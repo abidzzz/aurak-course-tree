@@ -8,7 +8,6 @@ https://abidzzz.github.io/aurak-course-tree
 ## Screenshots
 
 ![screenshot](image.png)
-![screenshot](image2.png)
 
 ## Features
 
