@@ -38,17 +38,75 @@ function setupEventListeners() {
 function boxOnHover(event) {
     if (box_focused) return;
     console.log('Box hover:', event.target);
-    highlightCourse(event.target);
+
+    let box = event.target;
+    while (!box.classList.contains('classBox')) {
+        box = box.parentElement;
+    }
+
+    showPrerequisitesOnHover(box);
+    highlightCourse(box);
 }
+
+function showPrerequisitesOnHover(box) {
+    const prereqs = box.getAttribute('prereq');
+    const courseCodeFull = box.getElementsByClassName('course-code-full')[0].innerHTML;
+
+    if (prereqs && prereqs !== '') {
+        const prereqArray = prereqs.split(' ');
+        let prereqText = '';
+
+        prereqArray.forEach(prereqId => {
+            const prereqElement = document.getElementById(prereqId);
+            if (prereqElement) {
+                const prereqCourseCode = prereqElement.getElementsByClassName('course-code-full')[0].innerHTML;
+                prereqText += prereqCourseCode + ', ';
+            } else {
+                prereqText += prereqId + ', ';
+            }
+        });
+
+        // Remove trailing comma and space
+        prereqText = prereqText.slice(0, -2);
+
+        // Create or update tooltip
+        let tooltip = document.getElementById('prereq-tooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('div');
+            tooltip.id = 'prereq-tooltip';
+            document.body.appendChild(tooltip);
+        }
+
+        tooltip.innerHTML = `<strong>${courseCodeFull}</strong><br>Prerequisites: ${prereqText}`;
+
+        // Position tooltip near the box
+        const rect = box.getBoundingClientRect();
+        tooltip.style.left = (rect.left + window.scrollX) + 'px';
+        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+
+        // Show the tooltip with animation
+        tooltip.classList.add('show');
+    }
+}
+
+function hidePrerequisitesTooltip() {
+    const tooltip = document.getElementById('prereq-tooltip');
+    if (tooltip) {
+        tooltip.classList.remove('show'); // Hide tooltip using opacity transition
+    }
+}
+
 
 function boxOnLeave() {
     if (box_focused) return;
     console.log('Box leave');
+    hidePrerequisitesTooltip();
     showAllElements();
 }
 
 function boxOnClick(event) {
     console.log('Box click:', event.target);
+    hidePrerequisitesTooltip(); // Hide tooltip when clicking
     focusBox(event.target);
 }
 
@@ -57,6 +115,7 @@ function rootDivClicked(event) {
         !event.target.classList.contains('course-code-full') &&
         !event.target.classList.contains('course-name')) {
         console.log('Root div clicked');
+        hidePrerequisitesTooltip(); // Hide tooltip when clicking elsewhere
         unfocusBox();
     }
 }
