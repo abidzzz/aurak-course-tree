@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAK Electrical Electronics Engineering Course Tree</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet">
+    <script src="../js/index.js" defer></script>
+</head>
+<body>
+    <div id="namebox">
+        <div class="wide-bg-colour">
+            <h1 class="titl">AURAK Electrical Electronics Engineering Class Tree <br> (Course Prerequisite List) </h1>
+        </div>
+    </div>
+    <div hidden="hidden" id="templates">
+        <line x1="" y1="" x2="" y2="" style="stroke:rgb(255, 255, 255);stroke-width:1;" marker-end="url(#arrow)" class="svg-arrow"/>
+    </div>
+    <div id="settings-bar">       
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #686204;"></div>
+                <div class="legend-text">1st Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #496a0a;"></div>
+                <div class="legend-text">2nd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #0d4764;"></div>
+                <div class="legend-text">3rd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #282b2d;"></div>
+                <div class="legend-text">4th Year Courses</div>
+            </div>
+        </div>
+        <div id="zoom-size-div">
+            Zoom: <span id="zoom-value">1</span>x<br>
+            <input type="range" id="zoom-range-slider" min="0.7" max="1.3" value="1" step="0.1">
+        </div>
+    </div>
+    <div id="root" style="width: 86em; height: 127.5em;" colorcode="level">
+        <svg height="100%" width="100%" class="svgConns">
+            <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" markerUnits="strokeWidth" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#FFFFFF" />
+                </marker>
+            </defs>
+        </svg>
+
+        
+<div class="classBox yl-1" id="PHYS110" style="left: 2em; top: 2.0em;" prereq="" coreq="PHYS111">
+    <span class="course-code-full">PHYS 110 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Physics I</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS111" style="left: 16em; top: 2.0em;" prereq="" coreq="PHYS110">
+    <span class="course-code-full">PHYS 111 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Physics I Lab</span>
+</div>
+
+<div class="classBox yl-1" id="ENGL101" style="left: 30em; top: 2.0em;" prereq="RequisitescoreontheEmSAT IETLS TOEFL OOPT orcompletionofrequiredEnglishfoundationcourse(s)" coreq="">
+    <span class="course-code-full">ENGL 101 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Composition</span>
+</div>
+
+<div class="classBox yl-1" id="ENGR107" style="left: 44em; top: 2.0em;" prereq="Math Placement Test score qualifying student for MATH 113" coreq="">
+    <span class="course-code-full">ENGR 107 (2.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Engineering</span>
+</div>
+
+<div class="classBox yl-1" id="MATH113" style="left: 58em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">MATH 113 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus I</span>
+</div>
+
+<div class="classBox yl-1" id="UNIV100" style="left: 72em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 100 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University First-Year Transition</span>
+</div>
+
+<div class="classBox yl-1" id="CHEM211" style="left: 86em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">CHEM 211 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">General Chemistry I</span>
+</div>
+
+<div class="classBox yl-1" id="UAES200" style="left: 2em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">UAES 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Survey of United Arab Emirates Studies</span>
+</div>
+
+<div class="classBox yl-1" id="CSCI112" style="left: 16em; top: 9.0em;" prereq="" coreq="CSCI113">
+    <span class="course-code-full">CSCI 112 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Intro. to Computer Programming</span>
+</div>
+
+<div class="classBox yl-1" id="CSCI113" style="left: 30em; top: 9.0em;" prereq="" coreq="CSCI112">
+    <span class="course-code-full">CSCI 113 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Intro. to Computer Programming Lab</span>
+</div>
+
+<div class="classBox yl-1" id="MATH114" style="left: 44em; top: 9.0em;" prereq="MATH113" coreq="">
+    <span class="course-code-full">MATH 114 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus II</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS220" style="left: 58em; top: 9.0em;" prereq="PHYS110" coreq="">
+    <span class="course-code-full">PHYS 220 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Physics II</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS221" style="left: 72em; top: 9.0em;" prereq="" coreq="PHYS220">
+    <span class="course-code-full">PHYS 221 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Physics II Lab</span>
+</div>
+
+<div class="classBox yl-1" id="PHIL100ENGL200MEST100" style="left: 86em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">PHIL 100/ENGL 200/MEST 100 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Critical Thinking and Reasoning/Advanced Composition/Introduction to Islam in World Culture</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN280" style="left: 2em; top: 24.0em;" prereq="PHYS220" coreq="">
+    <span class="course-code-full">EEEN 280 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electric Circuit Analysis I</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN281" style="left: 16em; top: 24.0em;" prereq="" coreq="EEEN280orMENG231">
+    <span class="course-code-full">EEEN 281 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electric Circuit Analysis I Lab</span>
+</div>
+
+<div class="classBox yl-2" id="ENGL202" style="left: 30em; top: 24.0em;" prereq="ENGL101" coreq="">
+    <span class="course-code-full">ENGL 202 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">English for Workplace Communication</span>
+</div>
+
+<div class="classBox yl-2" id="MATH203" style="left: 44em; top: 24.0em;" prereq="MATH113" coreq="">
+    <span class="course-code-full">MATH 203 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Algebra</span>
+</div>
+
+<div class="classBox yl-2" id="MATH213" style="left: 58em; top: 24.0em;" prereq="MATH114" coreq="">
+    <span class="course-code-full">MATH 213 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus III</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN331" style="left: 72em; top: 24.0em;" prereq="PHYS220" coreq="EEEN332">
+    <span class="course-code-full">EEEN 331 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital System Design</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN332" style="left: 86em; top: 24.0em;" prereq="" coreq="EEEN331">
+    <span class="course-code-full">EEEN 332 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital System Design Lab</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN220" style="left: 2em; top: 31.0em;" prereq="MATH113" coreq="EEEN221">
+    <span class="course-code-full">EEEN 220 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Signals & Systems</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN221" style="left: 16em; top: 31.0em;" prereq="" coreq="EEEN220">
+    <span class="course-code-full">EEEN 221 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Signals & Systems Lab</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN282" style="left: 30em; top: 31.0em;" prereq="EEEN280" coreq="">
+    <span class="course-code-full">EEEN 282 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electric Circuit Analysis II</span>
+</div>
+
+<div class="classBox yl-2" id="ENGR200" style="left: 44em; top: 31.0em;" prereq="Math114" coreq="">
+    <span class="course-code-full">ENGR 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Engineering Statistics</span>
+</div>
+
+<div class="classBox yl-2" id="MATH214" style="left: 58em; top: 31.0em;" prereq="MATH114" coreq="">
+    <span class="course-code-full">MATH 214 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Elementary Differential Equations</span>
+</div>
+
+<div class="classBox yl-2" id="ENGR210" style="left: 72em; top: 31.0em;" prereq="" coreq="">
+    <span class="course-code-full">ENGR 210 (2.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Sustainability in Engineering</span>
+</div>
+
+<div class="classBox yl-2" id="ENGR390" style="left: 2em; top: 38.0em;" prereq="Completion of 60 Credit Hours a CGPA of 2.0 or Higher" coreq="">
+    <span class="course-code-full">ENGR 390 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Internship I</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN305" style="left: 2em; top: 53.0em;" prereq="PHYS220 MATH214" coreq="">
+    <span class="course-code-full">EEEN 305 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electromagnetic Theory</span>
+</div>
+
+<div class="classBox yl-3" id="UNIV200" style="left: 16em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Innovation, Entrepreneurship, and Sustainability</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN350" style="left: 30em; top: 53.0em;" prereq="EEEN282" coreq="EEEN351">
+    <span class="course-code-full">EEEN 350 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electric Machines</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN351" style="left: 44em; top: 53.0em;" prereq="" coreq="EEEN350">
+    <span class="course-code-full">EEEN 351 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Electric Machines Lab</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN333" style="left: 58em; top: 53.0em;" prereq="EEEN280" coreq="">
+    <span class="course-code-full">EEEN 333 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Electronics I</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN334" style="left: 72em; top: 53.0em;" prereq="EEEN281" coreq="EEEN333">
+    <span class="course-code-full">EEEN 334 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Electronics I Lab</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN413" style="left: 86em; top: 53.0em;" prereq="CSCI112 EEEN331" coreq="EEEN414">
+    <span class="course-code-full">EEEN 413 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Microcontrollers and Embedded Systems</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN414" style="left: 2em; top: 60.0em;" prereq="" coreq="EEEN413">
+    <span class="course-code-full">EEEN 414 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Microcontrollers and Embedded Systems Lab</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN412" style="left: 2em; top: 67.0em;" prereq="EEEN350" coreq="">
+    <span class="course-code-full">EEEN 412 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Power Systems</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN433" style="left: 16em; top: 60.0em;" prereq="EEEN333" coreq="">
+    <span class="course-code-full">EEEN 433 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Electronics II</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN434" style="left: 30em; top: 60.0em;" prereq="EEEN334" coreq="EEEN433">
+    <span class="course-code-full">EEEN 434 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Electronics II Lab</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN431" style="left: 44em; top: 60.0em;" prereq="EEEN331 EEEN333" coreq="">
+    <span class="course-code-full">EEEN 431 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital Circuit Design</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN451" style="left: 58em; top: 60.0em;" prereq="EEEN220orMATH214" coreq="">
+    <span class="course-code-full">EEEN 451 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Control Theory</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN452" style="left: 72em; top: 60.0em;" prereq="" coreq="EEEN451">
+    <span class="course-code-full">EEEN 452 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Control Lab</span>
+</div>
+
+<div class="classBox yl-3" id="EEEN460" style="left: 86em; top: 60.0em;" prereq="EEEN220 ENGR200" coreq="">
+    <span class="course-code-full">EEEN 460 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Communication Systems</span>
+</div>
+
+<div class="classBox yl-3" id="ENGR391" style="left: 16em; top: 67.0em;" prereq="Completion of 90 Credit Hours a CGPA of 2.0 or Higher" coreq="">
+    <span class="course-code-full">ENGR 391 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Internship II</span>
+</div>
+
+<div class="classBox yl-4" id="GENED" style="left: 2em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">GEN ED (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Humanities/Fine Arts Course</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN437" style="left: 16em; top: 82.0em;" prereq="EEEN333" coreq="">
+    <span class="course-code-full">EEEN 437 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Power Electronics</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN492" style="left: 30em; top: 82.0em;" prereq="Completion of 90 Credit Hours" coreq="">
+    <span class="course-code-full">EEEN 492 (2.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Design Project I</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN466" style="left: 44em; top: 82.0em;" prereq="EEEN220 ENGR200" coreq="">
+    <span class="course-code-full">EEEN 466 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital Signal Processing</span>
+</div>
+
+<div class="classBox yl-4" id="Elective" style="left: 58em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Technical Elective I</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN464" style="left: 2em; top: 89.0em;" prereq="EEEN460" coreq="EEEN461">
+    <span class="course-code-full">EEEN 464 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital Communication Systems</span>
+</div>
+
+<div class="classBox yl-4" id="ENGR450" style="left: 16em; top: 89.0em;" prereq="Completion of 90 Credit Hours" coreq="">
+    <span class="course-code-full">ENGR 450 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Engineering Seminar</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN493" style="left: 30em; top: 89.0em;" prereq="EEEN492" coreq="">
+    <span class="course-code-full">EEEN 493 (4.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Design Project II</span>
+</div>
+
+<div class="classBox yl-4" id="EEEN461" style="left: 44em; top: 89.0em;" prereq="EEEN460" coreq="EEEN464.">
+    <span class="course-code-full">EEEN 461 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Communication Engineering Lab</span>
+</div>
+
+<div class="classBox yl-4" id="Elective" style="left: 58em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Technical Elective II</span>
+</div>
+
+<div class="classBox yl-4" id="ECON103" style="left: 72em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">ECON 103 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Principles of Microeconomics</span>
+</div>
+    </div>
+    
+    <footer style="text-align: center; padding: 20px; margin-top: 40px; color: #6c757d; font-size: 0.9rem;">
+        <hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 20px;">
+        <p>Made by <strong>Abid</strong> </p>
+        <p>
+            <a href="https://github.com/abidzzz" style="color: #0366d6; text-decoration: none;">GitHub</a> 
+        </p>
+        <p>© 2025 - Present</p>
+    </footer>
+</body>
+</html>

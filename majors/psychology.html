@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAK Psychology Course Tree</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet">
+    <script src="../js/index.js" defer></script>
+</head>
+<body>
+    <div id="namebox">
+        <div class="wide-bg-colour">
+            <h1 class="titl">AURAK Psychology Class Tree <br> (Course Prerequisite List) </h1>
+        </div>
+    </div>
+    <div hidden="hidden" id="templates">
+        <line x1="" y1="" x2="" y2="" style="stroke:rgb(255, 255, 255);stroke-width:1;" marker-end="url(#arrow)" class="svg-arrow"/>
+    </div>
+    <div id="settings-bar">       
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #686204;"></div>
+                <div class="legend-text">1st Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #496a0a;"></div>
+                <div class="legend-text">2nd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #0d4764;"></div>
+                <div class="legend-text">3rd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #282b2d;"></div>
+                <div class="legend-text">4th Year Courses</div>
+            </div>
+        </div>
+        <div id="zoom-size-div">
+            Zoom: <span id="zoom-value">1</span>x<br>
+            <input type="range" id="zoom-range-slider" min="0.7" max="1.3" value="1" step="0.1">
+        </div>
+    </div>
+    <div id="root" style="width: 86em; height: 127.5em;" colorcode="level">
+        <svg height="100%" width="100%" class="svgConns">
+            <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" markerUnits="strokeWidth" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#FFFFFF" />
+                </marker>
+            </defs>
+        </svg>
+
+        
+<div class="classBox yl-1" id="PSYC100" style="left: 2em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">PSYC 100 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Psychology</span>
+</div>
+
+<div class="classBox yl-1" id="ITEC103" style="left: 16em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">ITEC 103 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Fundamentals of Information Technology</span>
+</div>
+
+<div class="classBox yl-1" id="ENGL101" style="left: 30em; top: 2.0em;" prereq="RequisitescoreontheEmSAT IETLS TOEFL OOPT orcompletionofrequiredEnglishfoundationcourse(s)" coreq="">
+    <span class="course-code-full">ENGL 101 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Composition</span>
+</div>
+
+<div class="classBox yl-1" id="UNIV100" style="left: 44em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 100 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University First-Year Transition</span>
+</div>
+
+<div class="classBox yl-1" id="GenEd" style="left: 58em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">Gen Ed (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Natural Science Course</span>
+</div>
+
+<div class="classBox yl-1" id="GenEd" style="left: 72em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">Gen Ed (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Social and Behavioral Science Course</span>
+</div>
+
+<div class="classBox yl-1" id="PSYC250" style="left: 2em; top: 9.0em;" prereq="PSYC100" coreq="">
+    <span class="course-code-full">PSYC 250 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Social Psychology</span>
+</div>
+
+<div class="classBox yl-1" id="STAT100" style="left: 16em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">STAT 100 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Statistics</span>
+</div>
+
+<div class="classBox yl-1" id="GenEd" style="left: 30em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">Gen Ed (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Humanities/Fine Arts Course</span>
+</div>
+
+<div class="classBox yl-1" id="ENGL202" style="left: 44em; top: 9.0em;" prereq="ENGL101" coreq="">
+    <span class="course-code-full">ENGL 202 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">English for Workplace Communication</span>
+</div>
+
+<div class="classBox yl-1" id="PSYC260" style="left: 58em; top: 9.0em;" prereq="PSYC100" coreq="">
+    <span class="course-code-full">PSYC 260 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Child Development</span>
+</div>
+
+<div class="classBox yl-2" id="ENGL200" style="left: 2em; top: 24.0em;" prereq="Completion of a minimum of 45 credit hours ENGL 101" coreq="">
+    <span class="course-code-full">ENGL 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Advanced Composition</span>
+</div>
+
+<div class="classBox yl-2" id="BIOL112" style="left: 16em; top: 24.0em;" prereq="" coreq="BIOL113UniversityBiologyILaboratory">
+    <span class="course-code-full">BIOL 112 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Biology I</span>
+</div>
+
+<div class="classBox yl-2" id="BIOL113" style="left: 30em; top: 24.0em;" prereq="" coreq="BIOL112">
+    <span class="course-code-full">BIOL 113 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Biology II (Lab)</span>
+</div>
+
+<div class="classBox yl-2" id="PSYC290" style="left: 44em; top: 24.0em;" prereq="PSYC100 STAT100" coreq="">
+    <span class="course-code-full">PSYC 290 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Analysis of Psychological Data</span>
+</div>
+
+<div class="classBox yl-2" id="PSYC291" style="left: 58em; top: 24.0em;" prereq="PSYC100 STAT100" coreq="PSYC290">
+    <span class="course-code-full">PSYC 291 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Analysis of Psychological Data Lab</span>
+</div>
+
+<div class="classBox yl-2" id="PsychologyElective" style="left: 72em; top: 24.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-2" id="PSYC220" style="left: 2em; top: 31.0em;" prereq="PSYC100 BIOL112 BIOL113" coreq="">
+    <span class="course-code-full">PSYC 220 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Brain and Behavior</span>
+</div>
+
+<div class="classBox yl-2" id="PSYC292" style="left: 16em; top: 31.0em;" prereq="PSYC290 PSYC291" coreq="">
+    <span class="course-code-full">PSYC 292 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Research Methods I</span>
+</div>
+
+<div class="classBox yl-2" id="PSYC293" style="left: 30em; top: 31.0em;" prereq="PSYC290 PSYC291" coreq="PSYC292">
+    <span class="course-code-full">PSYC 293 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Research Methods II Lab</span>
+</div>
+
+<div class="classBox yl-2" id="COMM101" style="left: 44em; top: 31.0em;" prereq="" coreq="">
+    <span class="course-code-full">COMM 101 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Interpersonal Communication and Group Interaction</span>
+</div>
+
+<div class="classBox yl-2" id="UNIV200" style="left: 58em; top: 31.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Innovation, Entrepreneurship, and Sustainability</span>
+</div>
+
+<div class="classBox yl-2" id="PsychologyElective" style="left: 72em; top: 31.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC394" style="left: 2em; top: 46.0em;" prereq="PSYC292 PSYC293" coreq="">
+    <span class="course-code-full">PSYC 394 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Research Methods II</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC395" style="left: 16em; top: 46.0em;" prereq="PSYC292 PSYC293" coreq="PSYC394">
+    <span class="course-code-full">PSYC 395 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Research Methods III Lab</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC371" style="left: 30em; top: 46.0em;" prereq="PSYC100" coreq="">
+    <span class="course-code-full">PSYC 371 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Personality Theories</span>
+</div>
+
+<div class="classBox yl-3" id="UAES200" style="left: 44em; top: 46.0em;" prereq="" coreq="">
+    <span class="course-code-full">UAES 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Survey of United Arab Emirates</span>
+</div>
+
+<div class="classBox yl-3" id="PsychologyElective" style="left: 58em; top: 46.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC332" style="left: 2em; top: 53.0em;" prereq="PSYC394 PSYC395" coreq="">
+    <span class="course-code-full">PSYC 332 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Cognitive Psychology</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC333" style="left: 16em; top: 53.0em;" prereq="PSYC394 PSYC395" coreq="PSYC332">
+    <span class="course-code-full">PSYC 333 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Cognitive Psychology Lab</span>
+</div>
+
+<div class="classBox yl-3" id="PsychologyElective" style="left: 30em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-3" id="FreeElective" style="left: 44em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+
+<div class="classBox yl-3" id="FreeElective" style="left: 58em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+
+<div class="classBox yl-3" id="PSYC390" style="left: 2em; top: 60.0em;" prereq="Completion of 90 Credit Hours CGPA greater than 2.0." coreq="">
+    <span class="course-code-full">PSYC 390 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Internship</span>
+</div>
+
+<div class="classBox yl-4" id="PSYC498" style="left: 2em; top: 75.0em;" prereq="PSYC394 PSYC395" coreq="">
+    <span class="course-code-full">PSYC 498 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Project I</span>
+</div>
+
+<div class="classBox yl-4" id="PSYC481" style="left: 16em; top: 75.0em;" prereq="PSYC220" coreq="">
+    <span class="course-code-full">PSYC 481 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Adult Psychopathology</span>
+</div>
+
+<div class="classBox yl-4" id="PsychologyElective" style="left: 30em; top: 75.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-4" id="FreeElective" style="left: 44em; top: 75.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+
+<div class="classBox yl-4" id="FreeElective" style="left: 58em; top: 75.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+
+<div class="classBox yl-4" id="PSYC499" style="left: 2em; top: 82.0em;" prereq="PSYC498" coreq="">
+    <span class="course-code-full">PSYC 499 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Project II</span>
+</div>
+
+<div class="classBox yl-4" id="PsychologyElective" style="left: 16em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">Psychology Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Psychology Elective</span>
+</div>
+
+<div class="classBox yl-4" id="FreeElective" style="left: 30em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+
+<div class="classBox yl-4" id="FreeElective" style="left: 44em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">Free Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Free Elective</span>
+</div>
+    </div>
+    
+    <footer style="text-align: center; padding: 20px; margin-top: 40px; color: #6c757d; font-size: 0.9rem;">
+        <hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 20px;">
+        <p>Made by <strong>Abid</strong> </p>
+        <p>
+            <a href="https://github.com/abidzzz" style="color: #0366d6; text-decoration: none;">GitHub</a> 
+        </p>
+        <p>© 2025 - Present</p>
+    </footer>
+</body>
+</html>

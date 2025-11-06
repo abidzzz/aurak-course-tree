@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURAK Artificial Intelligence Course Tree</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet">
+    <script src="../js/index.js" defer></script>
+</head>
+<body>
+    <div id="namebox">
+        <div class="wide-bg-colour">
+            <h1 class="titl">AURAK Artificial Intelligence Class Tree <br> (Course Prerequisite List) </h1>
+        </div>
+    </div>
+    <div hidden="hidden" id="templates">
+        <line x1="" y1="" x2="" y2="" style="stroke:rgb(255, 255, 255);stroke-width:1;" marker-end="url(#arrow)" class="svg-arrow"/>
+    </div>
+    <div id="settings-bar">       
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #686204;"></div>
+                <div class="legend-text">1st Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #496a0a;"></div>
+                <div class="legend-text">2nd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #0d4764;"></div>
+                <div class="legend-text">3rd Year Courses</div>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #282b2d;"></div>
+                <div class="legend-text">4th Year Courses</div>
+            </div>
+        </div>
+        <div id="zoom-size-div">
+            Zoom: <span id="zoom-value">1</span>x<br>
+            <input type="range" id="zoom-range-slider" min="0.7" max="1.3" value="1" step="0.1">
+        </div>
+    </div>
+    <div id="root" style="width: 86em; height: 127.5em;" colorcode="level">
+        <svg height="100%" width="100%" class="svgConns">
+            <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" markerUnits="strokeWidth" orient="auto">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#FFFFFF" />
+                </marker>
+            </defs>
+        </svg>
+
+        
+<div class="classBox yl-1" id="CSCI104" style="left: 2em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSCI 104 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Computing</span>
+</div>
+
+<div class="classBox yl-1" id="ENGL101" style="left: 16em; top: 2.0em;" prereq="RequisitescoreontheEmSAT IETLS TOEFL OOPT orcompletionofrequiredEnglishfoundationcourse(s)" coreq="">
+    <span class="course-code-full">ENGL 101 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Composition</span>
+</div>
+
+<div class="classBox yl-1" id="MATH113" style="left: 30em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">MATH 113 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus I</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS110" style="left: 44em; top: 2.0em;" prereq="" coreq="PHYS111">
+    <span class="course-code-full">PHYS 110 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Physics I</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS111" style="left: 58em; top: 2.0em;" prereq="" coreq="PHYS110">
+    <span class="course-code-full">PHYS 111 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Physics I Lab</span>
+</div>
+
+<div class="classBox yl-1" id="UNIV100" style="left: 72em; top: 2.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 100 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University First-Year Transition</span>
+</div>
+
+<div class="classBox yl-1" id="PHIL100ENGL200MEST100" style="left: 2em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">PHIL 100/ENGL 200/MEST 100 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Critical Thinking and Reasoning/Advanced Composition/Introduction to Islam in World Culture</span>
+</div>
+
+<div class="classBox yl-1" id="CSCI112" style="left: 16em; top: 9.0em;" prereq="" coreq="CSCI113">
+    <span class="course-code-full">CSCI 112 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Computer Programming</span>
+</div>
+
+<div class="classBox yl-1" id="CSCI113" style="left: 30em; top: 9.0em;" prereq="" coreq="CSCI112">
+    <span class="course-code-full">CSCI 113 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Computer Programming Lab</span>
+</div>
+
+<div class="classBox yl-1" id="MATH114" style="left: 44em; top: 9.0em;" prereq="MATH113" coreq="">
+    <span class="course-code-full">MATH 114 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus II</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS220" style="left: 58em; top: 9.0em;" prereq="PHYS110" coreq="">
+    <span class="course-code-full">PHYS 220 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Physics II</span>
+</div>
+
+<div class="classBox yl-1" id="PHYS221" style="left: 72em; top: 9.0em;" prereq="" coreq="PHYS220">
+    <span class="course-code-full">PHYS 221 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">University Physics II Lab</span>
+</div>
+
+<div class="classBox yl-1" id="GENED" style="left: 86em; top: 9.0em;" prereq="" coreq="">
+    <span class="course-code-full">GEN ED (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Humanities/Fine Arts Course</span>
+</div>
+
+<div class="classBox yl-2" id="CSCI211" style="left: 2em; top: 24.0em;" prereq="CSCI112orCSCI114" coreq="">
+    <span class="course-code-full">CSCI 211 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Object Oriented Programming</span>
+</div>
+
+<div class="classBox yl-2" id="MATH213" style="left: 16em; top: 24.0em;" prereq="MATH114" coreq="">
+    <span class="course-code-full">MATH 213 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Calculus III</span>
+</div>
+
+<div class="classBox yl-2" id="MATH225" style="left: 30em; top: 24.0em;" prereq="MATH113 (CSCI112orCSCI114)" coreq="">
+    <span class="course-code-full">MATH 225 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Discrete Mathematics</span>
+</div>
+
+<div class="classBox yl-2" id="CSCI232" style="left: 44em; top: 24.0em;" prereq="CSCI112" coreq="">
+    <span class="course-code-full">CSCI 232 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Computer Organization</span>
+</div>
+
+<div class="classBox yl-2" id="GENED" style="left: 58em; top: 24.0em;" prereq="" coreq="">
+    <span class="course-code-full">GEN ED (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Social and Behavioral Sciences Course</span>
+</div>
+
+<div class="classBox yl-2" id="CSCI215" style="left: 2em; top: 31.0em;" prereq="CSCI211 MATH225" coreq="">
+    <span class="course-code-full">CSCI 215 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Data Structures and Algorithms</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN331" style="left: 16em; top: 31.0em;" prereq="PHYS220" coreq="EEEN332">
+    <span class="course-code-full">EEEN 331 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital Systems Design</span>
+</div>
+
+<div class="classBox yl-2" id="EEEN332" style="left: 30em; top: 31.0em;" prereq="" coreq="EEEN331">
+    <span class="course-code-full">EEEN 332 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Digital Systems Design Lab</span>
+</div>
+
+<div class="classBox yl-2" id="ENGR200" style="left: 44em; top: 31.0em;" prereq="Math114" coreq="">
+    <span class="course-code-full">ENGR 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Engineering Statistics</span>
+</div>
+
+<div class="classBox yl-2" id="ENGL202" style="left: 58em; top: 31.0em;" prereq="ENGL101" coreq="">
+    <span class="course-code-full">ENGL 202 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">English for Workplace Communication</span>
+</div>
+
+<div class="classBox yl-2" id="MATH203" style="left: 72em; top: 31.0em;" prereq="MATH113" coreq="">
+    <span class="course-code-full">MATH 203 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Linear Algebra</span>
+</div>
+
+<div class="classBox yl-3" id="CSAI300" style="left: 2em; top: 38.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSAI 300 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Internship I</span>
+</div>
+
+<div class="classBox yl-3" id="CSAI350" style="left: 2em; top: 45.0em;" prereq="CSCI215" coreq="">
+    <span class="course-code-full">CSAI 350 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Artificial Intelligence</span>
+</div>
+
+<div class="classBox yl-3" id="ENVS101" style="left: 16em; top: 45.0em;" prereq="" coreq="">
+    <span class="course-code-full">ENVS 101 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Sustainability and Human Environment Relations</span>
+</div>
+
+<div class="classBox yl-3" id="CSCI312" style="left: 30em; top: 45.0em;" prereq="CSCI215" coreq="">
+    <span class="course-code-full">CSCI 312 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Operating System Fundamentals</span>
+</div>
+
+<div class="classBox yl-3" id="CSCI326" style="left: 44em; top: 45.0em;" prereq="CSCI211" coreq="">
+    <span class="course-code-full">CSCI 326 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Database Systems</span>
+</div>
+
+<div class="classBox yl-3" id="UNIV200" style="left: 58em; top: 45.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Innovation, Entrepreneurship, and Sustainability</span>
+</div>
+
+<div class="classBox yl-4" id="CSCI315" style="left: 2em; top: 60.0em;" prereq="CSCI215" coreq="">
+    <span class="course-code-full">CSCI 315 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Design and Analysis of Algorithms</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI462" style="left: 16em; top: 60.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSAI 462 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Data Science</span>
+</div>
+
+<div class="classBox yl-4" id="CSCI462" style="left: 30em; top: 60.0em;" prereq="CSCI112" coreq="">
+    <span class="course-code-full">CSCI 462 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Data Comm. and Computer Networks</span>
+</div>
+
+<div class="classBox yl-4" id="CSCI415" style="left: 44em; top: 60.0em;" prereq="CSCI215" coreq="">
+    <span class="course-code-full">CSCI 415 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Introduction to Parallel Programming</span>
+</div>
+
+<div class="classBox yl-4" id="UAES200" style="left: 58em; top: 60.0em;" prereq="" coreq="">
+    <span class="course-code-full">UAES 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Survey of United Arab Emirates Studies</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI931" style="left: 2em; top: 67.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSAI 931 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Internship II</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI450" style="left: 2em; top: 82.0em;" prereq="CSAI350 ENGR200" coreq="CSAI451">
+    <span class="course-code-full">CSAI 450 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Machine Learning</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI451" style="left: 16em; top: 82.0em;" prereq="" coreq="CSAI450">
+    <span class="course-code-full">CSAI 451 (1.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Machine Learning Lab</span>
+</div>
+
+<div class="classBox yl-4" id="CENG411" style="left: 30em; top: 82.0em;" prereq="CSCI215" coreq="">
+    <span class="course-code-full">CENG 411 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Software Engineering</span>
+</div>
+
+<div class="classBox yl-4" id="CSCI492" style="left: 44em; top: 82.0em;" prereq="Completion of 90 Credit Hours" coreq="">
+    <span class="course-code-full">CSCI 492 (2.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Design Project I</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI490" style="left: 58em; top: 82.0em;" prereq="Completion of 90 Credit Hours" coreq="CSCI492">
+    <span class="course-code-full">CSAI 490 (2.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Professional Software Practice</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI484" style="left: 72em; top: 82.0em;" prereq="(CSCI232orCENG315) CSCI462" coreq="">
+    <span class="course-code-full">CSAI 484 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Internet of Things System</span>
+</div>
+
+<div class="classBox yl-4" id="CSCI493" style="left: 2em; top: 89.0em;" prereq="CSCI492" coreq="">
+    <span class="course-code-full">CSCI 493 (4.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Design Project II</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI432" style="left: 16em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSAI 432 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Natural Language Processing</span>
+</div>
+
+<div class="classBox yl-4" id="CSAI433" style="left: 30em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">CSAI 433 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Data Visualization</span>
+</div>
+
+<div class="classBox yl-4" id="Elective" style="left: 44em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Technical Elective I</span>
+</div>
+
+<div class="classBox yl-4" id="Elective" style="left: 58em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">Elective (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Technical Elective II</span>
+</div>
+    </div>
+    
+    <footer style="text-align: center; padding: 20px; margin-top: 40px; color: #6c757d; font-size: 0.9rem;">
+        <hr style="border: none; border-top: 1px solid #ddd; margin-bottom: 20px;">
+        <p>Made by <strong>Abid</strong> </p>
+        <p>
+            <a href="https://github.com/abidzzz" style="color: #0366d6; text-decoration: none;">GitHub</a> 
+        </p>
+        <p>© 2025 - Present</p>
+    </footer>
+</body>
+</html>

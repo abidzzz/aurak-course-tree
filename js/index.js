@@ -48,45 +48,96 @@ function boxOnHover(event) {
     highlightCourse(box);
 }
 
+
 function showPrerequisitesOnHover(box) {
     const prereqs = box.getAttribute('prereq');
+    const coreqs = box.getAttribute('coreq');
     const courseCodeFull = box.getElementsByClassName('course-code-full')[0].innerHTML;
+    let prereqText = '';
+    let coreqText = '';
 
     if (prereqs && prereqs !== '') {
-        const prereqArray = prereqs.split(' ');
-        let prereqText = '';
+        let prereqArray;
+        console.log('Prereqs string:', prereqs);
+        const tempprereqArray = prereqs.split(' ');
 
-        prereqArray.forEach(prereqId => {
-            const prereqElement = document.getElementById(prereqId);
-            if (prereqElement) {
-                const prereqCourseCode = prereqElement.getElementsByClassName('course-code-full')[0].innerHTML;
-                prereqText += prereqCourseCode + ', ';
-            } else {
-                prereqText += prereqId + ', ';
-            }
-        });
-
-        // Remove trailing comma and space
-        prereqText = prereqText.slice(0, -2);
-
-        // Create or update tooltip
-        let tooltip = document.getElementById('prereq-tooltip');
-        if (!tooltip) {
-            tooltip = document.createElement('div');
-            tooltip.id = 'prereq-tooltip';
-            document.body.appendChild(tooltip);
+        if ( tempprereqArray[0] && tempprereqArray[0].substring(0, 10) === "Completion") {
+        prereqArray = [prereqs];
+        }
+        else if (tempprereqArray[0].length >= 7) {
+            prereqArray = tempprereqArray;
+        } 
+        else {
+            prereqArray = [prereqs];
         }
 
-        tooltip.innerHTML = `<strong>${courseCodeFull}</strong><br>Prerequisites: ${prereqText}`;
+        prereqArray.forEach(prereqId => {
+            
+            if (prereqId.includes('or')) {
+                const options = prereqId.split('or').map(option => option.trim());
+                prereqText += options.join(' or ') + ', ';
+            } else {
 
-        // Position tooltip near the box
-        const rect = box.getBoundingClientRect();
-        tooltip.style.left = (rect.left + window.scrollX) + 'px';
-        tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
-
-        // Show the tooltip with animation
-        tooltip.classList.add('show');
+                const prereqElement = document.getElementById(prereqId);
+                if (prereqElement) {
+                    const prereqCourseCode = prereqElement.getElementsByClassName('course-code-full')[0].innerHTML;
+                    prereqText += prereqCourseCode + ', ';
+                } else {
+                    prereqText += prereqId + ', ';
+                }
+            }
+        });
+        // Remove trailing comma and space
+        prereqText = prereqText.slice(0, -2);
     }
+
+    if (coreqs && coreqs !== '') {
+        let coreqArray;
+        const tempcoreqArray = coreqs.split(' ');
+        if (tempcoreqArray[0].length <= 7) {
+            coreqArray = tempcoreqArray;
+        } else {
+            coreqArray = [coreqs];
+        }
+
+        coreqArray.forEach(coreqId => {
+            if (coreqId.includes('or')) {
+                const options = coreqId.split('or').map(option => option.trim());
+                coreqText += options.join(' or ') + ', ';
+            }
+            else{
+                const coreqElement = document.getElementById(coreqId);
+                if (coreqElement) {
+                    const coreqCourseCode = coreqElement.getElementsByClassName('course-code-full')[0].innerHTML;
+                    coreqText += coreqCourseCode + ', ';
+                } else {
+                    coreqText += coreqId + ', ';
+                }
+            }   
+        });
+        // Remove trailing comma and space
+        coreqText = coreqText.slice(0, -2);
+    }
+
+    // Create or update tooltip
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+
+    tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
+        (prereqText ? `<br>Prerequisites: ${prereqText}` : '') +
+        (coreqText ? `<br>Corequisites: ${coreqText}` : '');
+
+    // Position tooltip near the box
+    const rect = box.getBoundingClientRect();
+    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+    tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+
+    // Show the tooltip with animation
+    tooltip.classList.add('show');
 }
 
 function hidePrerequisitesTooltip() {
@@ -199,35 +250,83 @@ function unfocusBox() {
     document.getElementById('explain-main').style.display = 'none';
     document.getElementById('explain-hint').style.display = 'block';
 }
-
 function setupArrows() {
     console.log('Setting up arrows');
     const classBoxes = document.getElementsByClassName("classBox");
-    const arrow_template = document.getElementById("templates").getElementsByClassName("svg-arrow")[0];
+    const svgConns = document.getElementsByClassName("svgConns")[0];
 
-    for (const box of classBoxes) {
-        const prereqs = box.getAttribute("prereq");
-        if (prereqs) {
-            const prereqArray = prereqs.split(" ");
-            for (const prereqId of prereqArray) {
-                const prereqElement = document.getElementById(prereqId);
-                if (prereqElement) {
+    // Helper function to create arrows for connections
+    function createArrowsForConnections(connectionType, connectionStyle, arrowClass) {
+        return function (element, connectionIds) {
+            connectionIds.forEach(connectionId => {
+                const connectionElement = document.getElementById(connectionId.trim());
+                if (connectionElement) {
                     const arrow = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-                    arrow.setAttribute("style", "stroke:rgb(255, 255, 255);stroke-width:1;opacity:0");
+                    arrow.setAttribute("style", connectionStyle);
                     arrow.setAttribute("marker-end", "url(#arrow)");
-                    const x1 = parseFloat(prereqElement.style.left) + 6;
-                    const y1 = parseFloat(prereqElement.style.top) + 4.5;
-                    const x2 = parseFloat(box.style.left) + 6;
-                    const y2 = parseFloat(box.style.top);
+
+                    const x1 = parseFloat(connectionElement.style.left) + 6;
+                    const y1 = parseFloat(connectionElement.style.top) + 4.5;
+                    const x2 = parseFloat(element.style.left) + 6;
+                    const y2 = parseFloat(element.style.top);
+
                     arrow.setAttribute("x1", `${x1}em`);
                     arrow.setAttribute("y1", `${y1}em`);
                     arrow.setAttribute("x2", `${x2}em`);
                     arrow.setAttribute("y2", `${y2}em`);
-                    arrow.classList.add(prereqId);
-                    arrow.classList.add(box.id);
-                    document.getElementsByClassName("svgConns")[0].appendChild(arrow);
+
+                    arrow.classList.add(connectionId.trim());
+                    arrow.classList.add(element.id);
+                    arrow.classList.add(arrowClass);
+
+                    svgConns.appendChild(arrow);
                 }
-            }
+            });
+        };
+    }
+
+    for (const box of classBoxes) {
+        // Prerequisite arrows (white)
+        const prereqs = box.getAttribute("prereq");
+        if (prereqs) {
+            // Split the prereqs based on "or" inside parentheses
+            const prereqArray = parsePrereqs(prereqs);
+            const createPrereqArrows = createArrowsForConnections(box, "stroke:rgb(255,255,255);stroke-width:1;opacity:0", 'prereq-arrow');
+            createPrereqArrows(box, prereqArray);
         }
+
+        // Corequisite arrows (blue)
+        const coreqs = box.getAttribute("coreq");
+        if (coreqs) {
+            // Split the coreqs based on "or" inside parentheses
+            const coreqArray = parsePrereqs(coreqs);
+            const createCoreqArrows = createArrowsForConnections(box, "stroke:#00ff88;stroke-width:1;opacity:0", 'coreq-arrow');
+            createCoreqArrows(box, coreqArray);
+        }
+    }
+
+    // Function to parse prerequisite or corequisite strings and split by "or" inside parentheses
+    function parsePrereqs(prereqString) {
+        // This regular expression will find content inside parentheses and split by "or"
+        // EEEN280orMENG231 -> ["EEEN280", "MENG231"]
+        const regex = /\((.*?)\)/g;
+        let matches = [];
+        let match;
+        while (match = regex.exec(prereqString)) {
+            const alternatives = match[1].split('or').map(item => item.trim());
+            matches = matches.concat(alternatives); // Add each alternative found in parentheses
+        }
+
+        // Also add any prerequisites/corequisites that aren't inside parentheses
+        // Split by spaces, then for each item, if it contains 'or', split further
+        const outsideParentheses = prereqString
+            .split(' ')
+            .filter(item => !item.includes('(') && !item.includes(')'))
+            .flatMap(item => item.includes('or') ? item.split('or').map(i => i.trim()) : [item.trim()])
+            .filter(item => item !== '');
+
+        matches = matches.concat(outsideParentheses);
+
+        return matches;
     }
 }
