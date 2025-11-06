@@ -254,10 +254,22 @@ function setupArrows() {
     console.log('Setting up arrows');
     const classBoxes = document.getElementsByClassName("classBox");
     const svgConns = document.getElementsByClassName("svgConns")[0];
-
+    
+    function checkSymmetricCoreq(courseA, courseB) {
+        const elementA = document.getElementById(courseA);
+        const elementB = document.getElementById(courseB);
+        
+        if (!elementA || !elementB) return false;
+        
+        const coreqsA = parsePrereqs(elementA.getAttribute("coreq"));
+        const coreqsB = parsePrereqs(elementB.getAttribute("coreq"));
+        
+        // Check if both courses list each other as corequisites
+        return coreqsA.includes(courseB) && coreqsB.includes(courseA);
+    }
     // Helper function to create arrows for connections
-    function createArrowsForConnections(connectionType, connectionStyle, arrowClass) {
-        return function (element, connectionIds) {
+    function createArrowsForConnections(element, connectionStyle, arrowClass) {
+        return function (targetBox, connectionIds) {
             connectionIds.forEach(connectionId => {
                 const connectionElement = document.getElementById(connectionId.trim());
                 if (connectionElement) {
@@ -265,10 +277,35 @@ function setupArrows() {
                     arrow.setAttribute("style", connectionStyle);
                     arrow.setAttribute("marker-end", "url(#arrow)");
 
-                    const x1 = parseFloat(connectionElement.style.left) + 6;
-                    const y1 = parseFloat(connectionElement.style.top) + 4.5;
-                    const x2 = parseFloat(element.style.left) + 6;
-                    const y2 = parseFloat(element.style.top);
+                    let x1, y1, x2, y2;
+                    if (arrowClass === 'coreq-arrow') {
+                        arrow.setAttribute("marker-end", "url(#coreq-arrow)");
+                        // Draw coreq arrows: from right edge to left edge OR left edge to right edge based on position
+                        const sourceRect = connectionElement.getBoundingClientRect();
+                        const targetRect = targetBox.getBoundingClientRect();   
+                        if (sourceRect.left < targetRect.left) {
+                            // Source is to the left of target: draw arrow from right to left
+                            x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
+                            y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x2 = parseFloat(targetBox.style.left);
+                            y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
+                        } else {
+                            // Source is to the right of target: draw arrow from left to right
+                            x1 = parseFloat(connectionElement.style.left);  
+                            y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x2 = parseFloat(targetBox.style.left)-0.4 + (parseFloat(targetBox.offsetWidth || 0) / 16);
+                            y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
+                        }
+                        
+
+
+                    } else {
+                        // Default: vertical arrow (prereq)
+                        x1 = parseFloat(connectionElement.style.left) + 6;
+                        y1 = parseFloat(connectionElement.style.top) + 4.5;
+                        x2 = parseFloat(targetBox.style.left) + 6;
+                        y2 = parseFloat(targetBox.style.top);
+                    }
 
                     arrow.setAttribute("x1", `${x1}em`);
                     arrow.setAttribute("y1", `${y1}em`);
@@ -276,7 +313,7 @@ function setupArrows() {
                     arrow.setAttribute("y2", `${y2}em`);
 
                     arrow.classList.add(connectionId.trim());
-                    arrow.classList.add(element.id);
+                    arrow.classList.add(targetBox.id);
                     arrow.classList.add(arrowClass);
 
                     svgConns.appendChild(arrow);
