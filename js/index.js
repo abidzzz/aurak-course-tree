@@ -60,7 +60,11 @@ function showPrerequisitesOnHover(box) {
         let prereqArray;
         console.log('Prereqs string:', prereqs);
         const tempprereqArray = prereqs.split(' ');
-
+        // prereq="Requisite score on the EmSAT, IETLS, TOEFL, OOPT, or completion of required English foundation course(s) "
+        // prereqArray = [prereqs]
+        if ( tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
+        prereqArray = [prereqs];
+        }
         if ( tempprereqArray[0] && tempprereqArray[0].substring(0, 10) === "Completion") {
         prereqArray = [prereqs];
         }
@@ -289,6 +293,12 @@ function setupArrows() {
                             y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
                             x2 = parseFloat(targetBox.style.left) + 0.1;
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
+
+                            // Design 2: two arrows with a gap in the middle
+                            // x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
+                            // y1 = parseFloat(connectionElement.style.top)  + 0.6+ (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            // x2 = parseFloat(targetBox.style.left); 
+                            // y2 = parseFloat(targetBox.style.top)  + 0.6 + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         } else {
                             // Source is to the right of target: draw arrow from left to right
                             x1 = parseFloat(connectionElement.style.left);  

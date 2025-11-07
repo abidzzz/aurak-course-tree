@@ -11,9 +11,16 @@
     <script src="../js/index.js" defer></script>
 </head>
 <body>
+    <div id="back-button-container">
+    <a href="../index.html" class="back-button">
+        <span class="back-arrow">←</span>
+        Back to Majors
+    </a>
+    </div>  
+    
     <div id="namebox">
         <div class="wide-bg-colour">
-            <h1 class="titl">AURAK Mechanical Engineering Class Tree <br> (Course Prerequisite List) </h1>
+            <h1 class="titl">AURAK Mechanical Engineering Study Plan <br> (Course Prerequisite List) </h1>
         </div>
     </div>
     <div hidden="hidden" id="templates">
@@ -66,8 +73,8 @@
     <span class="course-name" style="font-size:1em;">University Physics I Lab</span>
 </div>
 
-<div class="classBox yl-1" id="ENGR101" style="left: 30em; top: 2.0em;" prereq="" coreq="">
-    <span class="course-code-full">ENGR 101 (3.00)</span><br>
+<div class="classBox yl-1" id="ENGL101" style="left: 30em; top: 2.0em;" prereq="Requisite score on the EmSAT, IETLS, TOEFL, OOPT, or completion of required English foundation course(s) " coreq="">
+    <span class="course-code-full">ENGL 101 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Composition</span>
 </div>
 
@@ -128,7 +135,7 @@
 
 <div class="classBox yl-1" id="PHIL100ENGL200MEST100" style="left: 86em; top: 9.0em;" prereq="" coreq="">
     <span class="course-code-full">PHIL 100/ENGL 200/MEST 100 (3.00)</span><br>
-    <span class="course-name" style="font-size:1em;">Critical Thinking and Reasoning/Advanced Composition/Introduction to Islam in World Culture</span>
+    <span class="course-name" style="font-size:1em;">Critical Thinking and Reasoning OR Advanced Composition OR Introduction to Islam in World Culture</span>
 </div>
 
 <div class="classBox yl-2" id="MENG201" style="left: 2em; top: 24.0em;" prereq="" coreq="">
@@ -136,8 +143,8 @@
     <span class="course-name" style="font-size:1em;">Mechanical Engineering Drawing</span>
 </div>
 
-<div class="classBox yl-2" id="CEN211" style="left: 16em; top: 24.0em;" prereq="" coreq="">
-    <span class="course-code-full">CEN 211 (3.00)</span><br>
+<div class="classBox yl-2" id="CIEN211" style="left: 16em; top: 24.0em;" prereq="MATH113 PHYS110" coreq="">
+    <span class="course-code-full">CIEN 211 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Statics</span>
 </div>
 
@@ -161,8 +168,8 @@
     <span class="course-name" style="font-size:1em;">Engineering Measurements</span>
 </div>
 
-<div class="classBox yl-2" id="CEN212" style="left: 2em; top: 31.0em;" prereq="" coreq="">
-    <span class="course-code-full">CEN 212 (3.00)</span><br>
+<div class="classBox yl-2" id="CIEN212" style="left: 2em; top: 31.0em;" prereq="CIEN211" coreq="">
+    <span class="course-code-full">CIEN 212 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Mechanics of Materials</span>
 </div>
 
@@ -171,8 +178,8 @@
     <span class="course-name" style="font-size:1em;">Dynamics</span>
 </div>
 
-<div class="classBox yl-2" id="CEN251" style="left: 30em; top: 31.0em;" prereq="" coreq="">
-    <span class="course-code-full">CEN 251 (3.00)</span><br>
+<div class="classBox yl-2" id="CIEN251" style="left: 30em; top: 31.0em;" prereq="MATH213&CIEN211(CivilEngineering) MATH114 PHYS110(Chemical Mechanical PetroleumEngineering)" coreq="">
+    <span class="course-code-full">CIEN 251 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Fluid Mechanics</span>
 </div>
 
@@ -211,8 +218,8 @@
     <span class="course-name" style="font-size:1em;">Linear Algebra</span>
 </div>
 
-<div class="classBox yl-3" id="ECOM103" style="left: 44em; top: 53.0em;" prereq="" coreq="">
-    <span class="course-code-full">ECOM 103 (3.00)</span><br>
+<div class="classBox yl-3" id="ECON103" style="left: 44em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">ECON 103 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Principles of Microeconomics</span>
 </div>
 
@@ -221,8 +228,8 @@
     <span class="course-name" style="font-size:1em;">English for Workplace Communication</span>
 </div>
 
-<div class="classBox yl-3" id="GENED" style="left: 72em; top: 53.0em;" prereq="" coreq="">
-    <span class="course-code-full">GEN ED (3.00)</span><br>
+<div class="classBox yl-3" id="GenEd" style="left: 72em; top: 53.0em;" prereq="" coreq="">
+    <span class="course-code-full">Gen Ed (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Humanities/Fine Arts Course</span>
 </div>
 
@@ -258,7 +265,7 @@
 
 <div class="classBox yl-3" id="EEEN280" style="left: 86em; top: 60.0em;" prereq="PHYS220" coreq="">
     <span class="course-code-full">EEEN 280 (3.00)</span><br>
-    <span class="course-name" style="font-size:1em;">Electric Circuit Analysis</span>
+    <span class="course-name" style="font-size:1em;">Electric Circuit Analysis I</span>
 </div>
 
 <div class="classBox yl-3" id="EEEN281" style="left: 2em; top: 67.0em;" prereq="" coreq="EEEN280orMENG231">
@@ -281,19 +288,19 @@
     <span class="course-name" style="font-size:1em;">Theory of Machines</span>
 </div>
 
-<div class="classBox yl-4" id="MATH391" style="left: 30em; top: 82.0em;" prereq="" coreq="">
-    <span class="course-code-full">MATH 391 (3.00)</span><br>
+<div class="classBox yl-4" id="METechnicalElectiveI" style="left: 30em; top: 82.0em;" prereq="" coreq="">
+    <span class="course-code-full">ME Technical Elective I (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">ME Technical Elective I</span>
+</div>
+
+<div class="classBox yl-4" id="CIEN301" style="left: 44em; top: 82.0em;" prereq="MATH214 (CSCI112orCSCI114)" coreq="">
+    <span class="course-code-full">CIEN 301 (3.00)</span><br>
     <span class="course-name" style="font-size:1em;">Numerical Analysis</span>
 </div>
 
-<div class="classBox yl-4" id="MENG491" style="left: 44em; top: 82.0em;" prereq="Completion of 90 Credit Hours" coreq="">
+<div class="classBox yl-4" id="MENG491" style="left: 58em; top: 82.0em;" prereq="Completion of 90 Credit Hours" coreq="">
     <span class="course-code-full">MENG 491 (2.00)</span><br>
     <span class="course-name" style="font-size:1em;">Senior Design Project I</span>
-</div>
-
-<div class="classBox yl-4" id="Elective" style="left: 58em; top: 82.0em;" prereq="" coreq="">
-    <span class="course-code-full">Elective (3.00)</span><br>
-    <span class="course-name" style="font-size:1em;">ME Technical Elective 1</span>
 </div>
 
 <div class="classBox yl-4" id="MENG452" style="left: 2em; top: 89.0em;" prereq="MENG451" coreq="">
@@ -301,24 +308,24 @@
     <span class="course-name" style="font-size:1em;">Mechanical Design II</span>
 </div>
 
-<div class="classBox yl-4" id="UNIV200" style="left: 16em; top: 89.0em;" prereq="" coreq="">
-    <span class="course-code-full">UNIV 200 (3.00)</span><br>
-    <span class="course-name" style="font-size:1em;">Innovation, Entrepreneurship, and Sustainability</span>
+<div class="classBox yl-4" id="METechnicalElective2" style="left: 16em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">ME Technical Elective 2 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">ME Technical Elective 2</span>
 </div>
 
-<div class="classBox yl-4" id="MENG492" style="left: 30em; top: 89.0em;" prereq="MENG491" coreq="">
-    <span class="course-code-full">MENG 492 (4.00)</span><br>
-    <span class="course-name" style="font-size:1em;">Senior Design Project II</span>
-</div>
-
-<div class="classBox yl-4" id="ENGR450" style="left: 44em; top: 89.0em;" prereq="Completion of 90 Credit Hours" coreq="">
+<div class="classBox yl-4" id="ENGR450" style="left: 30em; top: 89.0em;" prereq="Completion of 90 Credit Hours" coreq="">
     <span class="course-code-full">ENGR 450 (1.00)</span><br>
     <span class="course-name" style="font-size:1em;">Engineering Seminar</span>
 </div>
 
-<div class="classBox yl-4" id="Elective" style="left: 58em; top: 89.0em;" prereq="" coreq="">
-    <span class="course-code-full">Elective (3.00)</span><br>
-    <span class="course-name" style="font-size:1em;">ME Technical Elective 2</span>
+<div class="classBox yl-4" id="UNIV200" style="left: 44em; top: 89.0em;" prereq="" coreq="">
+    <span class="course-code-full">UNIV 200 (3.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Innovation, Entrepreneurship, and Sustainability</span>
+</div>
+
+<div class="classBox yl-4" id="MENG492" style="left: 58em; top: 89.0em;" prereq="MENG491" coreq="">
+    <span class="course-code-full">MENG 492 (4.00)</span><br>
+    <span class="course-name" style="font-size:1em;">Senior Design Project II</span>
 </div>
     </div>
     
