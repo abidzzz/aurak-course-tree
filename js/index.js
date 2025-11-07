@@ -287,13 +287,13 @@ function setupArrows() {
                             // Source is to the left of target: draw arrow from right to left
                             x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
                             y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
-                            x2 = parseFloat(targetBox.style.left);
+                            x2 = parseFloat(targetBox.style.left) + 0.1;
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         } else {
                             // Source is to the right of target: draw arrow from left to right
                             x1 = parseFloat(connectionElement.style.left);  
-                            y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
-                            x2 = parseFloat(targetBox.style.left)-0.4 + (parseFloat(targetBox.offsetWidth || 0) / 16);
+                            y1 = parseFloat(connectionElement.style.top)  + (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x2 = parseFloat(targetBox.style.left) - 0.2 + (parseFloat(targetBox.offsetWidth || 0) / 16);
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         }
                         
