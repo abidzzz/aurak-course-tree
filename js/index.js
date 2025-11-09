@@ -258,7 +258,14 @@ function setupArrows() {
     console.log('Setting up arrows');
     const classBoxes = document.getElementsByClassName("classBox");
     const svgConns = document.getElementsByClassName("svgConns")[0];
-    
+    const bodyRect = document.body.getBoundingClientRect();
+    svgConns.style.position = 'absolute';
+    svgConns.style.top = '0';
+    svgConns.style.left = '0';
+    svgConns.style.width = bodyRect.width + 'px';
+    svgConns.style.height = bodyRect.height + 'px';
+    svgConns.style.pointerEvents = 'none';
+    svgConns.style.zIndex = '0';
     function checkSymmetricCoreq(courseA, courseB) {
         const elementA = document.getElementById(courseA);
         const elementB = document.getElementById(courseB);
