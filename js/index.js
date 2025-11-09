@@ -266,18 +266,7 @@ function setupArrows() {
     svgConns.style.height = bodyRect.height + 'px';
     svgConns.style.pointerEvents = 'none';
     svgConns.style.zIndex = '0';
-    function checkSymmetricCoreq(courseA, courseB) {
-        const elementA = document.getElementById(courseA);
-        const elementB = document.getElementById(courseB);
-        
-        if (!elementA || !elementB) return false;
-        
-        const coreqsA = parsePrereqs(elementA.getAttribute("coreq"));
-        const coreqsB = parsePrereqs(elementB.getAttribute("coreq"));
-        
-        // Check if both courses list each other as corequisites
-        return coreqsA.includes(courseB) && coreqsB.includes(courseA);
-    }
+
     // Helper function to create arrows for connections
     function createArrowsForConnections(element, connectionStyle, arrowClass) {
         return function (targetBox, connectionIds) {
