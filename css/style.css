@@ -379,6 +379,137 @@ div#root[colorcode="level"] .yl-5 {
     font-size: 16px;
     font-weight: bold;
 }
+/* Year Header Styles - Left Aligned (No Box) */
+.year-header {
+    position: absolute;
+    width: auto;
+    text-align: left;
+    z-index: 10;
+    pointer-events: none;
+    left: 20px;
+}
+
+.year-header h2 {
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.year-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #ffffff;
+    margin-top: 8px;
+    border-radius: 2px;
+}
+
+/* Summer Header Styles - Left Aligned (No Box) */
+.summer-header {
+    position: absolute;
+    width: auto;
+    text-align: left;
+    z-index: 10;
+    pointer-events: none;
+    left: 20px;
+}
+
+.summer-header h3 {
+    color: #b4641d; /* Orange accent for summer */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    font-weight: 500;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.summer-header h3::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: #e67e22;
+    margin-top: 6px;
+    border-radius: 2px;
+}
+
+/* Adjust course positioning to account for left headers */
+.classBox {
+    margin-left: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .year-header h2 {
+        font-size: 1.8em;
+    }
+    
+    .summer-header h3 {
+        font-size: 1.3em;
+    }
+    
+    .year-header,
+    .summer-header {
+        left: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .year-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .summer-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .year-header,
+    .summer-header {
+        left: 10px;
+    }
+    
+    .classBox {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .year-header h2 {
+        font-size: 1.3em;
+        letter-spacing: 1px;
+    }
+    
+    .year-header h2::after {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .summer-header h3 {
+        font-size: 1em;
+    }
+    
+    .summer-header h3::after {
+        width: 30px;
+        height: 2px;
+    }
+    
+    .year-header,
+    .summer-header {
+        left: 8px;
+    }
+    
+    .classBox {
+        margin-left: 10px;
+    }
+}
 
 /* Responsive back button */
 @media (max-width: 768px) {
