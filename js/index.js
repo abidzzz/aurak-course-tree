@@ -17,12 +17,6 @@ function setupEventListeners() {
 
     root.addEventListener('click', rootDivClicked);
 
-    const switchColorButton = document.getElementById('switch-color-code');
-    if (switchColorButton) {
-        switchColorButton.addEventListener('click', toggle_color_code_clicked);
-    } else {
-        console.error('Switch color code button not found');
-    }
 
     const zoomRangeSlider = document.getElementById('zoom-range-slider');
     if (zoomRangeSlider) {
@@ -229,21 +223,6 @@ function focusBox(source) {
     }
     box_focused = source.id;
     highlightCourse(source);
-    document.getElementById('explain-main').style.display = 'block';
-    document.getElementById('explain-hint').style.display = 'none';
-    document.getElementById('explain-topp').innerHTML = `${source.getElementsByClassName('course-code-full')[0].innerHTML}<br>${source.getElementsByClassName('course-name')[0].innerHTML}`;
-    document.getElementById('explain-desc').innerHTML = source.getElementsByClassName('course-description')[0].innerHTML;
-    const prereqs = source.getAttribute('prereq').split(' ');
-    const prereqList = document.getElementById('explain-prereq-list');
-    prereqList.innerHTML = '';
-    if (prereqs.length > 0 && prereqs[0] !== '') {
-        document.getElementById('explain-prereq-list-div').style.display = 'block';
-        prereqs.forEach(prereq => {
-            prereqList.innerHTML += `<li>${prereq}</li>`;
-        });
-    } else {
-        document.getElementById('explain-prereq-list-div').style.display = 'none';
-    }
 }
 
 function unfocusBox() {
@@ -251,8 +230,7 @@ function unfocusBox() {
     if (!box_focused) return;
     box_focused = false;
     showAllElements();
-    document.getElementById('explain-main').style.display = 'none';
-    document.getElementById('explain-hint').style.display = 'block';
+
 }
 function setupArrows() {
     console.log('Setting up arrows');
@@ -328,48 +306,94 @@ function setupArrows() {
         };
     }
 
-    for (const box of classBoxes) {
-        // Prerequisite arrows (white)
-        const prereqs = box.getAttribute("prereq");
-        if (prereqs) {
-            // Split the prereqs based on "or" inside parentheses
-            const prereqArray = parsePrereqs(prereqs);
-            const createPrereqArrows = createArrowsForConnections(box, "stroke:rgb(255,255,255);stroke-width:1;opacity:0", 'prereq-arrow');
-            createPrereqArrows(box, prereqArray);
-        }
+for (const box of classBoxes) {
+    const prereqs = box.getAttribute("prereq");
+    if (prereqs) {
+        const prereqArray = parsePrereqs(prereqs);
 
-        // Corequisite arrows (blue)
-        const coreqs = box.getAttribute("coreq");
-        if (coreqs) {
-            // Split the coreqs based on "or" inside parentheses
-            const coreqArray = parsePrereqs(coreqs);
-            const createCoreqArrows = createArrowsForConnections(box, "stroke:#00ff88;stroke-width:1;opacity:0", 'coreq-arrow');
-            createCoreqArrows(box, coreqArray);
-        }
+        prereqArray.forEach(({ id, isOr }) => {
+            const style = isOr
+                ? "stroke:rgb(255,255,255);stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                : "stroke:rgb(255,255,255);stroke-width:1;opacity:0";
+
+            const createArrow = createArrowsForConnections(box, style, 'prereq-arrow');
+            createArrow(box, [id]);
+        });
     }
+
+    const coreqs = box.getAttribute("coreq");
+    if (coreqs) {
+        const coreqArray = parsePrereqs(coreqs);
+
+        coreqArray.forEach(({ id, isOr }) => {
+            const style = isOr
+                ? "stroke:#00ff88;stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                : "stroke:#00ff88;stroke-width:1;opacity:0";
+
+            const createArrow = createArrowsForConnections(box, style, 'coreq-arrow');
+            createArrow(box, [id]);
+        });
+    }
+}
+
 
     // Function to parse prerequisite or corequisite strings and split by "or" inside parentheses
     function parsePrereqs(prereqString) {
-        // This regular expression will find content inside parentheses and split by "or"
-        // EEEN280orMENG231 -> ["EEEN280", "MENG231"]
+        console.log('Parsing prereqString:', prereqString);
         const regex = /\((.*?)\)/g;
-        let matches = [];
+        let results = [];
         let match;
-        while (match = regex.exec(prereqString)) {
-            const alternatives = match[1].split('or').map(item => item.trim());
-            matches = matches.concat(alternatives); // Add each alternative found in parentheses
+        let foundOrGroup = false;
+
+        // Handle content inside parentheses
+        while ((match = regex.exec(prereqString))) {
+            const alternatives = match[1]
+                .split('or')
+                .map(item => item.trim())
+                .filter(item => item !== '');
+            foundOrGroup = true;
+
+            const existing = alternatives.filter(id => document.getElementById(id));
+            const isOrGroup = existing.length >= 2;
+
+            console.log('Found alternatives:', alternatives, 'Existing:', existing, 'isOrGroup:', isOrGroup);
+
+            results = results.concat(alternatives.map(id => ({
+                id,
+                isOr: isOrGroup
+            })));
         }
 
-        // Also add any prerequisites/corequisites that aren't inside parentheses
-        // Split by spaces, then for each item, if it contains 'or', split further
+        // If no parentheses found but "or" exists (like AorB)
+        if (!foundOrGroup && prereqString.includes('or')) {
+            const parts = prereqString.split(' ')
+                .flatMap(item => item.includes('or') ? item.split('or').map(i => i.trim()) : [item.trim()])
+                .filter(item => item !== '');
+
+            const existing = parts.filter(id => document.getElementById(id));
+            const isOrGroup = existing.length >= 2;
+
+            console.log('No parentheses, found inline or:', parts, 'Existing:', existing, 'isOrGroup:', isOrGroup);
+
+            results = results.concat(parts.map(id => ({
+                id,
+                isOr: isOrGroup
+            })));
+        }
+
+        // Normal AND connections
         const outsideParentheses = prereqString
             .split(' ')
-            .filter(item => !item.includes('(') && !item.includes(')'))
-            .flatMap(item => item.includes('or') ? item.split('or').map(i => i.trim()) : [item.trim()])
+            .filter(item => !item.includes('(') && !item.includes(')') && !item.includes('or'))
+            .map(item => item.trim())
             .filter(item => item !== '');
 
-        matches = matches.concat(outsideParentheses);
+        results = results.concat(outsideParentheses.map(id => ({
+            id,
+            isOr: false
+        })));
 
-        return matches;
+        return results;
     }
+
 }
