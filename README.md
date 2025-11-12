@@ -1,5 +1,5 @@
 # AURAK Computer Engineering Prerequisite Tree
-Interactive roadmap for AURAK's Computer Engineering program.
+Interactive roadmap for AURAK's programs.
 
 
 ## Live Demo
@@ -13,6 +13,7 @@ https://abidzzz.github.io/aurak-course-tree
 
 - View all courses
 - Hover to see prerequisites
+- Hover to see corequisites
 
 ## License
 
