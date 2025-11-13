@@ -124,8 +124,15 @@ function showPrerequisitesOnHover(box) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-
+    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3.00)"){
+        desc = "<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br>OR<br> Introduction to Islam in World Culture";
+    }
+    else{
+        desc = "";
+        console.log('No description available for:', courseCodeFull);
+    }
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
+        (desc ? `<br>${desc}` : '') +
         (prereqText ? `<br>Prerequisites: ${prereqText}` : '') +
         (coreqText ? `<br>Corequisites: ${coreqText}` : '');
 
@@ -155,7 +162,6 @@ function boxOnLeave() {
 
 function boxOnClick(event) {
     console.log('Box click:', event.target);
-    hidePrerequisitesTooltip(); // Hide tooltip when clicking
     focusBox(event.target);
 }
 
@@ -339,7 +345,7 @@ for (const box of classBoxes) {
 
     // Function to parse prerequisite or corequisite strings and split by "or" inside parentheses
     function parsePrereqs(prereqString) {
-        console.log('Parsing prereqString:', prereqString);
+        // console.log('Parsing prereqString:', prereqString);
         const regex = /\((.*?)\)/g;
         let results = [];
         let match;
@@ -356,7 +362,7 @@ for (const box of classBoxes) {
             const existing = alternatives.filter(id => document.getElementById(id));
             const isOrGroup = existing.length >= 2;
 
-            console.log('Found alternatives:', alternatives, 'Existing:', existing, 'isOrGroup:', isOrGroup);
+            // console.log('Found alternatives:', alternatives, 'Existing:', existing, 'isOrGroup:', isOrGroup);
 
             results = results.concat(alternatives.map(id => ({
                 id,
@@ -373,7 +379,7 @@ for (const box of classBoxes) {
             const existing = parts.filter(id => document.getElementById(id));
             const isOrGroup = existing.length >= 2;
 
-            console.log('No parentheses, found inline or:', parts, 'Existing:', existing, 'isOrGroup:', isOrGroup);
+            // console.log('No parentheses, found inline or:', parts, 'Existing:', existing, 'isOrGroup:', isOrGroup);
 
             results = results.concat(parts.map(id => ({
                 id,

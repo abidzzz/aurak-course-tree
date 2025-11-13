@@ -46,7 +46,27 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
+    .school-section {
+        margin-bottom: 3rem;
+    }
 
+.school-title {
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border-bottom: 2px solid #8a0d0c; /* Your red accent */
+    padding-bottom: 0.5rem;
+    padding-left: 10px;
+    border-left: 3px solid #8a0d0c;
+}
+
+    .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
 .programs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -177,15 +197,27 @@ body {
     color: rgb(255, 255, 255);
     text-align: center;
 }
-
-/* Legend styling - now part of header */
 .legend {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 15px;
     padding: 10px;
     flex-wrap: wrap;
+}
+
+.left-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.center-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allow centering by occupying remaining space */
+    margin-left: 20px;
 }
 
 .legend-item {
@@ -202,8 +234,36 @@ body {
     border-radius: 3px;
 }
 
+.legend-arrow-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.arrow-line {
+    width: 20px;
+    height: 1.6px;
+    background-color: #FFFFFF;
+}
+
+.arrow-head {
+    width: 0;
+    height: 0;
+    border-left: 6px solid #FFFFFF;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-left: -1px;
+}
+
 .legend-text {
     font-size: 14px;
+}
+.legend-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    flex-wrap: wrap;
 }
 
 /* Zoom controls - positioned at bottom right */
@@ -251,36 +311,9 @@ div#root {
     align-items: center;
     transition: all 500ms ease;
 }
-
-/*  id="PHIL100ENGL200MEST100"  */
-#PHIL100ENGL200MEST100 {
-    min-width: 12em;
-    /* consistent minimum width */
-    max-width: 16em;
-    /* prevent overly wide boxes */
-    height: auto;
-    /* ✅ auto-resize for text */
-    text-align: center;
-    border-radius: 0.5em;
-    position: absolute;
-    box-shadow: 0 10px 16px 3px rgba(0, 0, 0, .1),
-        0 4px 6px -2px rgba(0, 0, 0, .05);
-    padding: 0.6rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    /* ✅ allow multi-line text */
-    word-wrap: break-word;
-    overflow: hidden;
-    /* prevent text spill */
-    line-height: 1.3;
-    /* better readability */
-    transition: all 300ms ease;
-    /* smooth hover transitions */
-
+.internship{
+    width:84em;
 }
-
 /* by level */
 div#root[colorcode="level"] .yl-1 {
     border-style: solid;
@@ -316,6 +349,7 @@ div#root[colorcode="level"] .yl-5 {
     border-color: #393e40;
     background-color: #2a2e30;
 }
+
 
 .course-code-full {
     font-weight: 900;
