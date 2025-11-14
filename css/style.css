@@ -316,7 +316,13 @@ div#root {
     transition: all 500ms ease;
 }
 .internship{
-    width:84em;
+    width:82em;
+}
+.internship-short{
+    width:68em;
+}
+.internship-large{
+    width:96em;
 }
 /* by level */
 div#root[colorcode="level"] .yl-1 {

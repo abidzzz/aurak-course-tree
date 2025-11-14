@@ -42,7 +42,6 @@ function boxOnHover(event) {
     highlightCourse(box);
 }
 
-
 function showPrerequisitesOnHover(box) {
     const prereqs = box.getAttribute('prereq');
     const coreqs = box.getAttribute('coreq');
@@ -50,17 +49,34 @@ function showPrerequisitesOnHover(box) {
     let prereqText = '';
     let coreqText = '';
 
+    // Function to format course code with spaces
+    function formatCourseCode(courseId) {
+        // If it's a "Completion" or "Requisite" text, return as is
+        if (courseId.startsWith("Completion") || courseId.startsWith("Requisite")) {
+            return courseId;
+        }
+        
+        // For course codes like "COMM111" -> "COMM 111"
+        // Match pattern: 3-4 letters followed by 3 digits
+        const match = courseId.match(/^([A-Z]{3,4})(\d{3})$/);
+        if (match) {
+            return match[1] + ' ' + match[2];
+        }
+        
+        // If no match, return original
+        return courseId;
+    }
+
     if (prereqs && prereqs !== '') {
         let prereqArray;
         console.log('Prereqs string:', prereqs);
         const tempprereqArray = prereqs.split(' ');
-        // prereq="Requisite score on the EmSAT, IETLS, TOEFL, OOPT, or completion of required English foundation course(s) "
-        // prereqArray = [prereqs]
-        if ( tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
-        prereqArray = [prereqs];
+        
+        if (tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
+            prereqArray = [prereqs];
         }
-        if ( tempprereqArray[0] && tempprereqArray[0].substring(0, 10) === "Completion") {
-        prereqArray = [prereqs];
+        else if (tempprereqArray[0] && tempprereqArray[0].substring(0, 10) === "Completion") {
+            prereqArray = [prereqs];
         }
         else if (tempprereqArray[0].length >= 7) {
             prereqArray = tempprereqArray;
@@ -70,18 +86,17 @@ function showPrerequisitesOnHover(box) {
         }
 
         prereqArray.forEach(prereqId => {
-            
             if (prereqId.includes('or')) {
-                const options = prereqId.split('or').map(option => option.trim());
+                const options = prereqId.split('or').map(option => formatCourseCode(option.trim()));
                 prereqText += options.join(' or ') + ', ';
             } else {
-
                 const prereqElement = document.getElementById(prereqId);
                 if (prereqElement) {
                     const prereqCourseCode = prereqElement.getElementsByClassName('course-code-full')[0].innerHTML;
                     prereqText += prereqCourseCode + ', ';
                 } else {
-                    prereqText += prereqId + ', ';
+                    // Format the course code before displaying
+                    prereqText += formatCourseCode(prereqId) + ', ';
                 }
             }
         });
@@ -100,16 +115,17 @@ function showPrerequisitesOnHover(box) {
 
         coreqArray.forEach(coreqId => {
             if (coreqId.includes('or')) {
-                const options = coreqId.split('or').map(option => option.trim());
+                const options = coreqId.split('or').map(option => formatCourseCode(option.trim()));
                 coreqText += options.join(' or ') + ', ';
             }
-            else{
+            else {
                 const coreqElement = document.getElementById(coreqId);
                 if (coreqElement) {
                     const coreqCourseCode = coreqElement.getElementsByClassName('course-code-full')[0].innerHTML;
                     coreqText += coreqCourseCode + ', ';
                 } else {
-                    coreqText += coreqId + ', ';
+                    // Format the course code before displaying
+                    coreqText += formatCourseCode(coreqId) + ', ';
                 }
             }   
         });
@@ -124,13 +140,13 @@ function showPrerequisitesOnHover(box) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3.00)"){
+    
+    let desc = "";
+    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)"){
         desc = "<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br>OR<br> Introduction to Islam in World Culture";
     }
-    else{
-        desc = "";
-        console.log('No description available for:', courseCodeFull);
-    }
+    
+    
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
         (desc ? `<br>${desc}` : '') +
         (prereqText ? `<br>Prerequisites: ${prereqText}` : '') +
