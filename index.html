@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,123 +8,23 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet">
-    <style>
-        /* Modal Styles with Animations */
-        .concentration-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .concentration-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .modal-content {
-            background: #2a2e30;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            border: 2px solid #8a0d0c;
-            text-align: center;
-            transform: scale(0.7);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .concentration-modal.active .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        
-        .modal-content h3 {
-            color: white;
-            margin-bottom: 10px;
-            font-size: 1.5em;
-        }
-        
-        .modal-content p {
-            color: #ccc;
-            margin-bottom: 25px;
-        }
-        
-        .concentration-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .concentration-link {
-            display: block;
-            padding: 15px;
-            background: rgba(138, 13, 12, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid #8a0d0c;
-            transition: all 0.3s ease;
-            transform: translateY(20px);
-            opacity: 0;
-        }
-        
-        .concentration-modal.active .concentration-link {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .concentration-link:hover {
-            background: rgba(138, 13, 12, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .close-modal {
-            background: #8a0d0c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: background 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            background: #a00e0d;
-        }
-        
-        .program-card.has-concentrations {
-            cursor: pointer;
-        }
-        
-        /* Staggered animation for links */
-        .concentration-link:nth-child(1) { transition-delay: 0.1s; }
-        .concentration-link:nth-child(2) { transition-delay: 0.2s; }
-        .concentration-link:nth-child(3) { transition-delay: 0.3s; }
-        .concentration-link:nth-child(4) { transition-delay: 0.4s; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="front-page-container">
         <!-- Header -->
         <div id="namebox">
-            <div class="wide-bg-colour" style="display: flex; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative;">
-                <img src="imgs/aurak.png" alt="AURAK Logo" style="width: 250px; height: auto; position: absolute; left: 10em; top: 50%; transform: translateY(-50%);">
+            <div class="wide-bg-colour"
+                style="display: flex; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative;">
+                <img src="imgs/aurak.png" alt="AURAK Logo"
+                    style="width: 250px; height: auto; position: absolute; left: 10em; top: 50%; transform: translateY(-50%);">
                 <div style="text-align: center;">
                     <h1 class="titl" style="margin: 0 0 10px 0; font-size: 2.2em;">Study Plan Map</h1>
-                    <p style="margin: 0; font-size: 1.1em; color: #f8f9fa; font-weight: 300; line-height: 1.4;">Visualize your academic pathway<br> Academic Year (2025-2026)</p>
+                    <p style="margin: 0; font-size: 1.1em; color: #f8f9fa; font-weight: 300; line-height: 1.4;">
+                        Visualize your academic pathway<br> Academic Year (2025-2026)</p>
                 </div>
             </div>
         </div>
@@ -131,15 +32,17 @@
         <!-- Main Content -->
         <div class="main-content">
             <section>
-                <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; font-size: 2em;">Offered Programs</h2>
-                
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; font-size: 2em;">Offered Programs
+                </h2>
+
                 <!-- SCHOOL OF ARTS AND SCIENCES -->
                 <div class="school-section">
                     <h3 class="school-title">SCHOOL OF ARTS AND SCIENCES</h3>
                     <div class="programs-grid">
                         <!-- Mass Communication -->
                         <div class="program-card has-concentrations" onclick="showConcentrations('mass-comm')">
-                            <h3>Bachelor of Arts in Mass Communication</h3>
+                            <h3><i class="fas fa-broadcast-tower program-icon"></i>Bachelor of Arts in Mass
+                                Communication</h3>
                             <div class="program-meta">
                                 <span class="view-link">Choose Concentration →</span>
                             </div>
@@ -147,7 +50,7 @@
 
                         <!-- Biotechnology -->
                         <div class="program-card has-concentrations" onclick="showConcentrations('biotech')">
-                            <h3>Bachelor of Science in Biotechnology</h3>
+                            <h3><i class="fas fa-dna program-icon"></i>Bachelor of Science in Biotechnology</h3>
                             <div class="program-meta">
                                 <span class="view-link">Choose Concentration →</span>
                             </div>
@@ -155,7 +58,7 @@
 
                         <!-- Psychology -->
                         <a href="majors/psychology.html" class="program-card">
-                            <h3>Bachelor of Science in Psychology</h3>
+                            <h3><i class="fas fa-brain program-icon"></i>Bachelor of Science in Psychology</h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
@@ -169,7 +72,7 @@
                     <div class="programs-grid">
                         <!-- ONE Business Administration card that shows all majors -->
                         <div class="program-card has-concentrations" onclick="showConcentrations('bba-all-majors')">
-                            <h3>Bachelor of Business Administration</h3>
+                            <h3><i class="fas fa-chart-line program-icon"></i>Bachelor of Business Administration</h3>
                             <div class="program-meta">
                                 <span class="view-link">Choose Major →</span>
                             </div>
@@ -182,14 +85,15 @@
                     <h3 class="school-title">SCHOOL OF ENGINEERING AND COMPUTING</h3>
                     <div class="programs-grid">
                         <a href="majors/architecture.html" class="program-card">
-                            <h3>Bachelor of Architecture</h3>
+                            <h3><i class="fas fa-building program-icon"></i>Bachelor of Architecture</h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
                         </a>
 
                         <a href="majors/artificial_intelligence.html" class="program-card">
-                            <h3>Bachelor of Science in Artificial Intelligence</h3>
+                            <h3><i class="fas fa-robot program-icon"></i>Bachelor of Science in Artificial Intelligence
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
@@ -197,28 +101,32 @@
 
                         <!-- Chemical Engineering -->
                         <div class="program-card has-concentrations" onclick="showConcentrations('chem-eng')">
-                            <h3>Bachelor of Science in Chemical Engineering</h3>
+                            <h3><i class="fas fa-flask program-icon"></i>Bachelor of Science in Chemical Engineering
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">Choose Concentration →</span>
                             </div>
                         </div>
 
                         <a href="majors/civil_engineering.html" class="program-card">
-                            <h3>Bachelor of Science in Civil Engineering</h3>
+                            <h3><i class="fas fa-hard-hat program-icon"></i>Bachelor of Science in Civil Engineering
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
                         </a>
 
                         <a href="majors/computer_engineering.html" class="program-card">
-                            <h3>Bachelor of Science in Computer Engineering</h3>
+                            <h3><i class="fas fa-microchip program-icon"></i>Bachelor of Science in Computer Engineering
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
                         </a>
 
                         <a href="majors/computer_science.html" class="program-card">
-                            <h3>Bachelor of Science in Computer Science</h3>
+                            <h3><i class="fas fa-laptop-code program-icon"></i>Bachelor of Science in Computer Science
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
@@ -226,14 +134,16 @@
 
                         <!-- Electrical Engineering -->
                         <div class="program-card has-concentrations" onclick="showConcentrations('eee')">
-                            <h3>Bachelor of Science in Electrical and Electronics Engineering</h3>
+                            <h3><i class="fas fa-bolt program-icon"></i>Bachelor of Science in Electrical and
+                                Electronics Engineering</h3>
                             <div class="program-meta">
                                 <span class="view-link">Choose Concentration →</span>
                             </div>
                         </div>
 
                         <a href="majors/mechanical_engineering.html" class="program-card">
-                            <h3>Bachelor of Science in Mechanical Engineering</h3>
+                            <h3><i class="fas fa-cogs program-icon"></i>Bachelor of Science in Mechanical Engineering
+                            </h3>
                             <div class="program-meta">
                                 <span class="view-link">View Study Plan→</span>
                             </div>
@@ -248,7 +158,7 @@
             <hr style="border: none; border-top: 1px solid #444; margin-bottom: 20px;">
             <p>Developed by <strong>Abid</strong></p>
             <p>
-                <a href="https://github.com/abidzzz" style="color: #8a0d0c; text-decoration: none;">GitHub</a> 
+                <a href="https://github.com/abidzzz" style="color: #8a0d0c; text-decoration: none;">GitHub</a>
             </p>
             <p>© 2025 - Present</p>
         </footer>
@@ -258,14 +168,14 @@
     <!-- Mass Communication Modal -->
     <div id="mass-comm-modal" class="concentration-modal">
         <div class="modal-content">
-            <h3>Mass Communication</h3>
+            <h3><i class="fas fa-broadcast-tower program-icon"></i>Mass Communication</h3>
             <p>Choose your concentration:</p>
             <div class="concentration-links">
                 <a href="majors/mass_communication.html" class="concentration-link">
-                    Digital Media Concentration
+                    <i class="fas fa-photo-video concentration-icon"></i>Digital Media Concentration
                 </a>
                 <a href="majors/mass_communication_public_relations.html" class="concentration-link">
-                    Public Relations Concentration
+                    <i class="fas fa-handshake concentration-icon"></i>Public Relations Concentration
                 </a>
             </div>
             <button class="close-modal" onclick="closeModal()">Cancel</button>
@@ -275,17 +185,17 @@
     <!-- Biotechnology Modal -->
     <div id="biotech-modal" class="concentration-modal">
         <div class="modal-content">
-            <h3>Biotechnology</h3>
+            <h3><i class="fas fa-dna program-icon"></i>Biotechnology</h3>
             <p>Choose your concentration:</p>
             <div class="concentration-links">
                 <a href="majors/biotechnology_medical.html" class="concentration-link">
-                    Medical Biotechnology
+                    <i class="fas fa-hospital concentration-icon"></i>Medical Biotechnology
                 </a>
                 <a href="majors/biotechnology_cell_molecular.html" class="concentration-link">
-                    Cell and Molecular Biotechnology
+                    <i class="fas fa-microscope concentration-icon"></i>Cell and Molecular Biotechnology
                 </a>
                 <a href="majors/biotechnology_forensic.html" class="concentration-link">
-                    Forensic Biology
+                    <i class="fas fa-fingerprint concentration-icon"></i>Forensic Biology
                 </a>
             </div>
             <button class="close-modal" onclick="closeModal()">Cancel</button>
@@ -295,14 +205,14 @@
     <!-- Chemical Engineering Modal -->
     <div id="chem-eng-modal" class="concentration-modal">
         <div class="modal-content">
-            <h3>Chemical Engineering</h3>
+            <h3><i class="fas fa-flask program-icon"></i>Chemical Engineering</h3>
             <p>Choose your concentration:</p>
             <div class="concentration-links">
                 <a href="majors/chemical_engineering.html" class="concentration-link">
-                    General Chemical Engineering
+                    <i class="fas fa-industry concentration-icon"></i>General Chemical Engineering
                 </a>
                 <a href="majors/petroleum_engineering.html" class="concentration-link">
-                    Petroleum Engineering
+                    <i class="fas fa-oil-well concentration-icon"></i>Petroleum Engineering
                 </a>
             </div>
             <button class="close-modal" onclick="closeModal()">Cancel</button>
@@ -312,79 +222,51 @@
     <!-- Electrical Engineering Modal -->
     <div id="eee-modal" class="concentration-modal">
         <div class="modal-content">
-            <h3>Electrical & Electronics Engineering</h3>
+            <h3><i class="fas fa-bolt program-icon"></i>Electrical & Electronics Engineering</h3>
             <p>Choose your concentration:</p>
             <div class="concentration-links">
                 <a href="majors/electrical_electronics_engineering.html" class="concentration-link">
-                    General Electrical Engineering
+                    <i class="fas fa-bolt concentration-icon"></i>General Electrical Engineering
                 </a>
                 <a href="majors/electrical_electronics_robotics.html" class="concentration-link">
-                    Robotics Concentration
+                    <i class="fas fa-robot concentration-icon"></i>Robotics Concentration
                 </a>
             </div>
             <button class="close-modal" onclick="closeModal()">Cancel</button>
         </div>
     </div>
+
     <!-- Business Administration - All Majors Modal -->
     <div id="bba-all-majors-modal" class="concentration-modal">
         <div class="modal-content">
-            <h3>Business Administration</h3>
+            <h3><i class="fas fa-chart-line program-icon"></i>Business Administration</h3>
             <p>Choose your major:</p>
             <div class="concentration-links">
                 <a href="majors/business_administration_major1.html" class="concentration-link">
-                    Accounting
+                    <i class="fas fa-calculator concentration-icon"></i>Accounting
                 </a>
                 <a href="majors/business_administration_major1.html" class="concentration-link">
-                    Business Analytics
+                    <i class="fas fa-chart-bar concentration-icon"></i>Business Analytics
                 </a>
                 <a href="majors/business_administration_major1.html" class="concentration-link">
-                    Finance
+                    <i class="fas fa-money-bill-wave concentration-icon"></i>Finance
                 </a>
                 <a href="majors/business_administration_major1.html" class="concentration-link">
-                    Human Resource Management
+                    <i class="fas fa-users concentration-icon"></i>Human Resource Management
                 </a>
                 <a href="majors/business_administration_major1.html" class="concentration-link">
-                    Marketing
+                    <i class="fas fa-bullhorn concentration-icon"></i>Marketing
                 </a>
                 <a href="majors/BA_hospitality.html" class="concentration-link">
-                    Hospitality and Tourism Management
+                    <i class="fas fa-hotel concentration-icon"></i>Hospitality and Tourism Management
                 </a>
                 <a href="majors/business_administration.html" class="concentration-link">
-                    Generalist Program
+                    <i class="fas fa-graduation-cap concentration-icon"></i>Generalist Program
                 </a>
             </div>
             <button class="close-modal" onclick="closeModal()">Cancel</button>
         </div>
     </div>
-    <script>
-        function showConcentrations(programId) {
-            closeModal(); // Close any open modals first
-            const modal = document.getElementById(programId + '-modal');
-            if (modal) {
-                modal.classList.add('active');
-            }
-        }
-        
-        function closeModal() {
-            const modals = document.querySelectorAll('.concentration-modal');
-            modals.forEach(modal => {
-                modal.classList.remove('active');
-            });
-        }
-        
-        // Close modal when clicking outside content
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('concentration-modal')) {
-                closeModal();
-            }
-        });
-        
-        // Close with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-    </script>
 </body>
+
 </html>

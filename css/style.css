@@ -46,27 +46,30 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
-    .school-section {
-        margin-bottom: 3rem;
-    }
+
+.school-section {
+    margin-bottom: 3rem;
+}
 
 .school-title {
     color: #ffffff;
     font-size: 1.5em;
     margin-bottom: 1.5rem;
     text-align: left;
-    border-bottom: 2px solid #8a0d0c; /* Your red accent */
+    border-bottom: 2px solid #8a0d0c;
+    /* Your red accent */
     padding-bottom: 0.5rem;
     padding-left: 10px;
     border-left: 3px solid #8a0d0c;
 }
 
-    .programs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-        margin-bottom: 3rem;
-    }
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
 .programs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -121,7 +124,12 @@ body {
     font-size: 0.9em;
     color: #999;
 }
-
+.program-card:hover .program-icon {
+    transform: scale(1.2); /* Enlarge effect */
+    color: #ffffff;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(138, 13, 12, 0.5); /* Glow effect */
+}
 .view-link {
     color: #8a0d0c;
     text-decoration: none;
@@ -197,6 +205,7 @@ body {
     color: rgb(255, 255, 255);
     text-align: center;
 }
+
 .legend {
     display: flex;
     justify-content: space-between;
@@ -216,7 +225,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1; /* Allow centering by occupying remaining space */
+    flex-grow: 1;
+    /* Allow centering by occupying remaining space */
     margin-left: 20px;
 }
 
@@ -245,11 +255,13 @@ body {
     height: 1.6px;
     background-color: #FFFFFF;
 }
+
 .arrow-line-dotted {
     width: 20px;
     height: 0px;
     border-top: 1.6px dotted #ffffff;
 }
+
 .arrow-head {
     width: 0;
     height: 0;
@@ -262,6 +274,7 @@ body {
 .legend-text {
     font-size: 14px;
 }
+
 .legend-row {
     display: flex;
     justify-content: center;
@@ -315,15 +328,19 @@ div#root {
     align-items: center;
     transition: all 500ms ease;
 }
-.internship{
-    width:82em;
+
+.internship {
+    width: 82em;
 }
-.internship-short{
-    width:68em;
+
+.internship-short {
+    width: 68em;
 }
-.internship-large{
-    width:96em;
+
+.internship-large {
+    width: 96em;
 }
+
 /* by level */
 div#root[colorcode="level"] .yl-1 {
     border-style: solid;
@@ -338,6 +355,7 @@ div#root[colorcode="level"] .yl-2 {
     border-width: 2px;
     background-color: #496a0a;
 }
+
 div#root[colorcode="level"] .yl-3 {
     border-style: solid;
     border-color: #0f5376;
@@ -354,9 +372,11 @@ div#root[colorcode="level"] .yl-4 {
 
 div#root[colorcode="level"] .yl-5 {
     border-style: solid;
-    border-color: #1f3c36;  /* Deep teal-green */
+    border-color: #1f3c36;
+    /* Deep teal-green */
     border-width: 2px;
-    background-color: #1a2a26;  /* Darker teal-grey */
+    background-color: #1a2a26;
+    /* Darker teal-grey */
 }
 
 
@@ -387,20 +407,25 @@ div#root[colorcode="level"] .yl-5 {
 #prereq-tooltip.show {
     opacity: 1;
 }
+
 /* Back Button Styles - Dark Theme */
 #back-button-container {
-    position: absolute;  /* Positioned inside header */
+    position: absolute;
+    /* Positioned inside header */
     top: 20px;
     left: 20px;
-    z-index: 1000;  /* Ensures it stays on top */
+    z-index: 1000;
+    /* Ensures it stays on top */
 }
 
 .back-button {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #660808; /* Darker shade of red */
-    color: #FFFFFF; /* White text */
+    background-color: #660808;
+    /* Darker shade of red */
+    color: #FFFFFF;
+    /* White text */
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 0.5em;
@@ -415,7 +440,8 @@ div#root[colorcode="level"] .yl-5 {
 .back-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-    background-color: #8a0d0c; /* Slightly lighter red on hover */
+    background-color: #8a0d0c;
+    /* Slightly lighter red on hover */
     color: #FFFFFF;
     text-decoration: none;
 }
@@ -425,12 +451,189 @@ div#root[colorcode="level"] .yl-5 {
     font-weight: bold;
 }
 
+
+.program-icon {
+    font-size: 1.2em;
+    margin-right: 20px;
+    width: 24px;
+    text-align: center;
+    color: #f8f9fa;
+    /* Light color that matches your header text */
+    opacity: 0.9;
+}
+
+.concentration-icon {
+    font-size: 1.1em;
+    margin-right: 15px;
+    width: 24px;
+    text-align: center;
+    color: #cccccc;
+    /* Matches your secondary text color */
+    opacity: 0.8;
+}
+
+/* Hover effects for icons */
+.program-card:hover .program-icon {
+    color: #ffffff;
+    /* Brighter on hover */
+    opacity: 1;
+}
+
+.concentration-link:hover .concentration-icon {
+    color: #ffffff;
+    /* Brighter on hover */
+    opacity: 1;
+}
+
+/* Better alignment for program cards with icons */
+.program-card h3 {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+/* Better alignment for modal headers */
+.modal-content h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+/* Better alignment for concentration links */
+.concentration-link {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(138, 13, 12, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid #8a0d0c;
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+/* Rest of your existing CSS remains the same */
+.concentration-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.concentration-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #2a2e30;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    border: 2px solid #8a0d0c;
+    text-align: center;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.concentration-modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-content p {
+    color: #ccc;
+    margin-bottom: 25px;
+}
+
+.concentration-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.concentration-modal.active .concentration-link {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.concentration-link:hover {
+    background: rgba(138, 13, 12, 0.4);
+    transform: translateY(-2px);
+}
+
+.close-modal {
+    background: #8a0d0c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s ease;
+}
+
+.close-modal:hover {
+    background: #a00e0d;
+}
+
+.program-card.has-concentrations {
+    cursor: pointer;
+}
+
+/* Staggered animation for links */
+.concentration-link:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.concentration-link:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.concentration-link:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.concentration-link:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.concentration-link:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.concentration-link:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+.concentration-link:nth-child(7) {
+    transition-delay: 0.7s;
+}
+
 @media (max-width: 768px) {
     #back-button-container {
         top: 15px;
         left: 15px;
     }
-    
+
     .back-button {
         padding: 8px 16px;
         font-size: 13px;
@@ -442,12 +645,12 @@ div#root[colorcode="level"] .yl-5 {
         top: 10px;
         left: 10px;
     }
-    
+
     .back-button {
         padding: 6px 12px;
         font-size: 12px;
     }
-    
+
     .back-arrow {
         font-size: 14px;
     }
@@ -488,6 +691,7 @@ div#root[colorcode="level"] .yl-5 {
         font-size: 1em;
     }
 }
+
 /* Media queries for responsiveness */
 @media (max-width: 600px) {
     .titl {

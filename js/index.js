@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOMContentLoaded event fired');
     setupEventListeners();
 });
@@ -55,14 +55,14 @@ function showPrerequisitesOnHover(box) {
         if (courseId.startsWith("Completion") || courseId.startsWith("Requisite")) {
             return courseId;
         }
-        
+
         // For course codes like "COMM111" -> "COMM 111"
         // Match pattern: 3-4 letters followed by 3 digits
         const match = courseId.match(/^([A-Z]{3,4})(\d{3})$/);
         if (match) {
             return match[1] + ' ' + match[2];
         }
-        
+
         // If no match, return original
         return courseId;
     }
@@ -71,7 +71,7 @@ function showPrerequisitesOnHover(box) {
         let prereqArray;
         console.log('Prereqs string:', prereqs);
         const tempprereqArray = prereqs.split(' ');
-        
+
         if (tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
             prereqArray = [prereqs];
         }
@@ -80,7 +80,7 @@ function showPrerequisitesOnHover(box) {
         }
         else if (tempprereqArray[0].length >= 7) {
             prereqArray = tempprereqArray;
-        } 
+        }
         else {
             prereqArray = [prereqs];
         }
@@ -127,7 +127,7 @@ function showPrerequisitesOnHover(box) {
                     // Format the course code before displaying
                     coreqText += formatCourseCode(coreqId) + ', ';
                 }
-            }   
+            }
         });
         // Remove trailing comma and space
         coreqText = coreqText.slice(0, -2);
@@ -140,16 +140,16 @@ function showPrerequisitesOnHover(box) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    
+
     let desc = "";
-    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)"){
+    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)") {
         desc = "<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br>OR<br> Introduction to Islam in World Culture";
     }
-    else if(courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)"){
+    else if (courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)") {
         desc = "<br>Arabic for Media: Native Speakers <br> OR <br> Arabic for Media: Non-Native speakers"
     }
-    
-    
+
+
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
         (desc ? `<br>${desc}` : '') +
         (prereqText ? `<br>Prerequisites: ${prereqText}` : '') +
@@ -285,7 +285,7 @@ function setupArrows() {
                         arrow.setAttribute("marker-end", "url(#coreq-arrow)");
                         // Draw coreq arrows: from right edge to left edge OR left edge to right edge based on position
                         const sourceRect = connectionElement.getBoundingClientRect();
-                        const targetRect = targetBox.getBoundingClientRect();   
+                        const targetRect = targetBox.getBoundingClientRect();
                         if (sourceRect.left < targetRect.left) {
                             // Source is to the left of target: draw arrow from right to left
                             x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
@@ -300,12 +300,12 @@ function setupArrows() {
                             // y2 = parseFloat(targetBox.style.top)  + 0.6 + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         } else {
                             // Source is to the right of target: draw arrow from left to right
-                            x1 = parseFloat(connectionElement.style.left);  
-                            y1 = parseFloat(connectionElement.style.top)  + (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x1 = parseFloat(connectionElement.style.left);
+                            y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
                             x2 = parseFloat(targetBox.style.left) - 0.2 + (parseFloat(targetBox.offsetWidth || 0) / 16);
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         }
-                        
+
 
 
                     } else {
@@ -331,35 +331,35 @@ function setupArrows() {
         };
     }
 
-for (const box of classBoxes) {
-    const prereqs = box.getAttribute("prereq");
-    if (prereqs) {
-        const prereqArray = parsePrereqs(prereqs);
+    for (const box of classBoxes) {
+        const prereqs = box.getAttribute("prereq");
+        if (prereqs) {
+            const prereqArray = parsePrereqs(prereqs);
 
-        prereqArray.forEach(({ id, isOr }) => {
-            const style = isOr
-                ? "stroke:rgb(255,255,255);stroke-width:1;stroke-dasharray:2,2;opacity:0"
-                : "stroke:rgb(255,255,255);stroke-width:1;opacity:0";
+            prereqArray.forEach(({ id, isOr }) => {
+                const style = isOr
+                    ? "stroke:rgb(255,255,255);stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                    : "stroke:rgb(255,255,255);stroke-width:1;opacity:0";
 
-            const createArrow = createArrowsForConnections(box, style, 'prereq-arrow');
-            createArrow(box, [id]);
-        });
+                const createArrow = createArrowsForConnections(box, style, 'prereq-arrow');
+                createArrow(box, [id]);
+            });
+        }
+
+        const coreqs = box.getAttribute("coreq");
+        if (coreqs) {
+            const coreqArray = parsePrereqs(coreqs);
+
+            coreqArray.forEach(({ id, isOr }) => {
+                const style = isOr
+                    ? "stroke:#00ff88;stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                    : "stroke:#00ff88;stroke-width:1;opacity:0";
+
+                const createArrow = createArrowsForConnections(box, style, 'coreq-arrow');
+                createArrow(box, [id]);
+            });
+        }
     }
-
-    const coreqs = box.getAttribute("coreq");
-    if (coreqs) {
-        const coreqArray = parsePrereqs(coreqs);
-
-        coreqArray.forEach(({ id, isOr }) => {
-            const style = isOr
-                ? "stroke:#00ff88;stroke-width:1;stroke-dasharray:2,2;opacity:0"
-                : "stroke:#00ff88;stroke-width:1;opacity:0";
-
-            const createArrow = createArrowsForConnections(box, style, 'coreq-arrow');
-            createArrow(box, [id]);
-        });
-    }
-}
 
 
     // Function to parse prerequisite or corequisite strings and split by "or" inside parentheses
@@ -422,3 +422,32 @@ for (const box of classBoxes) {
     }
 
 }
+
+function showConcentrations(programId) {
+    closeModal(); // Close any open modals first
+    const modal = document.getElementById(programId + '-modal');
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+function closeModal() {
+    const modals = document.querySelectorAll('.concentration-modal');
+    modals.forEach(modal => {
+        modal.classList.remove('active');
+    });
+}
+
+// Close modal when clicking outside content
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('concentration-modal')) {
+        closeModal();
+    }
+});
+
+// Close with Escape key
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
