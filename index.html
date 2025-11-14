@@ -8,7 +8,112 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Saira+Condensed:wght@300&display=swap" rel="stylesheet">
-
+    <style>
+        /* Modal Styles with Animations */
+        .concentration-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .concentration-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: #2a2e30;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #8a0d0c;
+            text-align: center;
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .concentration-modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .modal-content h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+        
+        .modal-content p {
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+        
+        .concentration-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .concentration-link {
+            display: block;
+            padding: 15px;
+            background: rgba(138, 13, 12, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid #8a0d0c;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .concentration-modal.active .concentration-link {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .concentration-link:hover {
+            background: rgba(138, 13, 12, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .close-modal {
+            background: #8a0d0c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: #a00e0d;
+        }
+        
+        .program-card.has-concentrations {
+            cursor: pointer;
+        }
+        
+        /* Staggered animation for links */
+        .concentration-link:nth-child(1) { transition-delay: 0.1s; }
+        .concentration-link:nth-child(2) { transition-delay: 0.2s; }
+        .concentration-link:nth-child(3) { transition-delay: 0.3s; }
+        .concentration-link:nth-child(4) { transition-delay: 0.4s; }
+    </style>
 </head>
 <body>
     <div class="front-page-container">
@@ -25,28 +130,30 @@
 
         <!-- Main Content -->
         <div class="main-content">
-
-            <!-- Programs Grid -->
             <section>
                 <h2 style="text-align: center; margin-bottom: 2rem; color: #ffffff; font-size: 2em;">Offered Programs</h2>
+                
                 <!-- SCHOOL OF ARTS AND SCIENCES -->
                 <div class="school-section">
                     <h3 class="school-title">SCHOOL OF ARTS AND SCIENCES</h3>
                     <div class="programs-grid">
-                        <a href="majors/mass_communication.html" class="program-card">
+                        <!-- Mass Communication -->
+                        <div class="program-card has-concentrations" onclick="showConcentrations('mass-comm')">
                             <h3>Bachelor of Arts in Mass Communication</h3>
                             <div class="program-meta">
-                                <span class="view-link">View Study Plan→</span>
+                                <span class="view-link">Choose Concentration →</span>
                             </div>
-                        </a>
+                        </div>
 
-                        <a href="majors/biotechnology.html" class="program-card">
+                        <!-- Biotechnology -->
+                        <div class="program-card has-concentrations" onclick="showConcentrations('biotech')">
                             <h3>Bachelor of Science in Biotechnology</h3>
                             <div class="program-meta">
-                                <span class="view-link">View Study Plan→</span>
+                                <span class="view-link">Choose Concentration →</span>
                             </div>
-                        </a>
+                        </div>
 
+                        <!-- Psychology -->
                         <a href="majors/psychology.html" class="program-card">
                             <h3>Bachelor of Science in Psychology</h3>
                             <div class="program-meta">
@@ -60,14 +167,16 @@
                 <div class="school-section">
                     <h3 class="school-title">SCHOOL OF BUSINESS</h3>
                     <div class="programs-grid">
-                        <a href="majors/business_administration.html" class="program-card">
-                            <h3>Bachelor of Science in Business Administration</h3>
+                        <!-- ONE Business Administration card that shows all majors -->
+                        <div class="program-card has-concentrations" onclick="showConcentrations('bba-all-majors')">
+                            <h3>Bachelor of Business Administration</h3>
                             <div class="program-meta">
-                                <span class="view-link">View Study Plan→</span>
+                                <span class="view-link">Choose Major →</span>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
+
                 <!-- SCHOOL OF ENGINEERING AND COMPUTING -->
                 <div class="school-section">
                     <h3 class="school-title">SCHOOL OF ENGINEERING AND COMPUTING</h3>
@@ -86,12 +195,13 @@
                             </div>
                         </a>
 
-                        <a href="majors/chemical_engineering.html" class="program-card">
+                        <!-- Chemical Engineering -->
+                        <div class="program-card has-concentrations" onclick="showConcentrations('chem-eng')">
                             <h3>Bachelor of Science in Chemical Engineering</h3>
                             <div class="program-meta">
-                                <span class="view-link">View Study Plan→</span>
+                                <span class="view-link">Choose Concentration →</span>
                             </div>
-                        </a>
+                        </div>
 
                         <a href="majors/civil_engineering.html" class="program-card">
                             <h3>Bachelor of Science in Civil Engineering</h3>
@@ -114,12 +224,13 @@
                             </div>
                         </a>
 
-                        <a href="majors/electrical_electronics_engineering.html" class="program-card">
+                        <!-- Electrical Engineering -->
+                        <div class="program-card has-concentrations" onclick="showConcentrations('eee')">
                             <h3>Bachelor of Science in Electrical and Electronics Engineering</h3>
                             <div class="program-meta">
-                                <span class="view-link">View Study Plan→</span>
+                                <span class="view-link">Choose Concentration →</span>
                             </div>
-                        </a>
+                        </div>
 
                         <a href="majors/mechanical_engineering.html" class="program-card">
                             <h3>Bachelor of Science in Mechanical Engineering</h3>
@@ -130,7 +241,6 @@
                     </div>
                 </div>
             </section>
-
         </div>
 
         <!-- Footer -->
@@ -143,5 +253,138 @@
             <p>© 2025 - Present</p>
         </footer>
     </div>
+
+    <!-- Modals -->
+    <!-- Mass Communication Modal -->
+    <div id="mass-comm-modal" class="concentration-modal">
+        <div class="modal-content">
+            <h3>Mass Communication</h3>
+            <p>Choose your concentration:</p>
+            <div class="concentration-links">
+                <a href="majors/mass_communication.html" class="concentration-link">
+                    Digital Media Concentration
+                </a>
+                <a href="majors/mass_communication_public_relations.html" class="concentration-link">
+                    Public Relations Concentration
+                </a>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Biotechnology Modal -->
+    <div id="biotech-modal" class="concentration-modal">
+        <div class="modal-content">
+            <h3>Biotechnology</h3>
+            <p>Choose your concentration:</p>
+            <div class="concentration-links">
+                <a href="majors/biotechnology_medical.html" class="concentration-link">
+                    Medical Biotechnology
+                </a>
+                <a href="majors/biotechnology_cell_molecular.html" class="concentration-link">
+                    Cell and Molecular Biotechnology
+                </a>
+                <a href="majors/biotechnology_forensic.html" class="concentration-link">
+                    Forensic Biology
+                </a>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Chemical Engineering Modal -->
+    <div id="chem-eng-modal" class="concentration-modal">
+        <div class="modal-content">
+            <h3>Chemical Engineering</h3>
+            <p>Choose your concentration:</p>
+            <div class="concentration-links">
+                <a href="majors/chemical_engineering.html" class="concentration-link">
+                    General Chemical Engineering
+                </a>
+                <a href="majors/petroleum_engineering.html" class="concentration-link">
+                    Petroleum Engineering
+                </a>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Electrical Engineering Modal -->
+    <div id="eee-modal" class="concentration-modal">
+        <div class="modal-content">
+            <h3>Electrical & Electronics Engineering</h3>
+            <p>Choose your concentration:</p>
+            <div class="concentration-links">
+                <a href="majors/electrical_electronics_engineering.html" class="concentration-link">
+                    General Electrical Engineering
+                </a>
+                <a href="majors/electrical_electronics_robotics.html" class="concentration-link">
+                    Robotics Concentration
+                </a>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+    <!-- Business Administration - All Majors Modal -->
+    <div id="bba-all-majors-modal" class="concentration-modal">
+        <div class="modal-content">
+            <h3>Business Administration</h3>
+            <p>Choose your major:</p>
+            <div class="concentration-links">
+                <a href="majors/business_administration_major1.html" class="concentration-link">
+                    Accounting
+                </a>
+                <a href="majors/business_administration_major1.html" class="concentration-link">
+                    Business Analytics
+                </a>
+                <a href="majors/business_administration_major1.html" class="concentration-link">
+                    Finance
+                </a>
+                <a href="majors/business_administration_major1.html" class="concentration-link">
+                    Human Resource Management
+                </a>
+                <a href="majors/business_administration_major1.html" class="concentration-link">
+                    Marketing
+                </a>
+                <a href="majors/BA_hospitality.html" class="concentration-link">
+                    Hospitality and Tourism Management
+                </a>
+                <a href="majors/business_administration.html" class="concentration-link">
+                    Generalist Program
+                </a>
+            </div>
+            <button class="close-modal" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+    <script>
+        function showConcentrations(programId) {
+            closeModal(); // Close any open modals first
+            const modal = document.getElementById(programId + '-modal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+        
+        function closeModal() {
+            const modals = document.querySelectorAll('.concentration-modal');
+            modals.forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+        
+        // Close modal when clicking outside content
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('concentration-modal')) {
+                closeModal();
+            }
+        });
+        
+        // Close with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>

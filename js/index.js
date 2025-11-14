@@ -145,6 +145,9 @@ function showPrerequisitesOnHover(box) {
     if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)"){
         desc = "<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br>OR<br> Introduction to Islam in World Culture";
     }
+    else if(courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)"){
+        desc = "<br>Arabic for Media: Native Speakers <br> OR <br> Arabic for Media: Non-Native speakers"
+    }
     
     
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
