@@ -332,7 +332,6 @@ div#root[colorcode="level"] .yl-2 {
     border-width: 2px;
     background-color: #496a0a;
 }
-
 div#root[colorcode="level"] .yl-3 {
     border-style: solid;
     border-color: #0f5376;
@@ -349,14 +348,16 @@ div#root[colorcode="level"] .yl-4 {
 
 div#root[colorcode="level"] .yl-5 {
     border-style: solid;
+    border-color: #1f3c36;  /* Deep teal-green */
     border-width: 2px;
-    border-color: #393e40;
-    background-color: #2a2e30;
+    background-color: #1a2a26;  /* Darker teal-grey */
 }
+
 
 
 .course-code-full {
     font-weight: 900;
+    margin-right: 5px;
 }
 
 
