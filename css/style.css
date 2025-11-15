@@ -474,38 +474,41 @@ div#root[colorcode="level"] .yl-5 {
     font-weight: bold;
 }
 
-
+/* Program icon */
 .program-icon {
     font-size: 1.2em;
     margin-right: 20px;
     width: 24px;
     text-align: center;
-    color: #f8f9fa;
-    /* Light color that matches your header text */
+    color: #f8f9fa; /* Light color that matches your header text */
     opacity: 0.9;
+    transition: all 0.3s ease-in-out; /* Added transition */
 }
 
+/* Concentration icon */
 .concentration-icon {
     font-size: 1.1em;
     margin-right: 15px;
     width: 24px;
     text-align: center;
-    color: #cccccc;
-    /* Matches your secondary text color */
+    color: #cccccc; /* Matches your secondary text color */
     opacity: 0.8;
+    transition: all 0.3s ease-in-out; /* Added transition */
 }
 
 /* Hover effects for icons */
 .program-card:hover .program-icon {
-    color: #ffffff;
-    /* Brighter on hover */
+    color: #ffffff; /* Brighter on hover */
     opacity: 1;
+    transform: translateY(-5px) scale(1.1); /* Slight upward movement and scaling */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
 }
 
 .concentration-link:hover .concentration-icon {
-    color: #ffffff;
-    /* Brighter on hover */
+    color: #ffffff; /* Brighter on hover */
     opacity: 1;
+    transform: translateY(-5px) scale(1.1); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
 }
 
 /* Better alignment for program cards with icons */
@@ -537,10 +540,11 @@ div#root[colorcode="level"] .yl-5 {
     text-decoration: none;
     border-radius: 8px;
     border: 1px solid #8a0d0c;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out; /* Added transition */
     transform: translateY(20px);
     opacity: 0;
 }
+
 
 /* Rest of your existing CSS remains the same */
 .concentration-modal {

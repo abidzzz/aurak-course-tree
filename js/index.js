@@ -207,87 +207,23 @@ function highlightCourse(source) {
     console.log('Highlighting course:', source.id);
     const sourceId = source.id;
     const allElements = document.getElementsByClassName('classBox');
-    
-    // Reset all elements to low opacity
     for (const elem of allElements) {
         elem.style.opacity = '0.3';
     }
-    
-    // Reset all arrows to invisible
-    const allArrows = document.getElementsByTagName('line');
-    for (const arrow of allArrows) {
-        arrow.style.opacity = '0';
-    }
-    
-    // Function to recursively find all prerequisites
-    function findAllPrereqs(courseId, visited = new Set()) {
-        if (visited.has(courseId)) return new Set(); // Prevent infinite loops
-        visited.add(courseId);
-        
-        const courseElement = document.getElementById(courseId);
-        if (!courseElement) return new Set();
-        
-        const prereqs = new Set();
-        const prereqAttr = courseElement.getAttribute('prereq');
-        
-        if (prereqAttr && prereqAttr !== '') {
-            // Parse prerequisites (simplified version - you might want to use your existing parsePrereqs function)
-            const prereqIds = prereqAttr.split(' ').filter(id => id.trim() !== '');
-            
-            for (const prereqId of prereqIds) {
-                if (!prereqId.includes('or') && !prereqId.startsWith("Completion") && !prereqId.startsWith("Requisite")) {
-                    prereqs.add(prereqId);
-                    // Recursively find prerequisites of prerequisites
-                    const nestedPrereqs = findAllPrereqs(prereqId, visited);
-                    nestedPrereqs.forEach(nestedId => prereqs.add(nestedId));
-                }
-            }
-        }
-        
-        return prereqs;
-    }
-    
-    // Find all prerequisites in the chain
-    const allPrereqIds = findAllPrereqs(sourceId);
-    allPrereqIds.add(sourceId); // Include the source course itself
-    
-    // Highlight all courses in the prerequisite chain
-    for (const courseId of allPrereqIds) {
-        const courseElement = document.getElementById(courseId);
-        if (courseElement) {
-            courseElement.style.opacity = '1.0';
-        }
-    }
-    
-    // Highlight all arrows between the prerequisite chain courses
-    const allPrereqArray = Array.from(allPrereqIds);
-    for (let i = 0; i < allPrereqArray.length; i++) {
-        for (let j = i + 1; j < allPrereqArray.length; j++) {
-            const course1 = allPrereqArray[i];
-            const course2 = allPrereqArray[j];
-            
-            // Check for arrows between these two courses in both directions
-            const arrows1 = document.getElementsByClassName(course1 + ' ' + course2);
-            const arrows2 = document.getElementsByClassName(course2 + ' ' + course1);
-            
-            // Show arrows from course1 to course2
-            for (const arrow of arrows1) {
-                arrow.style.opacity = '1.0';
-            }
-            
-            // Show arrows from course2 to course1  
-            for (const arrow of arrows2) {
-                arrow.style.opacity = '1.0';
-            }
-        }
-    }
-    
-    // Also highlight direct arrows to/from the source course
+    source.style.opacity = '1.0';
     const arrows = document.getElementsByClassName(sourceId);
     for (const arrow of arrows) {
-        arrow.style.opacity = '1.0';
+        const related = arrow.classList;
+        for (const rel of related) {
+            const elem = document.getElementById(rel);
+            if (elem) {
+                arrow.style.opacity = '1.0';
+                elem.style.opacity = '1.0';
+            }
+        }
     }
 }
+
 
 function showAllElements() {
     console.log('Showing all elements');
