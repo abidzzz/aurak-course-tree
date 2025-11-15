@@ -131,14 +131,24 @@ body {
     text-shadow: 0 0 10px rgba(138, 13, 12, 0.5); /* Glow effect */
 }
 .view-link {
-    color: #8a0d0c;
+    color: #cbb2b2; 
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
 }
 
 .view-link:hover {
-    color: #ff6b6b;
+    color: #ffffff; /* Pure white on hover */
+    transform: translateX(5px);
+}
+
+.program-card.has-concentrations .view-link {
+    color:#cbb2b2; 
+}
+
+.program-card.has-concentrations .view-link:hover {
+    color: #ffffff; /* Your slightly lighter red */
 }
 
 .features-section {
@@ -193,8 +203,12 @@ body {
     display: block;
     padding: 20px;
     margin-bottom: 20px;
-    width: 100%;
+    width: 100vw; /* Ensures it spans the entire width of the viewport */
+    height: auto; /* Adjusts the height to auto */
     position: relative;
+}
+footer{
+    width: 100vw;
 }
 
 .titl {
