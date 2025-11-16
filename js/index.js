@@ -182,6 +182,7 @@ function boxOnLeave() {
 function boxOnClick(event) {
     console.log('Box click:', event.target);
     focusBox(event.target);
+    hidePrerequisitesTooltip();
 }
 
 function rootDivClicked(event) {
