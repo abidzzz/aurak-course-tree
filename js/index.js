@@ -41,14 +41,237 @@ function boxOnHover(event) {
     showPrerequisitesOnHover(box);
     highlightCourse(box);
 }
+// Add this to your JavaScript
+const genEdCourses = {
+    "Humanities/Fine Arts": {
+        "PHIL100": "Critical Thinking and Reasoning",
+        "ENGL200": "Advanced Composition", 
+        "MEST100": "Introduction to Islam in World Culture",
+        "ENGL102": "Public Speaking",
+        "HIST100": "Contemporary Middle Eastern History",
+        "HIST101": "Ancient History of the Arabian Peninsula",
+        "PHIL101": "Ethics in Today's World",
+        "ARTT101": "History of Art and Design",
+        "ARTT102": "Art and Artificial Intelligence",
+        "COMM102": "Reading Image and Film"
+    },
+    "Social and Behavioral Sciences": {
+        "UAES200": "Survey of United Arab Emirates Studies",
+        "PSYC100": "Introduction to Psychology",
+        "PSYC250": "Social Psychology",
+        "ECON103": "Principles of Microeconomics", 
+        "POLI100": "Contemporary Global Issues",
+        "POLI101": "Politics of Scarcity",
+        "COMM101": "Interpersonal Communication and Group Interaction"
+    },
+    "Mathematics": {
+        "MATH101": "Numbers and Data Interpretation",
+        "STAT100": "Statistics",
+        "MATH108": "Calculus with Business Applications",
+        "MATH111": "Calculus with Life Sciences Applications",
+        "MATH113": "Calculus I"
+    },
+    "Natural Sciences":{
+        "BIOL100": "Humankind in a Biological World",
+        "CHEM100/101": "Chemistry in Everyday Life", 
+        "CHEM211/212": "General Chemistry I",
+        "ENVS102": "Sustainability and Human-Environment Relations"
+    }
+};
+function matchGenEdCategory(courseName) {
+    const categoryKeywords = {
+        "Social and Behavioral Sciences": ["social", "behavioral", "sciences", "science"],
+        "Humanities/Fine Arts": ["humanities", "fine", "arts", "art"], 
+        "Mathematics": ["mathematics", "math"],
+        "Natural Sciences": ["natural", "sciences", "science"]
+    };
+    
+    const lowerName = courseName.toLowerCase();
+    
+    // Count matches for each category
+    const categoryMatches = {};
+    
+    for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        let matchCount = 0;
+        
+        for (const keyword of keywords) {
+            if (lowerName.includes(keyword)) {
+                matchCount++;
+            }
+        }
+        
+        categoryMatches[category] = matchCount;
+    }
+    
+    // Find category with at least 2 matches
+    for (const [category, matchCount] of Object.entries(categoryMatches)) {
+        if (matchCount >= 2) {
+            return category;
+        }
+    }
+    
+    // If no category has 2 matches, try with 1 match as fallback
+    for (const [category, matchCount] of Object.entries(categoryMatches)) {
+        if (matchCount >= 1) {
+            return category;
+        }
+    }
+    
+    return null;
+}
+
+function checkIfCourseExists(courseCode) {
+    const allCourseBoxes = document.getElementsByClassName('classBox');
+    
+    for (const box of allCourseBoxes) {
+        const boxId = box.id;
+        // Remove spaces and special characters for comparison
+        const cleanBoxId = boxId.replace(/[^A-Z0-9]/g, '');
+        const cleanCourseCode = courseCode.replace(/[^A-Z0-9]/g, '');
+        
+        if (cleanBoxId.includes(cleanCourseCode)) {
+            return true;
+        }
+    }
+    return false;
+}
+function getAvailableGenEdOptions(genEdCategory) {
+    const availableOptions = [];
+    const courses = genEdCourses[genEdCategory];
+    
+    if (!courses) return availableOptions;
+    
+    for (const [courseCode, courseTitle] of Object.entries(courses)) {
+        // Only include if this course doesn't exist as a separate box
+        if (!checkIfCourseExists(courseCode)) {
+            availableOptions.push({
+                code: courseCode,
+                title: courseTitle
+            });
+        }
+    }
+    
+    return availableOptions;
+}
+
+function showGenEdOptionsTooltip(box, courseName) {
+    // Match the category (handles plural/singular variations)
+    const genEdCategory = matchGenEdCategory(courseName);
+    
+    if (!genEdCategory) {
+        // Fallback: show generic message if category can't be determined
+        showGenericGenEdTooltip(box, courseName);
+        return;
+    }
+    
+    // Get available options for this category
+    const availableOptions = getAvailableGenEdOptions(genEdCategory);
+    
+    // Create or update tooltip
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+    
+    let tooltipHTML = `<strong>${courseName}</strong>`;
+    tooltipHTML += `<br><em>Available ${genEdCategory}:</em><br><br>`;
+    
+    if (availableOptions.length > 0) {
+        availableOptions.forEach(course => {
+            tooltipHTML += `<div class="gened-option">`;
+            tooltipHTML += `<strong>${course.code}</strong>: ${course.title}`;
+            tooltipHTML += `</div>`;
+        });
+        
+        tooltipHTML += `<br><small>Choose any one course from above options</small>`;
+    } else {
+        tooltipHTML += `<div class="no-options">`;
+        tooltipHTML += `All ${genEdCategory} courses are already in your study plan`;
+        tooltipHTML += `</div>`;
+    }
+    
+    tooltip.innerHTML = tooltipHTML;
+    
+    // Position and show tooltip
+    positionTooltipSmartly(tooltip, box);
+    tooltip.classList.add('show');
+}
+function positionTooltipSmartly(tooltip, box) {
+    const rect = box.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    let left = rect.left + window.scrollX;
+    let top = rect.bottom + window.scrollY + 5;
+    
+    // Reset any previous positioning classes
+    tooltip.classList.remove('off-screen-right', 'off-screen-bottom');
+    
+    // Check if tooltip would go off-screen to the right
+    tooltip.style.visibility = 'hidden';
+    tooltip.style.display = 'block';
+    const tooltipWidth = tooltip.offsetWidth;
+    const tooltipHeight = tooltip.offsetHeight;
+    tooltip.style.visibility = 'visible';
+    
+    // Adjust horizontal position if needed
+    if (left + tooltipWidth > viewportWidth) {
+        left = rect.right - tooltipWidth;
+        if (left < 0) left = 5; // Minimum left margin
+        tooltip.classList.add('off-screen-right');
+    }
+    
+    // Adjust vertical position if needed
+    if (top + tooltipHeight > viewportHeight + window.scrollY) {
+        top = rect.top + window.scrollY - tooltipHeight - 5;
+        if (top < 0) top = 5; // Minimum top margin
+        tooltip.classList.add('off-screen-bottom');
+    }
+    
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+}
+
+// Fallback function for unrecognized GenEd categories
+function showGenericGenEdTooltip(box, courseName) {
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+    
+    let tooltipHTML = `<strong>${courseName}</strong>`;
+    tooltipHTML += `<br><em>General Education Course</em><br>`;
+    tooltipHTML += `<div class="no-options">`;
+    tooltipHTML += `Choose any course from the General Education requirements`;
+    tooltipHTML += `</div>`;
+    
+    tooltip.innerHTML = tooltipHTML;
+    
+    const rect = box.getBoundingClientRect();
+    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+    tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+    tooltip.classList.add('show');
+}
 
 function showPrerequisitesOnHover(box) {
     const prereqs = box.getAttribute('prereq');
     const coreqs = box.getAttribute('coreq');
     const courseCodeFull = box.getElementsByClassName('course-code-full')[0].innerHTML;
+    const courseName = box.getElementsByClassName('course-name')[0]?.innerHTML || '';
+    const boxId = box.id;
+    console.log(boxId)
+    // Check if this is a GenEd box by ID
+    if (boxId.toLowerCase() === "gened") {
+        
+        showGenEdOptionsTooltip(box, courseName);
+        return;
+    }
     let prereqText = '';
     let coreqText = '';
-
     // Function to format course code with spaces
     function formatCourseCode(courseId) {
         // If it's a "Completion" or "Requisite" text, return as is
@@ -290,16 +513,20 @@ function setupArrows() {
                         const targetRect = targetBox.getBoundingClientRect();   
                         if (sourceRect.left < targetRect.left) {
                             // Source is to the left of target: draw arrow from right to left
+                            design = 1;
+                            if (design == 1){
                             x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
                             y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
                             x2 = parseFloat(targetBox.style.left) + 0.1;
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
-
+                            }
+                            else{
                             // Design 2: two arrows with a gap in the middle
-                            // x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
-                            // y1 = parseFloat(connectionElement.style.top)  + 0.6+ (parseFloat(connectionElement.offsetHeight || 0) / 32);
-                            // x2 = parseFloat(targetBox.style.left); 
-                            // y2 = parseFloat(targetBox.style.top)  + 0.6 + (parseFloat(targetBox.offsetHeight || 0) / 32);
+                            x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
+                            y1 = parseFloat(connectionElement.style.top)  + 0.6+ (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x2 = parseFloat(targetBox.style.left); 
+                            y2 = parseFloat(targetBox.style.top)  + 0.6 + (parseFloat(targetBox.offsetHeight || 0) / 32);
+                            }
                         } else {
                             // Source is to the right of target: draw arrow from left to right
                             x1 = parseFloat(connectionElement.style.left);  
