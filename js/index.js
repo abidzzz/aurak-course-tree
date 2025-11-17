@@ -203,9 +203,9 @@ function positionTooltipSmartly(tooltip, box) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     
-    let left = rect.left + window.scrollX;
+    let left = rect.left - 130;
     let top = rect.bottom + window.scrollY + 5;
-    
+
     // Reset any previous positioning classes
     tooltip.classList.remove('off-screen-right', 'off-screen-bottom');
     
@@ -218,18 +218,19 @@ function positionTooltipSmartly(tooltip, box) {
     
     // Adjust horizontal position if needed
     if (left + tooltipWidth > viewportWidth) {
-        left = rect.right - tooltipWidth;
+        left = rect.right - 130;
         if (left < 0) left = 5; // Minimum left margin
         tooltip.classList.add('off-screen-right');
     }
     
     // Adjust vertical position if needed
-    if (top + tooltipHeight > viewportHeight + window.scrollY) {
-        top = rect.top + window.scrollY - tooltipHeight - 5;
-        if (top < 0) top = 5; // Minimum top margin
-        tooltip.classList.add('off-screen-bottom');
-    }
-    
+    // if (top + tooltipHeight > viewportHeight + window.scrollY) {
+    //     top = rect.top + window.scrollY - tooltipHeight - 5;
+    //     if (top < 0) top = 5; // Minimum top margin
+    //     tooltip.classList.add('off-screen-bottom');
+    // }
+    console.log(left+"()"+top)
+    // left = 1255 top = 495
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
 }
@@ -513,20 +514,12 @@ function setupArrows() {
                         const targetRect = targetBox.getBoundingClientRect();   
                         if (sourceRect.left < targetRect.left) {
                             // Source is to the left of target: draw arrow from right to left
-                            design = 1;
-                            if (design == 1){
+
                             x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
                             y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
                             x2 = parseFloat(targetBox.style.left) + 0.1;
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
-                            }
-                            else{
-                            // Design 2: two arrows with a gap in the middle
-                            x1 = parseFloat(connectionElement.style.left) + (parseFloat(connectionElement.offsetWidth || 0) / 16);
-                            y1 = parseFloat(connectionElement.style.top)  + 0.6+ (parseFloat(connectionElement.offsetHeight || 0) / 32);
-                            x2 = parseFloat(targetBox.style.left); 
-                            y2 = parseFloat(targetBox.style.top)  + 0.6 + (parseFloat(targetBox.offsetHeight || 0) / 32);
-                            }
+
                         } else {
                             // Source is to the right of target: draw arrow from left to right
                             x1 = parseFloat(connectionElement.style.left);  
