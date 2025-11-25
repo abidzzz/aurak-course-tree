@@ -153,11 +153,41 @@ function getAvailableGenEdOptions(genEdCategory) {
     
     return availableOptions;
 }
+function showBusinessNaturalSciencesTooltip(box, courseName) {
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+    
+    const tooltipHTML = `
+        <strong>${courseName}</strong>
+        <br><div class="gened-instruction">Please choose one of the following courses:</div>
+        <br>
+        <div class="gened-option"><strong>BIOL 100</strong> - Humankind in a Biological World, OR</div>
+        <div class="gened-option"><strong>CHEM 100</strong> - Chemistry in Everyday Life, OR</div>
+        <div class="gened-option"><strong>CHEM 211</strong> - General Chemistry I, OR</div>
+        <div class="gened-option"><strong>ENVS 102</strong> - Sustainability and Human-Environment Relations</div>
+    `;
+    
+    tooltip.innerHTML = tooltipHTML;
+    positionTooltipSmartly(tooltip, box);
+    tooltip.classList.add('show');
+}
+
 
 function showGenEdOptionsTooltip(box, courseName) {
     // Match the category (handles plural/singular variations)
     const genEdCategory = matchGenEdCategory(courseName);
+    const titleElement = document.querySelector('h1.titl');
+    const isBusinessProgramPage = titleElement && titleElement.textContent.toLowerCase().includes('business');
+    const isNaturalSciences = courseName.includes("Natural Sciences") || courseName.includes("Natural Science");
     
+    if (isBusinessProgramPage && isNaturalSciences) {
+        showBusinessNaturalSciencesTooltip(box, courseName);
+        return;
+    }
     if (!genEdCategory) {
         // Fallback: show generic message if category can't be determined
         showGenericGenEdTooltip(box, courseName);
@@ -201,40 +231,30 @@ function showGenEdOptionsTooltip(box, courseName) {
 function positionTooltipSmartly(tooltip, box) {
     const rect = box.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
     
-    let left = rect.left - 130;
+    let left = rect.left + window.scrollX;
     let top = rect.bottom + window.scrollY + 5;
 
-    // Reset any previous positioning classes
-    tooltip.classList.remove('off-screen-right', 'off-screen-bottom');
-    
-    // Check if tooltip would go off-screen to the right
+    // Show tooltip temporarily to measure it
     tooltip.style.visibility = 'hidden';
     tooltip.style.display = 'block';
     const tooltipWidth = tooltip.offsetWidth;
     const tooltipHeight = tooltip.offsetHeight;
     tooltip.style.visibility = 'visible';
-    
-    // Adjust horizontal position if needed
+
+    // Adjust if tooltip goes off-screen right
     if (left + tooltipWidth > viewportWidth) {
-        left = rect.right - 130;
-        if (left < 0) left = 5; // Minimum left margin
-        tooltip.classList.add('off-screen-right');
+        left =  rect.left - 130;
     }
     
-    // Adjust vertical position if needed
-    // if (top + tooltipHeight > viewportHeight + window.scrollY) {
-    //     top = rect.top + window.scrollY - tooltipHeight - 5;
-    //     if (top < 0) top = 5; // Minimum top margin
-    //     tooltip.classList.add('off-screen-bottom');
-    // }
-    console.log(left+"()"+top)
-    // left = 1255 top = 495
+    // Adjust if tooltip goes off-screen left
+    if (left < 10) {
+        left = 10;
+    }
+
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
 }
-
 // Fallback function for unrecognized GenEd categories
 function showGenericGenEdTooltip(box, courseName) {
     let tooltip = document.getElementById('prereq-tooltip');
