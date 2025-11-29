@@ -2,7 +2,59 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('DOMContentLoaded event fired');
     setupEventListeners();
 });
+function fixHeaderWidth() {
+    const wideBg = document.querySelector('.wide-bg-colour');
+    const fullWidth = Math.max(
+        document.body.scrollWidth, 
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth, 
+        document.documentElement.offsetWidth,
+        document.documentElement.clientWidth
+    );
 
+    const headerHeight = wideBg.offsetHeight;
+    
+    // Create a wrapper for the red background (sibling of namebox)
+    const bgWrapper = document.createElement('div');
+    bgWrapper.className = 'header-bg-wrapper';
+    
+    // Insert the red background BEFORE the namebox
+    const namebox = document.getElementById('namebox');
+    namebox.parentNode.insertBefore(bgWrapper, namebox);
+    
+    // Style the background wrapper (full width)
+    bgWrapper.style.position = 'absolute';
+    bgWrapper.style.top = '0';
+    bgWrapper.style.left = '0';
+    bgWrapper.style.width = fullWidth + 'px'; // Use actual full width
+    bgWrapper.style.height = headerHeight + 'px';
+    bgWrapper.style.background = '#8a0d0c';
+    bgWrapper.style.zIndex = '1';
+    
+    // Style the header content to be centered
+    wideBg.style.position = 'relative';
+    wideBg.style.width = '100%';
+    wideBg.style.maxWidth = '100%'; // Your known max
+    wideBg.style.margin = '0 auto'; // Center the content
+    wideBg.style.background = 'transparent';
+    wideBg.style.zIndex = '2'; // Above the red background
+    
+    const elementsToPush = [
+        'root',
+
+    ];
+
+    elementsToPush.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+
+                element.style.marginTop = (headerHeight - 180) + 'px';
+        }
+    });
+ 
+}
+document.addEventListener('DOMContentLoaded', fixHeaderWidth);
+window.addEventListener('resize', fixHeaderWidth);
 function setupEventListeners() {
     console.log('Setting up event listeners');
     const root = document.getElementById('root');
@@ -508,11 +560,24 @@ function setupArrows() {
     const classBoxes = document.getElementsByClassName("classBox");
     const svgConns = document.getElementsByClassName("svgConns")[0];
     const bodyRect = document.body.getBoundingClientRect();
+    const scrollWidth = Math.max(
+        document.documentElement.scrollWidth,
+        document.body.scrollWidth,
+        document.documentElement.offsetWidth,
+        document.body.offsetWidth
+    );
+    const scrollHeight = Math.max(
+        document.documentElement.scrollHeight, 
+        document.body.scrollHeight,
+        document.documentElement.offsetHeight,
+        document.body.offsetHeight
+    );
+
     svgConns.style.position = 'absolute';
     svgConns.style.top = '0';
     svgConns.style.left = '0';
-    svgConns.style.width = bodyRect.width + 'px';
-    svgConns.style.height = bodyRect.height + 'px';
+    svgConns.style.width = scrollWidth + 'px';
+    svgConns.style.height = scrollHeight + 'px';
     svgConns.style.pointerEvents = 'none';
     svgConns.style.zIndex = '0';
 
