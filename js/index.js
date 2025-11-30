@@ -549,7 +549,10 @@ function showElectivesTooltip(box, courseName) {
     if (!electiveData) {
         if(programName.includes('Mass Communication')){ 
             electiveData = programElectives["Mass Communications"];
-        } 
+        }
+        else if(programName.includes('Biotechnology')){
+            electiveData = programElectives["Biotechnology"];
+        }
         else {
             
         console.log('No elective data found for program:', programName);
