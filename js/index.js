@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('DOMContentLoaded event fired');
     setupEventListeners();
 });
+
 function fixHeaderWidth() {
     const wideBg = document.querySelector('.wide-bg-colour');
     const fullWidth = Math.max(
@@ -45,8 +46,10 @@ function fixHeaderWidth() {
     }
 
 }
+
 document.addEventListener('DOMContentLoaded', fixHeaderWidth);
 window.addEventListener('resize', fixHeaderWidth);
+
 function setupEventListeners() {
     console.log('Setting up event listeners');
     const root = document.getElementById('root');
@@ -73,18 +76,7 @@ function setupEventListeners() {
     setupArrows();
 }
 
-function boxOnHover(event) {
-    if (box_focused) return;
-    console.log('Box hover:', event.target);
 
-    let box = event.target;
-    while (!box.classList.contains('classBox')) {
-        box = box.parentElement;
-    }
-
-    showPrerequisitesOnHover(box);
-    highlightCourse(box);
-}
 // Add this to your JavaScript
 const genEdCourses = {
     "Humanities/Fine Arts": {
@@ -121,6 +113,234 @@ const genEdCourses = {
         "CHEM211/212": "General Chemistry I",
         "ENVS102": "Sustainability and Human-Environment Relations"
     }
+};
+const programElectives = {
+  "Mass Communications": {
+    credits: 15,
+    courses: [
+      { code: "COMM 221", title: "Communication Analysis and Criticism", credits: 3 },
+      { code: "COMM 225", title: "Visual Communication and Digital Photography", credits: 3 },
+      { code: "COMM 226", title: "Graphic Communication Design and Print Production", credits: 3 },
+      { code: "COMM 227", title: "Film and Video Editing", credits: 3 },
+      { code: "COMM 322", title: "Digital Resources and Content", credits: 3 },
+      { code: "COMM 422", title: "Streaming Media, Podcasting and Radio Production", credits: 3 },
+      { code: "COMM 425", title: "Media Management and Entrepreneurship", credits: 3 }
+    ]
+  },
+  
+  "Biotechnology": {
+    credits: 7,
+    note: "Students may choose one course and its corresponding lab from the other concentration as an elective.",
+    courses: [
+      { code: "BIOL 322", title: "Microbial Genetics", credits: 3 },
+      { code: "BIOL 357", title: "Artificial Intelligence in Biotechnology", credits: 3 },
+      { code: "BIOL 480", title: "Food Biotechnology", credits: 3 },
+      { code: "BIOL 481", title: "Bioprocessing Technology in the Pharmaceutical Industry", credits: 3 }
+    ]
+  },
+  
+  "Psychology": {
+    credits: 18,
+    requirements: "Students need to take 2 courses from each of the following three groups (at least 2 courses must be at the 300-level and at least 1 course at the 400-level).",
+    groups: {
+      "Group 1: Cognitive and Brain Sciences": {
+        credits: 6,
+        courses: [
+          { code: "PSYC 210", title: "Learning and Memory", credits: 3 },
+          { code: "PSYC 340", title: "Sensation and Perception", credits: 3 },
+          { code: "PSYC 331", title: "Psychology of Language", credits: 3 },
+          { code: "PSYC 423", title: "Human Neuropsychology", credits: 3 }
+        ]
+      },
+      "Group 2: Clinical, Personality, Social": {
+        courses: [
+          { code: "PSYC 251", title: "Psychology of Diversity and Inclusion", credits: 3 },
+          { code: "PSYC 354", title: "Health Psychology", credits: 3 },
+          { code: "PSYC 396", title: "Tests and Measurements", credits: 3 },
+          { code: "PSYC 457", title: "Counseling and Psychotherapy", credits: 3 }
+        ]
+      },
+      "Group 3: Applied Psychology": {
+        courses: [
+          { code: "PSYC 252", title: "Positive Psychology", credits: 3 },
+          { code: "PSYC 262", title: "Psychology of Adulthood and Aging", credits: 3 },
+          { code: "PSYC 355", title: "Educational Psychology", credits: 3 },
+          { code: "MGMT 401", title: "Organizational Behavior", credits: 3 }
+        ]
+      }
+    }
+  },
+  
+  "Architecture": {
+    credits: 6,
+    courses: [
+      { code: "ARCH 449", title: "Technology of the Built Environment", credits: 3 },
+      { code: "ARCH 456", title: "Sustainable Housing", credits: 3 },
+      { code: "ARCH 459", title: "Conservation of Historic Environment", credits: 3 },
+      { code: "ARCH 473", title: "Environmental Control", credits: 3 },
+      { code: "ARCH 499", title: "Special Topics of Architecture", credits: 3 },
+      { code: "INDS 351", title: "Parametric Design", credits: 3 },
+      { code: "INDS 353", title: "Landscape and Garden Design", credits: 3 },
+      { code: "INDS 451", title: "Portfolio Design", credits: 3 },
+      { code: "INDS 453", title: "Advanced BIM: Scheduling and coordination", credits: 3 }
+    ]
+  },
+  
+  "Artificial Intelligence": {
+    credits: 6,
+    courses: [
+      { code: "CSCI 450", title: "Information Security and Privacy", credits: 3 },
+      { code: "CSAI 480", title: "Big Data", credits: 3 },
+      { code: "CSAI 481", title: "Computer Vision", credits: 3 },
+      { code: "CSAI 482", title: "Data Mining", credits: 3 },
+      { code: "CSAI 483", title: "Information Retrieval", credits: 3 },
+      { code: "CSAI 485", title: "Introduction to Deep Learning", credits: 3 },
+      { code: "CSCI 416", title: "Human Computer Interaction", credits: 3 },
+      { code: "CENG 431", title: "Embedded Systems", credits: 3 },
+      { code: "CENG 432", title: "Embedded Systems Lab", credits: 1 },
+      { code: "CSAI 486", title: "Special Topics in Artificial Intelligence", credits: 3 },
+      { code: "CSAI 487", title: "Introduction to Robotics", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Chemical Engineering": {
+    credits: 6,
+    note: "To be selected from the following list of courses:",
+    courses: [
+      { code: "CHEN 403", title: "Fundamentals of Biochemical Engineering", credits: 3 },
+      { code: "CHEN 452", title: "Introduction to Hydrogen Technologies", credits: 3 },
+      { code: "CHEN 462", title: "Petroleum Refining Engineering", credits: 3 },
+      { code: "CHEN 463", title: "Natural Gas Engineering", credits: 3 },
+      { code: "CHEN 464", title: "Industrial Catalysis", credits: 3 },
+      { code: "CHEN 473", title: "Water Desalination", credits: 3 },
+      { code: "CHEN 474", title: "Industrial and Wastewater Treatment", credits: 3 },
+      { code: "CHEN 476", title: "Fundamentals of Nanotechnology", credits: 3 },
+      { code: "CHEN 485", title: "Carbon Capture, Utilization and Storage", credits: 3 },
+      { code: "CHEN 493", title: "Special Topics in Chemical Engineering", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Chemical Engineeringwith Concentration in Petroleum Engineering": {
+    credits: 6,
+    note: "To be selected from the following list of courses:",
+    courses: [
+      { code: "CHEN 404", title: "Safety and Environmental Impact", credits: 3 },
+      { code: "CHEN 452", title: "Introduction to Hydrogen Technologies", credits: 3 },
+      { code: "CHEN 463", title: "Natural Gas Engineering", credits: 3 },
+      { code: "CHEN 485", title: "Carbon Capture, Utilization and Storage", credits: 3 },
+      { code: "PENG 404", title: "Petroleum Economics", credits: 3 },
+      { code: "PENG 464", title: "Data Science in Petroleum Engineering", credits: 3 },
+      { code: "PENG 474", title: "Applied Reservoir Simulation", credits: 3 },
+      { code: "PENG 483", title: "Well Testing", credits: 3 },
+      { code: "PENG 486", title: "Enhanced Oil Recovery", credits: 3 },
+      { code: "PENG 493", title: "Special Topics in Petroleum Engineering", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Civil Engineering": {
+        credits: 6,
+        courses: [
+          { code: "CIEN 422", title: "Advanced Reinforced Concrete Design", credits: 3 },
+          { code: "CIEN 424", title: "Bridge Design", credits: 3 },
+          { code: "CIEN 431", title: "Foundation Engineering", credits: 3 },
+          { code: "CIEN 442", title: "Construction Planning and Scheduling", credits: 3 },
+          { code: "CIEN 444", title: "Construction Cost Analysis and Estimating", credits: 3 },
+          { code: "CIEN 457", title: "Water Resources Sustainability", credits: 3 },
+          { code: "ENGR 410", title: "Climate Change", credits: 3 },
+          { code: "CIEN 456", title: "Sustainable Urban Building Sites", credits: 3 },
+          { code: "CIEN 462", title: "Advanced Pavement Design", credits: 3 },
+          { code: "CIEN 464", title: "Airport Planning and Design", credits: 3 },
+          { code: "CIEN 493", title: "Special Topics in Civil Engineering", credits: 3 },
+          { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 },
+          { code: "INDS 453", title: "Advanced BIM: Scheduling and Coordination", credits: 3 }
+        ]
+      },
+
+  "Computer Engineering": {
+    credits: 6,
+    courses: [
+      { code: "CSCI 415", title: "Introduction to Parallel Programming", credits: 3 },
+      { code: "CSCI 450", title: "Information Security and Privacy", credits: 3 },
+      { code: "CENG 435", title: "Parallel Computer Architectures", credits: 3 },
+      { code: "CENG 437", title: "Introduction to Robotics", credits: 3 },
+      { code: "CENG 461", title: "Network Security", credits: 3 },
+      { code: "CENG 401", title: "Network Servers & Architecture", credits: 3 },
+      { code: "CSCI 499", title: "Special Topics in Computing", credits: 3 },
+      { code: "EEEN 431", title: "Digital Circuit Design", credits: 3 },
+      { code: "EEEN 481", title: "Concepts of Multimedia Processing and Transmission", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Computer Science": {
+    credits: 6,
+    courses: [
+      { code: "CENG 437", title: "Introduction to Robotics", credits: 3 },
+      { code: "CSCI 411", title: "Computer Graphics", credits: 3 },
+      { code: "CSCI 412", title: "Computer Graphics Lab", credits: 1 },
+      { code: "CSCI 415", title: "Introduction to Parallel Programming", credits: 3 },
+      { code: "CSCI 416", title: "Human Computer Interaction", credits: 3 },
+      { code: "CENG 435", title: "Parallel Computer Architectures", credits: 3 },
+      { code: "EEEN 481", title: "Concepts of Multimedia Processing and Transmission", credits: 3 },
+      { code: "CENG 401", title: "Network Servers & Architecture", credits: 3 },
+      { code: "CSCI 450", title: "Information Security and Privacy", credits: 3 },
+      { code: "CSCI 499", title: "Special Topics in Computing", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Electrical and Electronics Engineering": {
+    credits: 6,
+    courses: [
+      { code: "CENG 315", title: "Microprocessor", credits: 3 },
+      { code: "EEEN 422", title: "High Voltage Engineering", credits: 3 },
+      { code: "EEEN 423", title: "Electrical Energy Systems and Fault Analysis", credits: 3 },
+      { code: "EEEN 425", title: "Smart Power Grid Systems Theory and Implementation", credits: 3 },
+      { code: "EEEN 426", title: "Renewable Energy Systems", credits: 3 },
+      { code: "EEEN 455", title: "Digital Image Processing", credits: 3 },
+      { code: "EEEN 462", title: "Data and Computer Communication", credits: 3 },
+      { code: "EEEN 467", title: "Mobile and Wireless Communications", credits: 3 },
+      { code: "EEEN 472", title: "Antenna Theory and Design", credits: 3 },
+      { code: "EEEN 474", title: "Advanced Information Theory and Coding", credits: 3 },
+      { code: "EEEN 481", title: "Concepts of Multimedia Processing & Transmission", credits: 3 },
+      { code: "EEEN 487", title: "Robotics Engineering", credits: 3 },
+      { code: "EEEN 499", title: "Special Topics in EEEN", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 }
+    ]
+  },
+
+  "Electrical Electronics Engineering with Concentration in Robotics": {
+    credits: 6,
+    courses: [
+      { code: "EEEN 455", title: "Digital Image Processing", credits: 3 },
+      { code: "EEER 488", title: "Advanced Robotics Engineering", credits: 3 },
+      { code: "EEER 489", title: "Machine Learning for Robotics", credits: 3 },
+      { code: "EEER 490", title: "IoT and Sensors for Robotic Systems", credits: 3 }
+    ]
+  },
+
+  "Mechanical Engineering": {
+    credits: 6,
+    courses: [
+      { code: "MENG 311", title: "Internal Combustion Engines", credits: 3 },
+      { code: "MENG 323", title: "Engineering Economy", credits: 3 },
+      { code: "MENG 441", title: "Turbo Machinery", credits: 3 },
+      { code: "MENG 453", title: "Computer Aided Design", credits: 3 },
+      { code: "MENG 455", title: "Finite Elements in Machine Design", credits: 3 },
+      { code: "MENG 461", title: "HVAC and Refrigeration Systems", credits: 3 },
+      { code: "MENG 462", title: "Design of Thermal System", credits: 3 },
+      { code: "MENG 463", title: "Energy Conversion and Management", credits: 3 },
+      { code: "MENG 471", title: "Sustainable Product Design", credits: 3 },
+      { code: "MENG 493", title: "Special Topics in Mechanical Engineering", credits: 3 },
+      { code: "ENGR 399", title: "Undergraduate Research Project", credits: 3 },
+      { code: "ENGR 420", title: "Life Cycle Assessment", credits: 3 },
+      { code: "EEEN 426", title: "Renewable Energy Systems", credits: 3 },
+      { code: "EEEN 451", title: "Control Theory", credits: 3 }
+    ]
+  }
 };
 function matchGenEdCategory(courseName) {
     const categoryKeywords = {
@@ -220,7 +440,6 @@ function showBusinessNaturalSciencesTooltip(box, courseName) {
     tooltip.classList.add('show');
 }
 
-
 function showGenEdOptionsTooltip(box, courseName) {
     // Match the category (handles plural/singular variations)
     const genEdCategory = matchGenEdCategory(courseName);
@@ -255,7 +474,7 @@ function showGenEdOptionsTooltip(box, courseName) {
     if (availableOptions.length > 0) {
         availableOptions.forEach(course => {
             tooltipHTML += `<div class="gened-option">`;
-            tooltipHTML += `<strong>${course.code}</strong>: ${course.title}`;
+            tooltipHTML += `<strong>${course.code}:</strong> ${course.title}`;
             tooltipHTML += `</div>`;
         });
 
@@ -321,6 +540,62 @@ function showGenericGenEdTooltip(box, courseName) {
     tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
     tooltip.classList.add('show');
 }
+// Add this function to show electives tooltip
+function showElectivesTooltip(box, courseName) {
+    const titleElement = document.querySelector('h1.titl');
+    const programName = titleElement && titleElement.textContent.replace('Bachelor of Science in ', '').replace('Bachelor of Arts in','').replace('4-Year Study Plan ','').replace('5-Year Study Plan ','').replace('(2025-2026)','').replace('Bachelor of ', '').trim(); 
+
+    let electiveData = programElectives[programName];
+    if (!electiveData) {
+        if(programName.includes('Mass Communication')){ 
+            electiveData = programElectives["Mass Communications"];
+        } 
+        else {
+            
+        console.log('No elective data found for program:', programName);
+        return;
+    }
+    }
+
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+    let tooltipHTML = '';
+    if (programName === "Psychology") {
+        
+        tooltipHTML += `<div class="electives-info">${electiveData.requirements || ''}</div>`;
+        
+        for (const [groupName, groupData] of Object.entries(electiveData.groups)) {
+            tooltipHTML += `<div class="elective-group">`;
+            tooltipHTML += `<div class="group-name">${groupName}</div>`;
+            
+            groupData.courses.forEach(course => {
+                tooltipHTML += `<div class="elective-option">`;
+                tooltipHTML += `<strong>${course.code}</strong>: ${course.title}`;
+                tooltipHTML += `</div>`;
+            });
+            
+            tooltipHTML += `</div>`;
+        }
+    } 
+    else{
+    tooltipHTML += `<strong>${courseName}</strong>`;
+    tooltipHTML += `<br><div class="electives-info"><small>Choose any one course from below options</small></div>`;
+    
+    electiveData.courses.forEach(course => {
+        tooltipHTML += `<div class="elective-option">`;
+        tooltipHTML += `<strong>${course.code}:</strong> ${course.title} (${course.credits} Cr.)`;
+        tooltipHTML += `</div>`;
+    });
+    }
+    tooltip.innerHTML = tooltipHTML;
+    positionTooltipSmartly(tooltip, box);
+    tooltip.classList.add('show');
+
+}
 
 function showPrerequisitesOnHover(box) {
     const prereqs = box.getAttribute('prereq');
@@ -328,7 +603,15 @@ function showPrerequisitesOnHover(box) {
     const courseCodeFull = box.getElementsByClassName('course-code-full')[0].innerHTML;
     const courseName = box.getElementsByClassName('course-name')[0]?.innerHTML || '';
     const boxId = box.id;
-    console.log(boxId)
+    
+    // Check if this is an electives box
+    if (courseName.includes('Electives') || courseName.includes('electives') || courseName.includes('Elective') || courseName.includes('elective')) {
+        if (!courseName.includes("Free")) {
+            showElectivesTooltip(box, courseName);
+            return;
+        }
+    }
+    
     // Check if this is a GenEd box by ID
     if (boxId.toLowerCase() === "gened") {
 
@@ -357,7 +640,6 @@ function showPrerequisitesOnHover(box) {
 
     if (prereqs && prereqs !== '') {
         let prereqArray;
-        console.log('Prereqs string:', prereqs);
         const tempprereqArray = prereqs.split(' ');
 
         if (tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
@@ -459,25 +741,33 @@ function hidePrerequisitesTooltip() {
     }
 }
 
+function boxOnHover(event) {
+    if (box_focused) return;
+
+    let box = event.target;
+    while (!box.classList.contains('classBox')) {
+        box = box.parentElement;
+    }
+
+    showPrerequisitesOnHover(box);
+    highlightCourse(box);
+}
 
 function boxOnLeave() {
     if (box_focused) return;
-    console.log('Box leave');
     hidePrerequisitesTooltip();
     showAllElements();
 }
 
 function boxOnClick(event) {
-    console.log('Box click:', event.target);
-    focusBox(event.target);
-    hidePrerequisitesTooltip();
+    if (event.target && !(event.target.textContent.includes('Electives') || event.target.textContent.includes('Elective')) ) {
+        hidePrerequisitesTooltip();
+    }
 }
-
 function rootDivClicked(event) {
     if (!event.target.classList.contains('classBox') &&
         !event.target.classList.contains('course-code-full') &&
         !event.target.classList.contains('course-name')) {
-        console.log('Root div clicked');
         hidePrerequisitesTooltip(); // Hide tooltip when clicking elsewhere
         unfocusBox();
     }
@@ -493,7 +783,6 @@ function highlightCourse(source) {
     while (!source.classList.contains('classBox')) {
         source = source.parentElement;
     }
-    console.log('Highlighting course:', source.id);
     const sourceId = source.id;
     const allElements = document.getElementsByClassName('classBox');
     for (const elem of allElements) {
@@ -515,7 +804,6 @@ function highlightCourse(source) {
 
 
 function showAllElements() {
-    console.log('Showing all elements');
     const allElements = document.getElementById('root').getElementsByTagName('*');
     for (const elem of allElements) {
         elem.style.opacity = '1.0';
@@ -532,7 +820,6 @@ function focusBox(source) {
     while (!source.classList.contains('classBox')) {
         source = source.parentElement;
     }
-    console.log('Focusing on box:', source.id);
     if (box_focused) {
         unfocusBox();  // Unfocus the previous box if there is one focused
     }
@@ -541,7 +828,6 @@ function focusBox(source) {
 }
 
 function unfocusBox() {
-    console.log('Unfocusing box');
     if (!box_focused) return;
     box_focused = false;
     showAllElements();
