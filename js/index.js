@@ -1,27 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOMContentLoaded event fired');
     setupEventListeners();
 });
 function fixHeaderWidth() {
     const wideBg = document.querySelector('.wide-bg-colour');
     const fullWidth = Math.max(
-        document.body.scrollWidth, 
+        document.body.scrollWidth,
         document.documentElement.scrollWidth,
-        document.body.offsetWidth, 
+        document.body.offsetWidth,
         document.documentElement.offsetWidth,
         document.documentElement.clientWidth
     );
 
     const headerHeight = wideBg.offsetHeight;
-    
+
     // Create a wrapper for the red background (sibling of namebox)
     const bgWrapper = document.createElement('div');
     bgWrapper.className = 'header-bg-wrapper';
-    
+
     // Insert the red background BEFORE the namebox
     const namebox = document.getElementById('namebox');
     namebox.parentNode.insertBefore(bgWrapper, namebox);
-    
+
     // Style the background wrapper (full width)
     bgWrapper.style.position = 'absolute';
     bgWrapper.style.top = '0';
@@ -30,7 +30,7 @@ function fixHeaderWidth() {
     bgWrapper.style.height = headerHeight + 'px';
     bgWrapper.style.background = '#8a0d0c';
     bgWrapper.style.zIndex = '1';
-    
+
     // Style the header content to be centered
     wideBg.style.position = 'relative';
     wideBg.style.width = '100%';
@@ -38,20 +38,12 @@ function fixHeaderWidth() {
     wideBg.style.margin = '0 auto'; // Center the content
     wideBg.style.background = 'transparent';
     wideBg.style.zIndex = '2'; // Above the red background
-    
-    const elementsToPush = [
-        'root',
 
-    ];
+    const element = document.getElementById("root");
+    if (element) {
+        element.style.marginTop = (headerHeight - 180) + 'px';
+    }
 
-    elementsToPush.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-
-                element.style.marginTop = (headerHeight - 180) + 'px';
-        }
-    });
- 
 }
 document.addEventListener('DOMContentLoaded', fixHeaderWidth);
 window.addEventListener('resize', fixHeaderWidth);
@@ -97,7 +89,7 @@ function boxOnHover(event) {
 const genEdCourses = {
     "Humanities/Fine Arts": {
         "PHIL100": "Critical Thinking and Reasoning",
-        "ENGL200": "Advanced Composition", 
+        "ENGL200": "Advanced Composition",
         "MEST100": "Introduction to Islam in World Culture",
         "ENGL102": "Public Speaking",
         "HIST100": "Contemporary Middle Eastern History",
@@ -111,7 +103,7 @@ const genEdCourses = {
         "UAES200": "Survey of United Arab Emirates Studies",
         "PSYC100": "Introduction to Psychology",
         "PSYC250": "Social Psychology",
-        "ECON103": "Principles of Microeconomics", 
+        "ECON103": "Principles of Microeconomics",
         "POLI100": "Contemporary Global Issues",
         "POLI101": "Politics of Scarcity",
         "COMM101": "Interpersonal Communication and Group Interaction"
@@ -123,9 +115,9 @@ const genEdCourses = {
         "MATH111": "Calculus with Life Sciences Applications",
         "MATH113": "Calculus I"
     },
-    "Natural Sciences":{
+    "Natural Sciences": {
         "BIOL100": "Humankind in a Biological World",
-        "CHEM100/101": "Chemistry in Everyday Life", 
+        "CHEM100/101": "Chemistry in Everyday Life",
         "CHEM211/212": "General Chemistry I",
         "ENVS102": "Sustainability and Human-Environment Relations"
     }
@@ -133,54 +125,54 @@ const genEdCourses = {
 function matchGenEdCategory(courseName) {
     const categoryKeywords = {
         "Social and Behavioral Sciences": ["social", "behavioral", "sciences", "science"],
-        "Humanities/Fine Arts": ["humanities", "fine", "arts", "art"], 
+        "Humanities/Fine Arts": ["humanities", "fine", "arts", "art"],
         "Mathematics": ["mathematics", "math"],
         "Natural Sciences": ["natural", "sciences", "science"]
     };
-    
+
     const lowerName = courseName.toLowerCase();
-    
+
     // Count matches for each category
     const categoryMatches = {};
-    
+
     for (const [category, keywords] of Object.entries(categoryKeywords)) {
         let matchCount = 0;
-        
+
         for (const keyword of keywords) {
             if (lowerName.includes(keyword)) {
                 matchCount++;
             }
         }
-        
+
         categoryMatches[category] = matchCount;
     }
-    
+
     // Find category with at least 2 matches
     for (const [category, matchCount] of Object.entries(categoryMatches)) {
         if (matchCount >= 2) {
             return category;
         }
     }
-    
+
     // If no category has 2 matches, try with 1 match as fallback
     for (const [category, matchCount] of Object.entries(categoryMatches)) {
         if (matchCount >= 1) {
             return category;
         }
     }
-    
+
     return null;
 }
 
 function checkIfCourseExists(courseCode) {
     const allCourseBoxes = document.getElementsByClassName('classBox');
-    
+
     for (const box of allCourseBoxes) {
         const boxId = box.id;
         // Remove spaces and special characters for comparison
         const cleanBoxId = boxId.replace(/[^A-Z0-9]/g, '');
         const cleanCourseCode = courseCode.replace(/[^A-Z0-9]/g, '');
-        
+
         if (cleanBoxId.includes(cleanCourseCode)) {
             return true;
         }
@@ -190,9 +182,9 @@ function checkIfCourseExists(courseCode) {
 function getAvailableGenEdOptions(genEdCategory) {
     const availableOptions = [];
     const courses = genEdCourses[genEdCategory];
-    
+
     if (!courses) return availableOptions;
-    
+
     for (const [courseCode, courseTitle] of Object.entries(courses)) {
         // Only include if this course doesn't exist as a separate box
         if (!checkIfCourseExists(courseCode)) {
@@ -202,7 +194,7 @@ function getAvailableGenEdOptions(genEdCategory) {
             });
         }
     }
-    
+
     return availableOptions;
 }
 function showBusinessNaturalSciencesTooltip(box, courseName) {
@@ -212,7 +204,7 @@ function showBusinessNaturalSciencesTooltip(box, courseName) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    
+
     const tooltipHTML = `
         <strong>${courseName}</strong>
         <br><div class="gened-instruction">Please choose one of the following courses:</div>
@@ -222,7 +214,7 @@ function showBusinessNaturalSciencesTooltip(box, courseName) {
         <div class="gened-option"><strong>CHEM 211</strong> - General Chemistry I, OR</div>
         <div class="gened-option"><strong>ENVS 102</strong> - Sustainability and Human-Environment Relations</div>
     `;
-    
+
     tooltip.innerHTML = tooltipHTML;
     positionTooltipSmartly(tooltip, box);
     tooltip.classList.add('show');
@@ -235,7 +227,7 @@ function showGenEdOptionsTooltip(box, courseName) {
     const titleElement = document.querySelector('h1.titl');
     const isBusinessProgramPage = titleElement && titleElement.textContent.toLowerCase().includes('business');
     const isNaturalSciences = courseName.includes("Natural Sciences") || courseName.includes("Natural Science");
-    
+
     if (isBusinessProgramPage && isNaturalSciences) {
         showBusinessNaturalSciencesTooltip(box, courseName);
         return;
@@ -245,10 +237,10 @@ function showGenEdOptionsTooltip(box, courseName) {
         showGenericGenEdTooltip(box, courseName);
         return;
     }
-    
+
     // Get available options for this category
     const availableOptions = getAvailableGenEdOptions(genEdCategory);
-    
+
     // Create or update tooltip
     let tooltip = document.getElementById('prereq-tooltip');
     if (!tooltip) {
@@ -256,26 +248,26 @@ function showGenEdOptionsTooltip(box, courseName) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    
+
     let tooltipHTML = `<strong>${courseName}</strong>`;
     tooltipHTML += `<br><em>Available ${genEdCategory}:</em><br><br>`;
-    
+
     if (availableOptions.length > 0) {
         availableOptions.forEach(course => {
             tooltipHTML += `<div class="gened-option">`;
             tooltipHTML += `<strong>${course.code}</strong>: ${course.title}`;
             tooltipHTML += `</div>`;
         });
-        
+
         tooltipHTML += `<br><small>Choose any one course from above options</small>`;
     } else {
         tooltipHTML += `<div class="no-options">`;
         tooltipHTML += `All ${genEdCategory} courses are already in your study plan`;
         tooltipHTML += `</div>`;
     }
-    
+
     tooltip.innerHTML = tooltipHTML;
-    
+
     // Position and show tooltip
     positionTooltipSmartly(tooltip, box);
     tooltip.classList.add('show');
@@ -283,7 +275,7 @@ function showGenEdOptionsTooltip(box, courseName) {
 function positionTooltipSmartly(tooltip, box) {
     const rect = box.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
-    
+
     let left = rect.left + window.scrollX;
     let top = rect.bottom + window.scrollY + 5;
 
@@ -296,9 +288,9 @@ function positionTooltipSmartly(tooltip, box) {
 
     // Adjust if tooltip goes off-screen right
     if (left + tooltipWidth > viewportWidth) {
-        left =  rect.left - 130;
+        left = rect.left - 130;
     }
-    
+
     // Adjust if tooltip goes off-screen left
     if (left < 10) {
         left = 10;
@@ -315,15 +307,15 @@ function showGenericGenEdTooltip(box, courseName) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    
+
     let tooltipHTML = `<strong>${courseName}</strong>`;
     tooltipHTML += `<br><em>General Education Course</em><br>`;
     tooltipHTML += `<div class="no-options">`;
     tooltipHTML += `Choose any course from the General Education requirements`;
     tooltipHTML += `</div>`;
-    
+
     tooltip.innerHTML = tooltipHTML;
-    
+
     const rect = box.getBoundingClientRect();
     tooltip.style.left = (rect.left + window.scrollX) + 'px';
     tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
@@ -339,7 +331,7 @@ function showPrerequisitesOnHover(box) {
     console.log(boxId)
     // Check if this is a GenEd box by ID
     if (boxId.toLowerCase() === "gened") {
-        
+
         showGenEdOptionsTooltip(box, courseName);
         return;
     }
@@ -351,14 +343,14 @@ function showPrerequisitesOnHover(box) {
         if (courseId.startsWith("Completion") || courseId.startsWith("Requisite")) {
             return courseId;
         }
-        
+
         // For course codes like "COMM111" -> "COMM 111"
         // Match pattern: 3-4 letters followed by 3 digits
         const match = courseId.match(/^([A-Z]{3,4})(\d{3})$/);
         if (match) {
             return match[1] + ' ' + match[2];
         }
-        
+
         // If no match, return original
         return courseId;
     }
@@ -367,7 +359,7 @@ function showPrerequisitesOnHover(box) {
         let prereqArray;
         console.log('Prereqs string:', prereqs);
         const tempprereqArray = prereqs.split(' ');
-        
+
         if (tempprereqArray[0] && tempprereqArray[0] === "Requisite") {
             prereqArray = [prereqs];
         }
@@ -376,7 +368,7 @@ function showPrerequisitesOnHover(box) {
         }
         else if (tempprereqArray[0].length >= 7) {
             prereqArray = tempprereqArray;
-        } 
+        }
         else {
             prereqArray = [prereqs];
         }
@@ -423,7 +415,7 @@ function showPrerequisitesOnHover(box) {
                     // Format the course code before displaying
                     coreqText += formatCourseCode(coreqId) + ', ';
                 }
-            }   
+            }
         });
         // Remove trailing comma and space
         coreqText = coreqText.slice(0, -2);
@@ -436,16 +428,16 @@ function showPrerequisitesOnHover(box) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-    
+
     let desc = "";
-    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)"){
+    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)") {
         desc = '<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br><div style="color:#ba0000;">*ENGL 200 requires ENGL 101</div>OR<br> Introduction to Islam in World Culture';
     }
-    else if(courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)"){
+    else if (courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)") {
         desc = '<br>Arabic for Media: Native Speakers <div style="color:#ba0000;">*ARAB 210 requires ARAB 110</div> OR <br> Arabic for Media: Non-Native speakers<div style="color:#ba0000;">*ARAB 211 requires ARAB 101</div>';
     }
-    
-    
+
+
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
         (desc ? `<br>${desc}` : '') +
         (prereqText ? `<br>Prerequisites: ${prereqText}` : '') +
@@ -567,7 +559,7 @@ function setupArrows() {
         document.body.offsetWidth
     );
     const scrollHeight = Math.max(
-        document.documentElement.scrollHeight, 
+        document.documentElement.scrollHeight,
         document.body.scrollHeight,
         document.documentElement.offsetHeight,
         document.body.offsetHeight
@@ -596,7 +588,7 @@ function setupArrows() {
                         arrow.setAttribute("marker-end", "url(#coreq-arrow)");
                         // Draw coreq arrows: from right edge to left edge OR left edge to right edge based on position
                         const sourceRect = connectionElement.getBoundingClientRect();
-                        const targetRect = targetBox.getBoundingClientRect();   
+                        const targetRect = targetBox.getBoundingClientRect();
                         if (sourceRect.left < targetRect.left) {
                             // Source is to the left of target: draw arrow from right to left
 
@@ -607,12 +599,12 @@ function setupArrows() {
 
                         } else {
                             // Source is to the right of target: draw arrow from left to right
-                            x1 = parseFloat(connectionElement.style.left);  
-                            y1 = parseFloat(connectionElement.style.top)  + (parseFloat(connectionElement.offsetHeight || 0) / 32);
+                            x1 = parseFloat(connectionElement.style.left);
+                            y1 = parseFloat(connectionElement.style.top) + (parseFloat(connectionElement.offsetHeight || 0) / 32);
                             x2 = parseFloat(targetBox.style.left) - 0.2 + (parseFloat(targetBox.offsetWidth || 0) / 16);
                             y2 = parseFloat(targetBox.style.top) + (parseFloat(targetBox.offsetHeight || 0) / 32);
                         }
-                        
+
 
 
                     } else {
@@ -638,35 +630,35 @@ function setupArrows() {
         };
     }
 
-for (const box of classBoxes) {
-    const prereqs = box.getAttribute("prereq");
-    if (prereqs) {
-        const prereqArray = parsePrereqs(prereqs);
+    for (const box of classBoxes) {
+        const prereqs = box.getAttribute("prereq");
+        if (prereqs) {
+            const prereqArray = parsePrereqs(prereqs);
 
-        prereqArray.forEach(({ id, isOr }) => {
-            const style = isOr
-                ? "stroke:rgb(255,255,255);stroke-width:1;stroke-dasharray:2,2;opacity:0"
-                : "stroke:rgb(255,255,255);stroke-width:1;opacity:0";
+            prereqArray.forEach(({ id, isOr }) => {
+                const style = isOr
+                    ? "stroke:rgb(255,255,255);stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                    : "stroke:rgb(255,255,255);stroke-width:1;opacity:0";
 
-            const createArrow = createArrowsForConnections(box, style, 'prereq-arrow');
-            createArrow(box, [id]);
-        });
+                const createArrow = createArrowsForConnections(box, style, 'prereq-arrow');
+                createArrow(box, [id]);
+            });
+        }
+
+        const coreqs = box.getAttribute("coreq");
+        if (coreqs) {
+            const coreqArray = parsePrereqs(coreqs);
+
+            coreqArray.forEach(({ id, isOr }) => {
+                const style = isOr
+                    ? "stroke:#00ff88;stroke-width:1;stroke-dasharray:2,2;opacity:0"
+                    : "stroke:#00ff88;stroke-width:1;opacity:0";
+
+                const createArrow = createArrowsForConnections(box, style, 'coreq-arrow');
+                createArrow(box, [id]);
+            });
+        }
     }
-
-    const coreqs = box.getAttribute("coreq");
-    if (coreqs) {
-        const coreqArray = parsePrereqs(coreqs);
-
-        coreqArray.forEach(({ id, isOr }) => {
-            const style = isOr
-                ? "stroke:#00ff88;stroke-width:1;stroke-dasharray:2,2;opacity:0"
-                : "stroke:#00ff88;stroke-width:1;opacity:0";
-
-            const createArrow = createArrowsForConnections(box, style, 'coreq-arrow');
-            createArrow(box, [id]);
-        });
-    }
-}
 
 
     // Function to parse prerequisite or corequisite strings and split by "or" inside parentheses

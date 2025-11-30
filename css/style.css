@@ -288,6 +288,9 @@ footer{
 .legend-text {
     font-size: 14px;
 }
+#settings-bar{
+    margin-top: 15px;
+}
 
 .legend-row {
     display: flex;
