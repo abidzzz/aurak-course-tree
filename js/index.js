@@ -422,6 +422,7 @@ function showMajorElectiveTooltip(box, courseName) {
     
     if (currentMajor && majorCourses[currentMajor]) {
         tooltipHTML += `<div class="gened-instruction" >${currentMajor} Major Electives:</div><br>`;
+        tooltipHTML += `<small>Choose any one course from the options:</small><br>`;
         majorCourses[currentMajor].electives.forEach(course => {
             tooltipHTML += `<div class="elective-option">${course}</div>`;
         });
@@ -448,8 +449,14 @@ function showBusinessElectiveTooltip(box, courseName) {
     
     let tooltipHTML = `<strong>${courseName}</strong><br>`;
     
-
-    tooltipHTML += `<div class="elective-option">Any Major or Elective Course listed in Accounting/ Finance/ Business Analytics/ HRM/ Hospitality & Tourism Management/ Marketing majors</div>`;
+    if (courseName.toUpperCase().includes('BUSINESS ELECTIVE 12')) {
+        tooltipHTML += `<div class="elective-option">Internship/ Internship in Accounting/ Business Analytics/ Finance/ HRM/ Hospitality & Tourism Management/ Marketing </div>`;
+    }
+    else if (courseName.toUpperCase().includes('BUSINESS ELECTIVE 13')) {
+        tooltipHTML += `<div class="elective-option">Accounting/ Business Analytics/ Finance/ HRM/ Hospitality and Tourism Management/ Marketing Project Based Internship</div>`;
+    } else {
+        tooltipHTML += `<div class="elective-option">Any Major or Elective Course listed in Accounting/ Finance/ Business Analytics/ HRM/ Hospitality & Tourism Management/ Marketing majors</div>`;
+    }
 
     tooltip.innerHTML = tooltipHTML;
     positionTooltipSmartly(tooltip, box);
@@ -473,21 +480,23 @@ function showPrerequisitesOnHover(box) {
     }
     let prereqText = '';
     let coreqText = '';
+    // ONLY FOR  business courses
+    const majorTitleElement = document.querySelector('h1.titl');
+    if (majorTitleElement && majorTitleElement.textContent.includes('Business')) {
+        if (courseName.includes('MAJOR ELECTIVE') || boxId.includes('MAJORELECTIVE')) {
+            showMajorElectiveTooltip(box, courseName);
+            return;
+        }
 
-    
-    if (courseName.includes('MAJOR ELECTIVE') || boxId.includes('MAJORELECTIVE')) {
-        showMajorElectiveTooltip(box, courseName);
-        return;
-    }
+        if (courseName.includes('PROGRAM MAJOR') || boxId.includes('MAJOR')) {
+            showProgramMajorTooltip(box, courseName);
+            return;
+        }
 
-    if (courseName.includes('PROGRAM MAJOR') || boxId.includes('MAJOR')) {
-        showProgramMajorTooltip(box, courseName);
-        return;
-    }
-    
-    if (courseName.includes('BUSINESS ELECTIVE') || boxId.includes('BUSINESSELECTIVE')) {
-        showBusinessElectiveTooltip(box, courseName);
-        return;
+        if (courseName.toUpperCase().includes('BUSINESS ELECTIVE') || boxId.includes('BUSINESSELECTIVE')) {
+            showBusinessElectiveTooltip(box, courseName);
+            return;
+        }
     }
     // Function to format course code with spaces
     function formatCourseCode(courseId) {
