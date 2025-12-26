@@ -304,5 +304,26 @@
         </p>
         <p>© 2025 - Present</p>
     </footer>
+<script>
+    // Get the selected major from localStorage
+    const selectedMajor = localStorage.getItem('selectedBusinessMajor') || 'Accounting';
+    
+    // Update the page title to show the selected major
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleElement = document.querySelector('h1.titl');
+        if (titleElement && selectedMajor !== 'General' && selectedMajor !== 'Hospitality') {
+            // Update the title to show the specific major
+            const currentText = titleElement.innerHTML;
+            const newText = currentText.replace(
+                'with Major in Accounting/Business Analytics/Finance/HRM/Marketing',
+                `with Major in ${selectedMajor}`
+            );
+            titleElement.innerHTML = newText;
+        }
+        
+        // Store in a global variable for use in index.js
+        window.selectedBusinessMajor = selectedMajor;
+    });
+</script>
 </body>
 </html>

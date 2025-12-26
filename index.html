@@ -229,25 +229,25 @@
             <h3><i class="fas fa-chart-line program-icon"></i>Business Administration</h3>
             <p>Choose your major:</p>
             <div class="concentration-links">
-                <a href="majors/business_majors.html" class="concentration-link">
+                <a href="majors/business_majors.html" class="concentration-link" onclick="setSelectedMajor('Accounting')">
                     <i class="fas fa-calculator concentration-icon"></i>Accounting
                 </a>
-                <a href="majors/business_majors.html" class="concentration-link">
+                <a href="majors/business_majors.html" class="concentration-link" onclick="setSelectedMajor('Business Analytics')">
                     <i class="fas fa-chart-bar concentration-icon"></i>Business Analytics
                 </a>
-                <a href="majors/business_majors.html" class="concentration-link">
+                <a href="majors/business_majors.html" class="concentration-link" onclick="setSelectedMajor('Finance')">
                     <i class="fas fa-money-bill-wave concentration-icon"></i>Finance
                 </a>
-                <a href="majors/business_majors.html" class="concentration-link">
+                <a href="majors/business_majors.html" class="concentration-link" onclick="setSelectedMajor('Human Resource Management')">
                     <i class="fas fa-users concentration-icon"></i>Human Resource Management
                 </a>
-                <a href="majors/business_majors.html" class="concentration-link">
+                <a href="majors/business_majors.html" class="concentration-link" onclick="setSelectedMajor('Marketing')">
                     <i class="fas fa-bullhorn concentration-icon"></i>Marketing
                 </a>
-                <a href="majors/business_hospitality.html" class="concentration-link">
+                <a href="majors/business_hospitality.html" class="concentration-link" onclick="setSelectedMajor('Hospitality')">
                     <i class="fas fa-hotel concentration-icon"></i>Hospitality and Tourism Management
                 </a>
-                <a href="majors/business_admin.html" class="concentration-link">
+                <a href="majors/business_admin.html" class="concentration-link" onclick="setSelectedMajor('General')">
                     <i class="fas fa-graduation-cap concentration-icon"></i>Generalist Program
                 </a>
             </div>
@@ -270,7 +270,9 @@
                 modal.classList.remove('active');
             });
         }
-        
+        function setSelectedMajor(major) {
+            localStorage.setItem('selectedBusinessMajor', major);
+        }
         // Close modal when clicking outside content
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('concentration-modal')) {
