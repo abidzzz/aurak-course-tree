@@ -861,3 +861,7 @@ div#root[colorcode="level"] .yl-5 {
     display: block;
     margin-top: 6px;
 } 
+.total-credits {
+    font-size: 0.75em;
+    font-weight: normal;
+}
