@@ -420,6 +420,24 @@ function showPrerequisitesOnHover(box) {
     }
     let prereqText = '';
     let coreqText = '';
+    let desc = "";
+    
+    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)") {
+        desc = '<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br><div style="color:#ba0000;">*ENGL 200 requires ENGL 101</div>OR<br> Introduction to Islam in World Culture';
+    }
+    else if (courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)") {
+        desc = '<br>Arabic for Media: Native Speakers <div style="color:#ba0000;">*ARAB 210 requires ARAB 110</div> OR <br> Arabic for Media: Non-Native speakers<div style="color:#ba0000;">*ARAB 211 requires ARAB 101</div>';
+    }
+        // Check if this is an electives box
+    else if (courseName.includes('Electives') || courseName.includes('electives') || courseName.includes('Elective') || courseName.includes('elective')) {
+        if (!courseName.includes("Free")) {
+            desc = 'Contact your academic advisor for electives available in your year.';
+        }
+        else{
+            desc = 'Any undergraduate course, provided the prerequisites are met.'
+        }
+    }
+
     // ONLY FOR  business courses
     const majorTitleElement = document.querySelector('h1.titl');
     if (majorTitleElement && majorTitleElement.textContent.includes('Business')) {
@@ -431,6 +449,9 @@ function showPrerequisitesOnHover(box) {
         if (courseName.toUpperCase().includes('BUSINESS ELECTIVE') || boxId.includes('BUSINESSELECTIVE')) {
             showBusinessElectiveTooltip(box, courseName);
             return;
+        }
+        if (courseName.toUpperCase().includes('FREE')) {
+            desc = 'Any undergraduate course, provided the prerequisites are met.';
         }
     }
     // Function to format course code with spaces
@@ -523,24 +544,6 @@ function showPrerequisitesOnHover(box) {
         tooltip.id = 'prereq-tooltip';
         document.body.appendChild(tooltip);
     }
-
-    let desc = "";
-    if (courseCodeFull == "PHIL 100 OR ENGL 200 OR MEST 100 (3&nbsp;Cr.)") {
-        desc = '<br>Critical Thinking and Reasoning <br>OR<br> Advanced Composition <br><div style="color:#ba0000;">*ENGL 200 requires ENGL 101</div>OR<br> Introduction to Islam in World Culture';
-    }
-    else if (courseCodeFull == "ARAB 210 OR ARAB 211 (3&nbsp;Cr.)") {
-        desc = '<br>Arabic for Media: Native Speakers <div style="color:#ba0000;">*ARAB 210 requires ARAB 110</div> OR <br> Arabic for Media: Non-Native speakers<div style="color:#ba0000;">*ARAB 211 requires ARAB 101</div>';
-    }
-        // Check if this is an electives box
-    else if (courseName.includes('Electives') || courseName.includes('electives') || courseName.includes('Elective') || courseName.includes('elective')) {
-        if (!courseName.includes("Free")) {
-            desc = 'Contact your academic advisor for electives available in your year.';
-        }
-        else{
-            desc = 'Any undergraduate course, provided the prerequisites are met.'
-        }
-    }
-
 
     tooltip.innerHTML = `<strong>${courseCodeFull}</strong>` +
         (desc ? `<br>${desc}` : '') +
