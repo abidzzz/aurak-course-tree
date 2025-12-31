@@ -1,16 +1,6 @@
-let selectedBusinessMajor = '';
-
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOMContentLoaded event fired');
     setupEventListeners();
-    try {
-        const storedMajor = localStorage.getItem('selectedBusinessMajor');
-        if (storedMajor) {
-            selectedBusinessMajor = storedMajor;
-                    }
-    } catch (error) {
-        //PASS
-    }
 });
 
 function fixHeaderWidth() {
@@ -126,27 +116,21 @@ const genEdCourses = {
 };
 const majorCourses = {
     "Accounting": {
-        required: ["ACCT 311 - Managerial and Cost Accounting", "ACCT 331 - Intermediate Accounting I", "ACCT 332 - Intermediate Accounting II", "ACCT 361 - Accounting Information Systems", "ACCT 390 - Internship in Accounting", "ACCT 412 - Auditing", "ACCT 444 - Accounting Project Based Internship"],
         electives: ["ACCT 321 - Governmental and Not-for-Profit Accounting", "ACCT 352 - Taxation and Managerial Decisions", "ACCT 472 - International Accounting", "ACCT 491 - Special Topics in Accounting", "FNAN 303 - Financial Analysis, Forecasting, and Valuation"]
     },
     "Finance": {
-        required: ["FNAN 303 - Financial Analysis, Forecasting, and Valuation", "FNAN 304 - Risk Management and Insurance", "FNAN 321 - Financial Institutions", "FNAN 390 - Internship in Finance", "FNAN 401 - Advanced Financial Management", "FNAN 411 - Investment Analysis and Portfolio Management", "FNAN 444 - Finance Project Based Internship"],
         electives: ["ACCT 331 - Intermediate Accounting I", "FNAN 331 - Fundamentals of Sustainable Finance", "FNAN 412 - Futures and Options Markets", "FNAN 421 - Money and Capital Markets", "FNAN 431 - International Financial Management"]
     },
     "Human Resource Management": {
-        required: ["MGHR 301 - Human Resource Management", "MGHR 302 - Compensation Management", "MGHR 304 - Human Resource Recruitment & Selection", "MGHR 390 - Internship in Human Resource Management", "MGHR 403 - Cross Cultural and International HRM", "MGHR 431 - Employee Relations", "MGHR 444 - HRM Project Based Internship"],
         electives: ["MGHR 461 - Diversity in organization", "MGHR 462 - Strategic Human Resource Management", "MGHR 463 - Negotiations in Organizations", "MGHR 464 - Training and Development"]
     },
     "Marketing": {
-        required: ["MKTG 312 - Consumer Behavior", "MKTG 313 - Integrated Marketing Communications", "MKTG 351 - Marketing Research Techniques & Applications", "MKTG 390 - Internship in Marketing", "MKTG 412 - Marketing of Services", "MKTG 471 - Marketing Strategy", "MKTG 444 - Marketing Project Based Internship"],
         electives: ["MKTG 311 - Sales Management", "MKTG 315 - Social media and Digital Marketing", "MKTG 316 - Luxury Brand Management", "MKTG 332 - Retailing and E-Commerce", "OPMT 405 - Supply Chain Management", "MKTG 407 - International Marketing"]
     },
     "Business Analytics": {
-        required: ["BUAN 311 - Business Data Mining", "BUAN 312 - Visual Analytics", "BUAN 390 - Internship in Business Analytics", "BUAN 401 - Business Data Engineering", "BUAN 411 - Business Intelligence & Big Data Analytics", "MKTG 351 - Marketing Research Techniques and Applications", "BUAN 444 - Business Analytics Project Based Internship"],
         electives: ["ACCT 361 - Accounting Information Systems", "FNAN 303 - Financial Analysis, Forecasting, and Valuation", "OPMT 405 - Supply Chain Management", "OPMT 301 - Operations Management"]
     },
     "Hospitality": {
-        required: ["HTMT 311 - Survey of Hospitality and Tourism", "HTMT 321 - Hospitality Operations I – F&B", "HTMT 322 - Hotel Operations", "HTMT 390 - Internship in Hospitality & Tourism Management", "HTMT 411 - Destination Management", "HTMT 412 - Meetings and Conventions", "HTMT 444 - Hospitality and Tourism Management Project Based Internship"],
         electives: ["HTMT 312 - Sustainable Tourism", "BUSN 391 - International Internship", "MKTG 313 - Integrated Marketing", "MKTG 412 - Marketing of Services", "MGHR 301 - Human Resource Management"]
     }
 };
@@ -299,6 +283,29 @@ function showGenEdOptionsTooltip(box, courseName) {
     positionTooltipSmartly(tooltip, box);
     tooltip.classList.add('show');
 }
+// Fallback function for unrecognized GenEd categories
+function showGenericGenEdTooltip(box, courseName) {
+    let tooltip = document.getElementById('prereq-tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'prereq-tooltip';
+        document.body.appendChild(tooltip);
+    }
+
+    let tooltipHTML = `<strong>${courseName}</strong>`;
+    tooltipHTML += `<br><em>General Education Course</em><br>`;
+    tooltipHTML += `<div class="no-options">`;
+    tooltipHTML += `Choose any course from the General Education requirements`;
+    tooltipHTML += `</div>`;
+    
+    tooltip.innerHTML = tooltipHTML;
+    
+    const rect = box.getBoundingClientRect();
+    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+    tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+    tooltip.classList.add('show');
+}
+
 function positionTooltipSmartly(tooltip, box) {
     const rect = box.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
@@ -326,75 +333,14 @@ function positionTooltipSmartly(tooltip, box) {
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
 }
-// Fallback function for unrecognized GenEd categories
-function showGenericGenEdTooltip(box, courseName) {
-    let tooltip = document.getElementById('prereq-tooltip');
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'prereq-tooltip';
-        document.body.appendChild(tooltip);
-    }
-
-    let tooltipHTML = `<strong>${courseName}</strong>`;
-    tooltipHTML += `<br><em>General Education Course</em><br>`;
-    tooltipHTML += `<div class="no-options">`;
-    tooltipHTML += `Choose any course from the General Education requirements`;
-    tooltipHTML += `</div>`;
-
-    tooltip.innerHTML = tooltipHTML;
-
-    const rect = box.getBoundingClientRect();
-    tooltip.style.left = (rect.left + window.scrollX) + 'px';
-    tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
-    tooltip.classList.add('show');
+function toTitleCase(str) {
+    return str
+        .split(' ')  // Split the string by spaces
+        .map(word => {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();  // Capitalize the first letter of each word
+        })
+        .join(' ');  // Join the words back into a single string
 }
-
-function showProgramMajorTooltip(box, courseName) {
-    let tooltip = document.getElementById('prereq-tooltip');
-    if (!tooltip) {
-        tooltip = document.createElement('div');
-        tooltip.id = 'prereq-tooltip';
-        document.body.appendChild(tooltip);
-    }
-    
-    const titleElement = document.querySelector('h1.titl');
-    const pageTitle = titleElement ? titleElement.textContent.toLowerCase() : '';
-    
-    let tooltipHTML = `<strong>${courseName}</strong><br>`;
-    
-    // Determine which major (use stored value for business_majors.html)
-    let currentMajor = selectedBusinessMajor;
-    
-    // For hospitality page
-    if (pageTitle.includes('hospitality')) {
-        currentMajor = 'Hospitality';
-    }
-    // For general business page
-    else if (pageTitle.includes('general business')) {
-        tooltipHTML += `<div class="elective-option">Generalist Option: No specific major</div>`;
-        tooltipHTML += `<div class="elective-option">13 business elective courses instead</div>`;
-        tooltip.innerHTML = tooltipHTML;
-        positionTooltipSmartly(tooltip, box);
-        tooltip.classList.add('show');
-        return;
-    }
-    
-    if (currentMajor && majorCourses[currentMajor]) {
-        // Show the actual major name in the tooltip
-        tooltipHTML += `<div class="gened-instruction">${currentMajor} Major Requirements:</div><br>`;
-        tooltipHTML += `<small>Choose any one course from the options:</small><br>`;
-        majorCourses[currentMajor].required.forEach(course => {
-            tooltipHTML += `<div class="elective-option">${course}</div>`;
-        });
-    } else {
-        tooltipHTML += `<div class="elective-option">Major-specific courses for ${currentMajor || 'your selected major'}</div>`;
-    }
-    
-    tooltip.innerHTML = tooltipHTML;
-    positionTooltipSmartly(tooltip, box);
-    tooltip.classList.add('show');
-}
-
 function showMajorElectiveTooltip(box, courseName) {
     let tooltip = document.getElementById('prereq-tooltip');
     if (!tooltip) {
@@ -409,17 +355,21 @@ function showMajorElectiveTooltip(box, courseName) {
     let tooltipHTML = `<strong>${courseName}</strong><br>`;
     
     // Determine which major
-    let currentMajor = selectedBusinessMajor;
-    if (pageTitle.includes('hospitality')) {
-        currentMajor = 'Hospitality';
-    } else if (pageTitle.includes('general business')) {
-        tooltipHTML += `<div class="elective-option">Generalist Option: No major electives</div>`;
-        tooltip.innerHTML = tooltipHTML;
-        positionTooltipSmartly(tooltip, box);
-        tooltip.classList.add('show');
-        return;
+    let selectedBusinessMajor = '';
+    try {
+                selectedBusinessMajor = pageTitle
+        .replace(/bachelor of science in business administration /, '')
+        .replace(/with major in/, '')
+        .replace(/\s*4[-\w\s]*study plan.*total credits:.*\d+/i, '')  
+        .replace(/\s{2,}/g, ' ')  
+        .trim();  
+
+    } catch (error) {
+        console.error('Error determining selected business major:', error);
     }
-    
+
+    let currentMajor = toTitleCase(selectedBusinessMajor);
+
     if (currentMajor && majorCourses[currentMajor]) {
         tooltipHTML += `<div class="gened-instruction" >${currentMajor} Major Electives:</div><br>`;
         tooltipHTML += `<small>Choose any one course from the options:</small><br>`;
@@ -444,19 +394,9 @@ function showBusinessElectiveTooltip(box, courseName) {
         document.body.appendChild(tooltip);
     }
     
-    const titleElement = document.querySelector('h1.titl');
-    const pageTitle = titleElement ? titleElement.textContent.toLowerCase() : '';
-    
     let tooltipHTML = `<strong>${courseName}</strong><br>`;
     
-    if (courseName.toUpperCase().includes('BUSINESS ELECTIVE 12')) {
-        tooltipHTML += `<div class="elective-option">Internship/ Internship in Accounting/ Business Analytics/ Finance/ HRM/ Hospitality & Tourism Management/ Marketing </div>`;
-    }
-    else if (courseName.toUpperCase().includes('BUSINESS ELECTIVE 13')) {
-        tooltipHTML += `<div class="elective-option">Accounting/ Business Analytics/ Finance/ HRM/ Hospitality and Tourism Management/ Marketing Project Based Internship</div>`;
-    } else {
-        tooltipHTML += `<div class="elective-option">Any Major or Elective Course listed in Accounting/ Finance/ Business Analytics/ HRM/ Hospitality & Tourism Management/ Marketing majors</div>`;
-    }
+    tooltipHTML += `<div class="elective-option">Any undergraduate course offered by the School of Business, outside the major, excluding internship courses.</div>`;
 
     tooltip.innerHTML = tooltipHTML;
     positionTooltipSmartly(tooltip, box);
@@ -485,11 +425,6 @@ function showPrerequisitesOnHover(box) {
     if (majorTitleElement && majorTitleElement.textContent.includes('Business')) {
         if (courseName.includes('MAJOR ELECTIVE') || boxId.includes('MAJORELECTIVE')) {
             showMajorElectiveTooltip(box, courseName);
-            return;
-        }
-
-        if (courseName.includes('PROGRAM MAJOR') || boxId.includes('MAJOR')) {
-            showProgramMajorTooltip(box, courseName);
             return;
         }
 
@@ -600,6 +535,9 @@ function showPrerequisitesOnHover(box) {
     else if (courseName.includes('Electives') || courseName.includes('electives') || courseName.includes('Elective') || courseName.includes('elective')) {
         if (!courseName.includes("Free")) {
             desc = 'Contact your academic advisor for electives available in your year.';
+        }
+        else{
+            desc = 'Any undergraduate course, provided the prerequisites are met.'
         }
     }
 
