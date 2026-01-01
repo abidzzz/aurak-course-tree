@@ -24,7 +24,12 @@
                 </div>
             </div>
         </div>
-
+        <div id="catalog-notification" class="notification-popup" style="display: none;">
+            <div class="popup-content">
+                <p> <strong>⚠️ Important Notice</strong> <br>These plans were prepared according to the <u><span style="font-weight: bold;">2025-2026</span></u> catalog. Make sure you consult with your advisor if you are following a different year.</p>
+                <button id="close-notification" class="close-btn">I Understand</button>
+            </div>
+        </div>
         <!-- Main Content -->
         <div class="main-content">
             <section>
@@ -283,6 +288,51 @@
                 closeModal();
             }
         });
+        if (!localStorage.getItem('notificationShown')) {
+            const notification = document.getElementById('catalog-notification');
+            const closeBtn = document.getElementById('close-notification');
+
+            notification.style.display = 'block';
+            
+            // Small delay for display to take effect
+            setTimeout(() => {
+                notification.style.opacity = 1;
+            }, 50);
+
+            closeBtn.addEventListener('click', function() {
+                // Add fading-out class
+                notification.classList.add('fading-out');
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.classList.remove('fading-out');
+                    localStorage.setItem('notificationShown', 'true');
+                }, 400); 
+            });
+
+            notification.addEventListener('click', function(e) {
+                if (e.target === notification) {
+                    notification.classList.add('fading-out');
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                        notification.classList.remove('fading-out');
+                        localStorage.setItem('notificationShown', 'true');
+                    }, 400);
+                }
+            });
+            
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && notification.style.display === 'block') {
+                    notification.classList.add('fading-out');
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                        notification.classList.remove('fading-out');
+                        localStorage.setItem('notificationShown', 'true');
+                    }, 400);
+                }
+            });
+        }
     </script>
 </body>
 </html>

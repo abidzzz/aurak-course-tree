@@ -124,14 +124,18 @@ body {
     font-size: 0.9em;
     color: #999;
 }
+
 .program-card:hover .program-icon {
-    transform: scale(1.2); /* Enlarge effect */
+    transform: scale(1.2);
+    /* Enlarge effect */
     color: #ffffff;
     opacity: 1;
-    text-shadow: 0 0 10px rgba(138, 13, 12, 0.5); /* Glow effect */
+    text-shadow: 0 0 10px rgba(138, 13, 12, 0.5);
+    /* Glow effect */
 }
+
 .view-link {
-    color: #cbb2b2; 
+    color: #cbb2b2;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.2em;
@@ -139,16 +143,18 @@ body {
 }
 
 .view-link:hover {
-    color: #ffffff; /* Pure white on hover */
+    color: #ffffff;
+    /* Pure white on hover */
     transform: translateX(5px);
 }
 
 .program-card.has-concentrations .view-link {
-    color:#cbb2b2; 
+    color: #cbb2b2;
 }
 
 .program-card.has-concentrations .view-link:hover {
-    color: #ffffff; /* Your slightly lighter red */
+    color: #ffffff;
+    /* Your slightly lighter red */
 }
 
 .features-section {
@@ -203,11 +209,14 @@ body {
     display: block;
     padding: 20px;
     margin-bottom: 20px;
-    width: 100vw; /* Ensures it spans the entire width of the viewport */
-    height: auto; /* Adjusts the height to auto */
+    width: 100vw;
+    /* Ensures it spans the entire width of the viewport */
+    height: auto;
+    /* Adjusts the height to auto */
     position: relative;
 }
-footer{
+
+footer {
     width: 100vw;
 }
 
@@ -288,7 +297,8 @@ footer{
 .legend-text {
     font-size: 14px;
 }
-#settings-bar{
+
+#settings-bar {
     margin-top: 15px;
 }
 
@@ -327,6 +337,7 @@ div#root {
     margin: 0;
     position: relative;
 }
+
 .year-label {
     position: absolute;
     left: 0;
@@ -483,9 +494,11 @@ div#root[colorcode="level"] .yl-5 {
     margin-right: 20px;
     width: 24px;
     text-align: center;
-    color: #f8f9fa; /* Light color that matches your header text */
+    color: #f8f9fa;
+    /* Light color that matches your header text */
     opacity: 0.9;
-    transition: all 0.3s ease-in-out; /* Added transition */
+    transition: all 0.3s ease-in-out;
+    /* Added transition */
 }
 
 /* Concentration icon */
@@ -494,24 +507,30 @@ div#root[colorcode="level"] .yl-5 {
     margin-right: 15px;
     width: 24px;
     text-align: center;
-    color: #cccccc; /* Matches your secondary text color */
+    color: #cccccc;
+    /* Matches your secondary text color */
     opacity: 0.8;
-    transition: all 0.3s ease-in-out; /* Added transition */
+    transition: all 0.3s ease-in-out;
+    /* Added transition */
 }
 
 /* Hover effects for icons */
 .program-card:hover .program-icon {
-    color: #ffffff; /* Brighter on hover */
+    color: #ffffff;
+    /* Brighter on hover */
     opacity: 1;
-    transform: translateY(-5px) scale(1.1); /* Slight upward movement and scaling */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    transform: translateY(-5px) scale(1.1);
+    /* Slight upward movement and scaling */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* Subtle shadow */
 }
 
 .concentration-link:hover .concentration-icon {
-    color: #ffffff; /* Brighter on hover */
+    color: #ffffff;
+    /* Brighter on hover */
     opacity: 1;
-    transform: translateY(-5px) scale(1.1); 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Better alignment for program cards with icons */
@@ -543,7 +562,8 @@ div#root[colorcode="level"] .yl-5 {
     text-decoration: none;
     border-radius: 8px;
     border: 1px solid #8a0d0c;
-    transition: all 0.3s ease-in-out; /* Added transition */
+    transition: all 0.3s ease-in-out;
+    /* Added transition */
     transform: translateY(20px);
     opacity: 0;
 }
@@ -755,6 +775,7 @@ div#root[colorcode="level"] .yl-5 {
         justify-content: center;
     }
 }
+
 .gened-info {
     background: #f8f9fa;
     padding: 8px;
@@ -771,6 +792,7 @@ div#root[colorcode="level"] .yl-5 {
     color: #7f8c8d;
     font-style: italic;
 }
+
 #prereq-tooltip {
     position: absolute;
     background: rgba(0, 0, 0, 0.95);
@@ -781,8 +803,10 @@ div#root[colorcode="level"] .yl-5 {
     z-index: 1000;
     pointer-events: none;
     border: 1px solid #555;
-    max-width: 320px; /* Reduced from 400px */
-    min-width: 200px; /* Reduced from 250px */
+    max-width: 320px;
+    /* Reduced from 400px */
+    min-width: 200px;
+    /* Reduced from 250px */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     transition: opacity 0.3s ease;
     opacity: 0;
@@ -860,8 +884,192 @@ div#root[colorcode="level"] .yl-5 {
     font-size: 0.75em;
     display: block;
     margin-top: 6px;
-} 
+}
+
 .total-credits {
     font-size: 0.75em;
     font-weight: normal;
+}
+.notification-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #2a2e30 0%, #1a1d1e 100%);
+    border: 2px solid #8a0d0c;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow:0 10px 40px rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    backdrop-filter: blur(10px);
+}
+
+.notification-popup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8a0d0c 0%, #660808 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+.popup-content p {
+    margin: 0 0 25px 0;
+    color: #f8f9fa;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+    padding: 0 10px;
+}
+
+.popup-content p strong {
+    color: #ffffff;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(138, 13, 12, 0.3);
+    padding-bottom: 8px;
+}
+
+.close-btn {
+    background: linear-gradient(135deg, #8a0d0c 0%, #660808 100%);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(138, 13, 12, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.close-btn:hover {
+    background: linear-gradient(135deg, #a00e0d 0%, #8a0d0c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(138, 13, 12, 0.4);
+}
+
+.close-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(138, 13, 12, 0.3);
+}
+
+.close-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.close-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+@keyframes fadeOutDown {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.95);
+    }
+}
+
+/* Add a class for fade out */
+.notification-popup.fading-out {
+    animation: fadeOutDown 0.4s ease-in forwards;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+@media (max-width: 768px) {
+    .notification-popup {
+        padding: 20px;
+        max-width: 400px;
+        border-width: 1px;
+    }
+    
+    .popup-content p {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .popup-content p strong {
+        font-size: 16px;
+    }
+    
+    .close-btn {
+        padding: 10px 22px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification-popup {
+        padding: 18px;
+        max-width: 320px;
+        border-radius: 10px;
+    }
+    
+    .popup-content p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 18px;
+    }
+    
+    .popup-content p strong {
+        font-size: 15px;
+    }
+    
+    .close-btn {
+        padding: 9px 20px;
+        font-size: 12px;
+    }
 }
